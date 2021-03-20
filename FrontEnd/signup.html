@@ -7,16 +7,25 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>I'm Here</title>
 </head>
+
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Bevan&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="index.css">
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="signup.css">
 
 <body>
   <div class="frame">
-    <p>회원정보를 입력해주세요</p>
+    
+    <div class="logo">
+      <h2><a href="index.html">I'm Here</a></h2>
+    </div>
+
+    
     
     <form action="#">
-
+      <p>회원정보를 입력해주세요</p>
       <label for="id">
         <input id="id" type="text" placeholder="아이디" name="id">
       </label>
@@ -32,7 +41,8 @@
       <label for="email">
         <input id="email" type="email" placeholder="이메일" name="userEmail">
       </label>
-      <input type="submit" value="회원가입">
+
+      <input id="signupBtn" type="submit" value="회원가입">
     
     </form>
   </div>
