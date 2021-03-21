@@ -1,21 +1,11 @@
-/*log-in*/
+/*Sign-up*/
 
 body {
     background-color: #dcd8d5;
 }
 
-.frame {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    position: absolute;
-    width: 370px;
-    top: 45%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
-
 /* Logo */
+
 .logo {
     width: 340px;
     height: 120px;
@@ -41,42 +31,44 @@ h2 {
     text-shadow: 1.5px 1.5px 1.5px gray;
 }
 
-/*log-in info*/
+/*content*/
+
+.frame {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: absolute;
+    width: 412px;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
 form {
     display: flex;
     flex-direction: column;
-    width: 370px;
-    margin-bottom: 18px;
-    border-bottom: 1px solid #ccc;
-    padding-bottom: 18px;
+    font-family: 'Noto Sans KR', sans-serif;
 }
 
-#id,
-#pw {
-    height: 30px;
-    margin-bottom: 18px;
+form p {
+    font-size: 1em;
+    margin-bottom: 30px;
 }
 
-#login {
+form input {
+    width: 412px;
+    height: 39px;
+    box-sizing: border-box;
+    margin-bottom: 25px;
+}
+
+#signupBtn {
+    margin-top: 10px;
     font: 700 1.1em 'Noto Sans KR', sans-serif;
     letter-spacing: 2px;
     box-sizing: border-box;
     background-color: #0e78e2;
     color: white;
     padding: 5.5px;
-    box-shadow: inset 0 -2px 0 rgb(0 0 0 / 38%);
-}
-
-.signUp {
-    font: 700 1.1em 'Noto Sans KR', sans-serif;
-    letter-spacing: 2px;
-    box-sizing: border-box;
-    background-color: white;
-    color: #0e78e2;
-    padding: 5.5px;
-    text-decoration: none;
-    border: 2px solid #ccc;
-    width: 370px;
-    text-align: center;
     box-shadow: 2px 2px 2px gray;
 }
