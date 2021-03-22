@@ -9,6 +9,5 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Slf4j
 public class HomeController {
 
-    @GetMapping("/login")
-    public String login()
+   
 }
