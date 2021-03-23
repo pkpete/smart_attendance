@@ -13,7 +13,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
 
-<link rel="stylesheet" href="/css/signup.css">
+<link rel="stylesheet" href="signup.css">
 
 <body>
   <div class="frame">
@@ -21,6 +21,7 @@
     <div class="logo">
       <h2><a href="index.html">I'm Here</a></h2>
     </div>
+
     
     
     <form action="#">
@@ -29,10 +30,11 @@
         <input id="id" type="text" placeholder="아이디" name="id">
       </label>
       <label for="pw">
-        <input id="pw" type="password" placeholder="비밀번호" name="pw">
+        <input id="pw" type="password" onchange="test()" placeholder="비밀번호" name="pw">
       </label>
       <label for="pwCheck">
-        <input id="pwCheck" type="password" placeholder="비밀번호 확인" name="pwCheck">
+        <input id="pwCheck"  type="password" placeholder="비밀번호 확인" onchange="test()" name="pwCheck">
+        <div id="alert"></div>
       </label>
       <label for="name">
         <input id="name" type="text" placeholder="이름" name="userName">
@@ -41,10 +43,34 @@
         <input id="email" type="email" placeholder="이메일" name="userEmail">
       </label>
 
-      <input id="signupBtn" type="submit" value="회원가입">
+      <input id="signupBtn" type="submit" value="회원가입" >
     
     </form>
   </div>
+
+  <script >
+
+    function test() {
+      var p1 = document.getElementById('pw').value;
+      var p2 = document.getElementById('pwCheck');
+      var message= document.getElementById('alert');
+      if (p1 != p2.value) {
+        message.innerHTML='비밀번호가 일치하지 않습니다';
+        message.style.color='red';
+        message.style.paddingBottom = '5.582px';
+        p2.style.marginBottom='0';
+        return false;
+      } else {
+        message.innerHTML='비밀번호가 일치합니다';
+        message.style.color='blue';
+        message.style.paddingBottom = '5.582px';
+        p2.style.marginBottom='0';
+          return true;
+      }
+  }
+  
+  
+  </script>
 
 </body>
 </html>

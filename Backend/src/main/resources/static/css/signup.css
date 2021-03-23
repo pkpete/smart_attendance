@@ -72,3 +72,7 @@ form input {
     padding: 5.5px;
     box-shadow: 2px 2px 2px gray;
 }
+
+#alert {
+    font: 500 0.85em 'Noto Sans KR', sans-serif;
+}
