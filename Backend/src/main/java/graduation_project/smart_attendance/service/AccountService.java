@@ -28,10 +28,12 @@ public class AccountService {
         List<Account> findMembers = accountRepository.findByUsername(accountForm.getUsername());
 
         if(!accountForm.getPassword().equals(accountForm.getConfirmPassword())){
-            errors.rejectValue("password", "key","비밀번호가 일치하지 않습니다.");
+            errors.rejectValue("confirmPassword", "key","비밀번호가 일치하지 않습니다.");
+
         }
         else if(!findMembers.isEmpty()){
             errors.rejectValue("username", "key","이미 사용자 이름이 존재합니다.");
         }
+
     }
 }

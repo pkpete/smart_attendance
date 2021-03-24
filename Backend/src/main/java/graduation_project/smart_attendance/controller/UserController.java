@@ -4,7 +4,6 @@ import graduation_project.smart_attendance.Hashing;
 import graduation_project.smart_attendance.domain.Account;
 import graduation_project.smart_attendance.dto.AccountForm;
 import graduation_project.smart_attendance.service.AccountService;
-import graduation_project.smart_attendance.service.AccountValidator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,7 +18,6 @@ import javax.validation.Valid;
 public class UserController {
 
     private final AccountService accountService;
-    private final AccountValidator accountValidator;
 
     @GetMapping("/signup")
     public String createUserForm(Model model){
@@ -29,10 +27,10 @@ public class UserController {
 
     @PostMapping("/signup")
     public String createUser(@Valid AccountForm form, BindingResult bindingResult){
-        //accountService.validate(form, bindingResult);
-//        if(bindingResult.hasErrors()) {
-//            return "signup"; // 실패
-//        }
+        accountService.validate(form, bindingResult);
+        if(bindingResult.hasErrors()) {
+            return "signup"; // 실패
+        }
 
             Account account = new Account();
             account.setUsername(form.getUsername());
