@@ -17,10 +17,10 @@ public class AccountForm {
     @Length(min = 5)
     private String username;
     @NotNull(message = "비밀번호는 8자 이상입니다.")
-    @Length(min = 8)
+    @Length(min = 5)
     private String password;
     @NotNull
-    @Length(min = 8)
+    @Length(min = 5)
     private String confirmPassword;
     @NotNull(message = "이름을 입력해주세요.")
     private String name;

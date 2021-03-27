@@ -26,9 +26,9 @@ public class AccountRepository {
                 .getResultList();
     }
 
-    public List<Account> findByName(String name){
-        return em.createQuery("select a from Account a where a.name = :=name", Account.class)
-                .setParameter("name", name)
+    public List<Account> findByUsername(String username){
+        return em.createQuery("select a from Account a where a.username = :username", Account.class)
+                .setParameter("username", username)
                 .getResultList();
     }
 }

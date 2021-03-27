@@ -26,19 +26,20 @@ public class UserController {
     }
 
     @PostMapping("/signup")
-    public String createUser(@Valid AccountForm form, BindingResult result){
-        if(result.hasErrors()){
-            return "signup";
+    public String createUser(@Valid AccountForm form, BindingResult bindingResult){
+        accountService.validate(form, bindingResult);
+        if(bindingResult.hasErrors()) {
+            return "signup"; // 실패
         }
 
-        Account account = new Account();
-        account.setUsername(form.getUsername());
-        account.setPassword(Hashing.hashingPassword(form.getPassword()));
-        account.setName(form.getName());
-        account.setEmail(form.getEmail());
+            Account account = new Account();
+            account.setUsername(form.getUsername());
+            account.setPassword(Hashing.hashingPassword(form.getPassword()));
+            account.setName(form.getName());
+            account.setEmail(form.getEmail());
 
-        accountService.createUser(account);
+            accountService.createUser(account);
 
-        return "redirect:/";
+            return "redirect:/";
     }
 }

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html xmlns:th="http://www.thymeleaf.org" lang="ko">
 
 <head>
   <meta charset="UTF-8">
@@ -13,7 +13,11 @@
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
 
+<<<<<<< HEAD
 <link rel="stylesheet" href="../static/css/signup.css">
+=======
+<link rel="stylesheet" href="/css/signup.css">
+>>>>>>> b8e5771504fc8315b239bb747d23353163859309
 
 <body>
   <div class="frame">
@@ -22,25 +26,32 @@
       <h2><a href="index.html">I'm Here</a></h2>
     </div>
 
-    
-    
-    <form action="#">
+
+
+    <form role="form" action="/signup" th:object="${userForm}" method="post">
       <p>회원정보를 입력해주세요</p>
-      <label for="id">
-        <input id="id" type="text" placeholder="아이디" name="id">
+
+      <label th:for="id">
+        <input id="id" type="text" th:field="*{username}" th:classappend="${#fields.hasErrors('username')} ? 'is-invalid'" placeholder="아이디" name="id" required>
       </label>
-      <label for="pw">
-        <input id="pw" type="password" onchange="test()" placeholder="비밀번호" name="pw">
+      <p th:if="${#fields.hasErrors('username')}" th:errors="*{username}">중복된 아이디입니다.</p>
+
+      <label th:for="pw">
+       <input id="pw" type="password" onchange="test()" th:field="*{password}" placeholder="비밀번호" name="pw" required>
       </label>
-      <label for="pwCheck">
-        <input id="pwCheck"  type="password" placeholder="비밀번호 확인" onchange="test()" name="pwCheck">
+
+      <label th:for="pwCheck">
+        <input id="pwCheck" type="password" th:field="*{confirmPassword}" th:classappend="${#fields.hasErrors('confirmPassword')} ? 'is-invalid'" placeholder="비밀번호 확인" onchange="test()" name="pwCheck" required>
         <div id="alert"></div>
       </label>
-      <label for="name">
-        <input id="name" type="text" placeholder="이름" name="userName">
+      <p th:if="${#fields.hasErrors('confirmPassword')}" th:errors="*{confirmPassword}">비밀번호가 일치하지 않습니다.</p>
+
+      <label th:for="name">
+        <input id="name" type="text" th:field="*{name}" placeholder="이름" name="userName" required>
       </label>
-      <label for="email">
-        <input id="email" type="email" placeholder="이메일" name="userEmail">
+
+      <label th:for="email">
+        <input id="email" type="email" th:field="*{email}" placeholder="이메일" name="userEmail" required>
       </label>
 
       <input id="signupBtn" type="submit" value="회원가입" >
@@ -68,8 +79,8 @@
           return true;
       }
   }
-  
-  
+
+
   </script>
 
 </body>
