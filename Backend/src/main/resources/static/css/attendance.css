@@ -1,0 +1,116 @@
+body {
+    margin: 0;
+}
+
+/* header */
+
+header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0;
+    height: 100px;
+    background-color: #dcd8d5;
+}
+
+/* Logo */
+.logo {
+    display: flex;
+    height: 100px;
+    margin: 0;
+    background-image: url(../media/face-id.png);
+    background-size: 80px;
+    background-repeat: no-repeat;
+    background-position: left;
+}
+
+.logo a {
+    text-decoration: none;
+    color: #0e78e2;
+}
+
+h2 {
+    display: flex;
+    align-items: center;
+    font: 500 2em 'Bevan', cursive;
+    height: 100px;
+    margin: 0;
+    margin-left: 80px;
+    color: #0e78e2;
+    text-shadow: 1.5px 1.5px 1.5px gray;
+}
+
+nav ul {
+    display: flex;
+    flex-direction: row;
+    margin-right: 50px;
+}
+
+ul li {
+    list-style: none;
+}
+
+ul a {
+    text-decoration: none;
+    color: black;
+    font: 540 1.45em 'Noto Sans KR', sans-serif;
+    margin-right: 25px;
+    letter-spacing: 1.5px;
+    padding-bottom: 8px;
+}
+
+ul a:hover {
+    border-bottom: 2.5px solid black;
+    /* transition: 0.5s;
+    transition-timing-function: ease-out; */
+}
+
+/* Button */
+.container {
+    display: flex;
+    flex-direction: row;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+#startBtn {
+    height: 50px;
+    width: 150px;
+    border-radius: 40px;
+    margin-right: 130px;
+    background: #fff;
+    border: 2px solid #1ecd97;
+    font: 540 20px 'Roboto', sans-serif;
+    letter-spacing: 0.9px;
+    cursor: pointer;
+}
+
+#startBtn:hover {
+    color: white;
+    background: #1ecd97;
+    transition: all 0.18s ease;
+}
+
+#startBtn:active {
+}
+#stopBtn {
+    height: 50px;
+    width: 150px;
+    border-radius: 40px;
+    margin-right: 130px;
+    background: #fff;
+    border: 2px solid #e44444;
+    font: 540 20px 'Roboto', sans-serif;
+    letter-spacing: 0.9px;
+    cursor: pointer;
+}
+
+#stopBtn:hover {
+    color: white;
+    background: #e44444;
+    transition: all 0.18s ease;
+}

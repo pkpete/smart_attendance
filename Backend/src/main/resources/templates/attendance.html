@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="ko">
-
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -13,25 +12,25 @@
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
 
-<link rel="stylesheet" href="../static/css/index.css">
+<link rel="stylesheet" href="../static/css/attendance.css">
 
 <body>
-  <div class="frame">
-    
+
+  <header>
     <div class="logo">
-      <h2><a href="index.html">I'm Here</a></h2>
+      <h2><a href="../html/attendance.html">I'm Here</a></h2>
     </div>
-
-    <form action="#">
-      <input id="id" type="text" name="id" placeholder="아이디">
-      <input id="pw" type="password" name="pw" placeholder="비밀번호">
-      <input id="login" type="submit" value="로그인">
-    </form>
-
-    <a class="signUp" href="signup.html">회원가입</a>
-  </div>
-
+    <nav>
+      <ul>
+        <li><a href="">출석</a></li>
+        <li> <a href="">멤버관리</a></li>
+        <li> <a href="">출결관리</a></li>
+      </ul>
+    </nav>
+  </header>
+  <div class="container">
+  <button id="startBtn" type="submit">Start</button>
+  <button id="stopBtn" type="submit">Stop</button>
+</div>
 </body>
 </html>
-
-
