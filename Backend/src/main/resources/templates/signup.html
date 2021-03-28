@@ -13,11 +13,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
 
-<<<<<<< HEAD
-<link rel="stylesheet" href="../static/css/signup.css">
-=======
-<link rel="stylesheet" href="/css/signup.css">
->>>>>>> b8e5771504fc8315b239bb747d23353163859309
+<link rel="stylesheet" href="../static/css/signup.css" th:href="@{/css/signup.css}">
 
 <body>
   <div class="frame">
@@ -28,30 +24,29 @@
 
 
 
-    <form role="form" action="/signup" th:object="${userForm}" method="post">
+    <form role="form" th:action="@{/signup}" th:object="${userForm}" method="post">
+      <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
       <p>회원정보를 입력해주세요</p>
 
-      <label th:for="id">
-        <input id="id" type="text" th:field="*{username}" th:classappend="${#fields.hasErrors('username')} ? 'is-invalid'" placeholder="아이디" name="id" required>
-      </label>
-      <p th:if="${#fields.hasErrors('username')}" th:errors="*{username}">중복된 아이디입니다.</p>
-
-      <label th:for="pw">
-       <input id="pw" type="password" onchange="test()" th:field="*{password}" placeholder="비밀번호" name="pw" required>
+      <label th:for="username">
+        <input type="text" th:field="*{username}" th:classappend="${#fields.hasErrors('username')} ? 'is-invalid'" placeholder="아이디" required>
       </label>
 
-      <label th:for="pwCheck">
-        <input id="pwCheck" type="password" th:field="*{confirmPassword}" th:classappend="${#fields.hasErrors('confirmPassword')} ? 'is-invalid'" placeholder="비밀번호 확인" onchange="test()" name="pwCheck" required>
+      <label th:for="password">
+        <input type="password" onchange="test()" th:field="*{password}" placeholder="비밀번호" required>
+      </label>
+
+      <label th:for="confirmPassword">
+        <input  type="password" th:field="*{confirmPassword}" th:classappend="${#fields.hasErrors('confirmPassword')} ? 'is-invalid'" placeholder="비밀번호 확인" onchange="test()" required>
         <div id="alert"></div>
       </label>
-      <p th:if="${#fields.hasErrors('confirmPassword')}" th:errors="*{confirmPassword}">비밀번호가 일치하지 않습니다.</p>
 
       <label th:for="name">
-        <input id="name" type="text" th:field="*{name}" placeholder="이름" name="userName" required>
+        <input  type="text" th:field="*{name}" placeholder="이름" required>
       </label>
 
       <label th:for="email">
-        <input id="email" type="email" th:field="*{email}" placeholder="이메일" name="userEmail" required>
+        <input  type="email" th:field="*{email}" placeholder="이메일"  required>
       </label>
 
       <input id="signupBtn" type="submit" value="회원가입" >
@@ -62,8 +57,8 @@
   <script >
 
     function test() {
-      var p1 = document.getElementById('pw').value;
-      var p2 = document.getElementById('pwCheck');
+      var p1 = document.getElementById('password').value;
+      var p2 = document.getElementById('confirmPassword');
       var message= document.getElementById('alert');
       if (p1 != p2.value) {
         message.innerHTML='비밀번호가 일치하지 않습니다';
