@@ -20,4 +20,5 @@ public class AttendanceController {
         log.info("Attendance Controller");
         return "attendance";
     }
+
 }

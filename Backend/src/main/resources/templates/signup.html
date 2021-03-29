@@ -24,10 +24,9 @@
 
 
 
-    <form role="form" th:action="@{/signup}" th:object="${userForm}" method="post">
+    <form role="form" th:action="@{/signup}" th:object="${accountForm}" method="post">
       <p>회원정보를 입력해주세요</p>
-      <p th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></p>
-      <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></p>
+
 
       <label th:for="username">
         <input type="text" th:field="*{username}" placeholder="아이디" required>
@@ -51,6 +50,9 @@
       </label>
 
       <input id="signupBtn" type="submit" value="회원가입" >
+
+      <p th:if="${#fields.hasErrors('username')}">이미 존재하는 아이디입니다.</p>
+      <p th:if="${#fields.hasErrors('password')}">비밀번호와 비밀번호 확인이 일치하지 않습니다.</p>
     
     </form>
   </div>

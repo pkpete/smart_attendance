@@ -21,7 +21,7 @@ public class UserController {
 
     @GetMapping("/signup")
     public String createUserForm(Model model){
-        model.addAttribute("userForm", new AccountForm());
+        model.addAttribute("accountForm", new AccountForm());
         return "signup";
     }
 
