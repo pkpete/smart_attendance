@@ -25,7 +25,7 @@ public class CustomAuthenticationFailureHandler extends SimpleUrlAuthenticationF
 //            msg = "유효하지 않은 비밀번호입니다.";
 //        }
 //
-//        setDefaultFailureUrl("/?error=true&exception="+msg);
+        setDefaultFailureUrl("/?error=true");
 
         super.onAuthenticationFailure(request,response,exception);
     }
