@@ -21,16 +21,18 @@
     <div class="logo">
       <h2><a href="index.html" >I'm Here</a></h2>
     </div>
-    <p th:if="${param.error}">아이디 혹은 비밀번호를 확인해주세요.</p>
+    <!-- <p th:if="${param.error}">아이디 혹은 비밀번호를 확인해주세요.</p> -->
     <form role="form" action="#" th:action="@{/login_proc}" method="post">
-      <input type="text" name="username" placeholder="아이디">
 
-      <input type="password" name="password" placeholder="비밀번호">
+      <input id="id" type="text" name="username" placeholder="아이디">
+
+      <input id="pw" type="password" name="password" placeholder="비밀번호">
 
       <input id="login" type="submit" value="로그인" >
+
     </form>
 
-    <a class="signUp" th:href="@{/signup}">회원가입</a>
+    <a class="signUp" href="signup.html">회원가입</a>
   </div>
 
 </body>
