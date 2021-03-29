@@ -2,6 +2,7 @@ package graduation_project.smart_attendance.controller;
 
 import graduation_project.smart_attendance.dto.AccountForm;
 import graduation_project.smart_attendance.service.AccountService;
+import graduation_project.smart_attendance.service.AccountValidator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,6 +17,7 @@ import javax.validation.Valid;
 public class UserController {
 
     private final AccountService accountService;
+    private final AccountValidator accountValidator;
 
     @GetMapping("/signup")
     public String createUserForm(Model model){
@@ -25,6 +27,8 @@ public class UserController {
 
     @PostMapping("/signup")
     public String createUser(@Valid AccountForm form, BindingResult result){
+
+        accountValidator.validate(form, result);
         if(result.hasErrors()){
             return "signup";
         }

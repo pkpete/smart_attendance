@@ -27,9 +27,11 @@
     <form role="form" th:action="@{/signup}" th:object="${userForm}" method="post">
       <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
       <p>회원정보를 입력해주세요</p>
+      <p th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></p>
+      <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></p>
 
       <label th:for="username">
-        <input type="text" th:field="*{username}" th:classappend="${#fields.hasErrors('username')} ? 'is-invalid'" placeholder="아이디" required>
+        <input type="text" th:field="*{username}" placeholder="아이디" required>
       </label>
 
       <label th:for="password">
@@ -37,7 +39,7 @@
       </label>
 
       <label th:for="confirmPassword">
-        <input  type="password" th:field="*{confirmPassword}" th:classappend="${#fields.hasErrors('confirmPassword')} ? 'is-invalid'" placeholder="비밀번호 확인" onchange="test()" required>
+        <input  type="password" th:field="*{confirmPassword}" placeholder="비밀번호 확인" onchange="test()" required>
         <div id="alert"></div>
       </label>
 
