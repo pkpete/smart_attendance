@@ -10,11 +10,7 @@ body {
     width: 340px;
     height: 120px;
     margin: 0;
-<<<<<<< HEAD
     background-image: url(../media/face-id.png);
-=======
-    background-image: url(/static/media/face-id.png);
->>>>>>> b8e5771504fc8315b239bb747d23353163859309
     background-size: 100px;
     background-repeat: no-repeat;
 }

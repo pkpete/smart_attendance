@@ -4,10 +4,12 @@ spring:
     username: sa
     password:
     driver-class-name: org.h2.Driver
-
+  devtools:
+    livereload:
+      enabled: true
   jpa:
     hibernate:
-      ddl-auto: none
+      ddl-auto: create
     properties:
       hibernate:
   #     show_sql: true
@@ -19,4 +21,4 @@ spring:
 
 logging.level:
   org.hibernate.SQL: debug
-# org.hibernate.type: trace
+  org.hibernate.type: trace

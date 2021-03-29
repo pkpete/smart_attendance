@@ -13,19 +13,23 @@
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
 
-<link rel="stylesheet" href="../static/css/index.css">
+<link rel="stylesheet" type = "text/css" href="../static/css/index.css" th:href="@{/css/index.css}">
 
 <body>
   <div class="frame">
     
     <div class="logo">
-      <h2><a href="index.html">I'm Here</a></h2>
+      <h2><a href="index.html" >I'm Here</a></h2>
     </div>
+    <!-- <p th:if="${param.error}">아이디 혹은 비밀번호를 확인해주세요.</p> -->
+    <form role="form" action="#" th:action="@{/login_proc}" method="post">
 
-    <form action="#">
-      <input id="id" type="text" name="id" placeholder="아이디">
-      <input id="pw" type="password" name="pw" placeholder="비밀번호">
-      <input id="login" type="submit" value="로그인">
+      <input id="id" type="text" name="username" placeholder="아이디">
+
+      <input id="pw" type="password" name="password" placeholder="비밀번호">
+
+      <input id="login" type="submit" value="로그인" >
+
     </form>
 
     <a class="signUp" href="signup.html">회원가입</a>
