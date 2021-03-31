@@ -21,7 +21,7 @@
     <div class="logo">
       <h2><a href="index.html" >I'm Here</a></h2>
     </div>
-     <p th:if="${param.error}">아이디 혹은 비밀번호를 확인해주세요.</p>
+      <p th:if="${param.error}">아이디 혹은 비밀번호를 확인해주세요.</p>
     <form role="form" action="#" th:action="@{/login_proc}" method="post">
       <label th:for="username"></label>
       <input id="id" type="text" name="username" placeholder="아이디">
