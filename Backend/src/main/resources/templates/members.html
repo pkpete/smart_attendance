@@ -46,18 +46,21 @@
         <td>홍길동</td>
         <td>24</td>
         <td>자료구조</td>
-        <td><a href="">수정</a> <a href=""> / 삭제</a></td>
+        <td><input class = "edit" id="fix" type="submit" value="수정"> / <input class = "edit" id="dlt" type="submit" value="삭제"></td>
       </tr>
       <tr>
 
       </tr>
     </table>
 
-    <button type="submit" id="add">
-      추가 +
-    </button>
-
-
+    <input type="button" id="add" onclick="showPopup();" value="추가+">
   </div>
 </body>
+<script>
+  function showPopup(){
+    var popupX = (window.screen.width / 2) - (750 / 2);
+    var popupY= (window.screen.height / 2) - (300 / 2);
+    window.open('popup.html', 'membeAdd', 'status=no, height=300, width=750, left='+ popupX + ', top='+ popupY);
+  }
+</script>
 </html>

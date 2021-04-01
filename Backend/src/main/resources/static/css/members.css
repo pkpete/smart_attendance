@@ -103,11 +103,19 @@ table th {
 table td {
     font: 540 1.25em 'Noto Sans KR', sans-serif;
 }
-td a {
-    text-decoration: none;
-    color: black;
+
+.edit {
+    font: 540 1.05em 'Noto Sans KR', sans-serif;
+    border: none;
+    background-color: white;
 }
-button {
+
+.edit:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+#add {
     position: fixed;
     bottom: 10%;
     width: 120px;

@@ -1,0 +1,58 @@
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+table {
+    padding: 0;
+    margin-top: 30px;
+    box-sizing: border-box;
+    font: 300 1.05em 'Noto Sans KR', sans-serif;
+    letter-spacing: 3px;
+    border: 1px solid black;
+}
+
+table th {
+    background-color: #0e78e2;
+    color: white;
+    border: 1px solid #ccc;
+}
+table td {
+    border: 1px solid #ccc;
+}
+table tr {
+    height: 30px;
+    border-collapse: collapse;
+}
+
+input {
+    text-align: center;
+    font-size: 16px;
+}
+
+#imageAdd {
+    font-size: 14px;
+    margin-left: 14px;
+}
+
+#add {
+    position: fixed;
+    bottom: 10%;
+    width: 80px;
+    height: 42px;
+    border: 2px solid rgb(160, 159, 159);
+    border-radius: 30px;
+    background-color: #23d83b;
+    color: white;
+    font: 570 19px 'Roboto', sans-serif;
+    letter-spacing: 0.9px;
+    cursor: pointer;
+}
+
+#add:hover {
+    background-color: #23d83b;
+    transform: scale(1.08);
+    transition: all 0.1s;
+    transition-timing-function: ease-in;
+}

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>I'm Here</title>
+</head>
+
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Bevan&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="../static/css/popup.css">
+
+<body>
+  <table>
+    <tr>
+      <th>번호</th>
+      <th>이름</th>
+      <th>나이</th>
+      <th>수업</th>
+      <th>사진</th>
+    </tr>
+    <tr>
+      <form action="" method="POST" enctype="multipart/form-data">
+      <td><input type="text" style="width:80px;"></td>
+      <td><input type="text" style="width:160px;"></td>
+      <td><input type="text" style="width:110px;"></td>
+      <td><input type="text" style="width:90px;"></td>
+      <td><input type="file" name="memberPic" style="width:200px;" accept="image/png, image/jpeg" id="imageAdd" value="사진"></td>
+      </tr>
+  </table>
+  <input type="submit" value="추가" id="add">
+</form>
+</body>
+</html>
