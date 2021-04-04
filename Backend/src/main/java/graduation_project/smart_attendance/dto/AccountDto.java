@@ -1,9 +1,8 @@
 package graduation_project.smart_attendance.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import graduation_project.smart_attendance.domain.Account;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
@@ -14,9 +13,12 @@ import javax.persistence.Id;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 
+
 @Data
+@Builder
+@AllArgsConstructor
 @NoArgsConstructor
-public class AccountForm {
+public class AccountDto {
 
     private Long id;
     private String username;
@@ -26,17 +28,6 @@ public class AccountForm {
     private String email;
     private String role;
 
-    @Builder
-    public AccountForm(Long id, String username, String password, String confirmPassword, String name, String email, String role) {
-        this.id = id;
-        this.username = username;
-        this.password = password;
-        this.confirmPassword = confirmPassword;
-        this.name = name;
-        this.email = email;
-        this.role = role;
-    }
-
     public Account toEntity(){
         return Account.builder()
                 .id(id)
@@ -44,7 +35,6 @@ public class AccountForm {
                 .password(new BCryptPasswordEncoder().encode(password))
                 .name(name)
                 .email(email)
-                .role(role)
                 .build();
     }
 }

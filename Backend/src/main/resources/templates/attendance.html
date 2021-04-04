@@ -23,15 +23,15 @@
 
   <header>
     <div class="logo">
-      <h2><a href="../templates/attendance.html">I'm Here</a></h2>
+      <h2><a href="../templates/attendance.html" th:href="@{/user/attendance}">I'm Here</a></h2>
     </div>
     <nav>
       <ul>
         <li><a href="attendance.html">출석</a></li>
-        <li> <a href="members.html">멤버관리</a></li>
+        <li> <a href="members.html" th:href="@{/user/members}">멤버관리</a></li>
         <li> <a href="check.html">출결관리</a></li>
       </ul>
-      <div><a href="index.html" id="logout">로그아웃</a></div>
+      <div><a href="index.html" id="logout" th:href="@{/logout}">로그아웃</a></div>
     </nav>
   </header>
   <div class="container">

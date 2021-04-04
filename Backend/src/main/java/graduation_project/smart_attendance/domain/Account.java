@@ -1,15 +1,17 @@
 package graduation_project.smart_attendance.domain;
 
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 @Data
+@Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor
 public class Account {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "account_id")
@@ -20,13 +22,7 @@ public class Account {
     private String email;
     private String role;
 
-    @Builder
-    public Account(Long id, String username, String password, String name, String email, String role) {
-        this.id = id;
-        this.username = username;
-        this.password = password;
-        this.name = name;
-        this.email = email;
-        this.role = role;
-    }
+    @OneToMany(mappedBy = "account", cascade = CascadeType.ALL)
+    private List<Member> members = new ArrayList<>();
+
 }

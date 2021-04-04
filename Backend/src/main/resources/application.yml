@@ -15,9 +15,17 @@ spring:
   #     show_sql: true
         format_sql: true
 
+  servlet:
+    multipart:
+      max-file-size: 20MB
+      max-request-size: 20MB
+
   thymeleaf:
     prefix: classpath:/templates/
     suffix: .html
+
+jwt:
+  secret: 4oCYc2lsdmVybmluZS10ZWNoLXNwcmluZy1ib290LWp3dC10dXRvcmlhbC1zZWNyZXQtc2lsdmVybmluZS10ZWNoLXNwcmluZy1ib290LWp3dC10dXRvcmlhbC1zZWNyZXTigJkK
 
 logging.level:
   org.hibernate.SQL: debug

@@ -1,10 +1,12 @@
 package graduation_project.smart_attendance.service;
 
 import graduation_project.smart_attendance.domain.Account;
-import graduation_project.smart_attendance.dto.AccountForm;
+import graduation_project.smart_attendance.dto.AccountDto;
 import graduation_project.smart_attendance.repository.AccountRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,11 +18,18 @@ public class AccountService {
     private final AccountRepository accountRepository;
 
     @Transactional
-    public Long createUser(AccountForm accountForm) {
-        Account account = accountForm.toEntity();
+    public Long createUser(AccountDto accountDto) {
+        Account account = accountDto.toEntity();
         account.setRole("ROLE_USER");
         accountRepository.save(account);
         return account.getId();
     }
 
+    public Account CurrentAccount(){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        User user = (User) authentication.getPrincipal();
+
+        return accountRepository.findByUsername(user.getUsername());
+    }
 }

@@ -1,4 +1,4 @@
-package graduation_project.smart_attendance.security;
+package graduation_project.smart_attendance.config;
 
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.InsufficientAuthenticationException;

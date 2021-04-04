@@ -1,6 +1,6 @@
 package graduation_project.smart_attendance.controller;
 
-import graduation_project.smart_attendance.dto.AccountForm;
+import graduation_project.smart_attendance.dto.AccountDto;
 import graduation_project.smart_attendance.service.AccountService;
 import graduation_project.smart_attendance.service.AccountValidator;
 import lombok.RequiredArgsConstructor;
@@ -21,12 +21,12 @@ public class UserController {
 
     @GetMapping("/signup")
     public String createUserForm(Model model){
-        model.addAttribute("accountForm", new AccountForm());
+        model.addAttribute("accountDto", new AccountDto());
         return "signup";
     }
 
     @PostMapping("/signup")
-    public String createUser(@Valid AccountForm form, BindingResult result){
+    public String createUser(@Valid AccountDto form, BindingResult result){
 
         accountValidator.validate(form, result);
         if(result.hasErrors()){

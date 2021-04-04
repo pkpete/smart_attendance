@@ -1,5 +1,6 @@
-package graduation_project.smart_attendance.security;
+package graduation_project.smart_attendance.config;
 
+import graduation_project.smart_attendance.adapter.UserAccount;
 import graduation_project.smart_attendance.domain.Account;
 import graduation_project.smart_attendance.repository.AccountRepository;
 import lombok.AllArgsConstructor;
@@ -31,8 +32,8 @@ public class CustomUserDetailsService implements UserDetailsService {
         List<GrantedAuthority> roles = new ArrayList<>();
         roles.add(new SimpleGrantedAuthority(account.getRole()));
 
-        AccountContext accountContext = new AccountContext(account, roles);
+        UserAccount userAccount = new UserAccount(account, roles);
 
-        return accountContext;
+        return userAccount;
     }
 }

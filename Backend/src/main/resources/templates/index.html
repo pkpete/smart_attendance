@@ -19,7 +19,7 @@
   <div class="frame">
     
     <div class="logo">
-      <h2><a href="index.html" >I'm Here</a></h2>
+      <h2><a href="index.html" th:href="@{/}">I'm Here</a></h2>
     </div>
       <p th:if="${param.error}">아이디 혹은 비밀번호를 확인해주세요.</p>
     <form role="form" action="#" th:action="@{/login_proc}" method="post">

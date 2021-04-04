@@ -1,4 +1,4 @@
-package graduation_project.smart_attendance.security;
+package graduation_project.smart_attendance.config;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -32,11 +32,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //        auth.authenticationProvider(authenticationProvider());
     }
 
-    @Bean
-    public AuthenticationProvider authenticationProvider(){
-        return new CustomAuthenticationProvider();
-    }
-
     @Override
     // js, css, image 설정은 보안 설정의 영향 밖에 있도록 만들어주는 설정.
     public void configure(WebSecurity web) throws Exception {
@@ -54,7 +49,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/user/**").hasRole("USER")
                 .anyRequest().permitAll()
                 .and()
-            .formLogin()
+                .formLogin()
                 .loginPage("/")
                 .loginProcessingUrl("/login_proc")
                 .defaultSuccessUrl("/user/attendance")

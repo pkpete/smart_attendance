@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="https://www.thymeleaf.org"
+      lang="en">
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -12,27 +13,45 @@
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
 
-<link rel="stylesheet" href="../static/css/popup.css">
+<link rel="stylesheet" href="../static/css/popup.css" th:href="@{/css/popup.css}">
 
 <body>
-  <table>
-    <tr>
-      <th>번호</th>
-      <th>이름</th>
-      <th>나이</th>
-      <th>수업</th>
-      <th>사진</th>
-    </tr>
-    <tr>
-      <form action="" method="POST" enctype="multipart/form-data">
-      <td><input type="text" style="width:80px;"></td>
-      <td><input type="text" style="width:160px;"></td>
-      <td><input type="text" style="width:110px;"></td>
-      <td><input type="text" style="width:90px;"></td>
-      <td><input type="file" name="memberPic" style="width:200px;" accept="image/png, image/jpeg" id="imageAdd" value="사진"></td>
+  <form action="" method="post" enctype="multipart/form-data" th:action="@{/user/members/add}" th:object="${addMemberDto}">
+    <table>
+      <tr>
+        <th>번호</th>
+        <th>이름</th>
+        <th>나이</th>
+        <th>수업</th>
+        <th>사진</th>
       </tr>
-  </table>
-  <input type="submit" value="추가" id="add">
-</form>
+      <tr>
+        <td>
+          <label th:for="number">
+            <input type="text" style="width:80px;" th:field="*{number}">
+          </label>
+        </td>
+        <td>
+          <label th:for="name">
+            <input type="text" style="width:160px;" th:field="*{name}">
+          </label>
+        </td>
+        <td>
+          <label th:for="age">
+            <input type="text" style="width:110px;" th:field="*{age}">
+          </label>
+        </td>
+        <td>
+          <label th:for="classname">
+            <input type="text" style="width:90px;" th:field="*{classname}">
+          </label>
+        </td>
+        <td><input type="file" name="memberPic" style="width:200px;" accept="image/png, image/jpeg" id="imageAdd" value="사진"></td>
+      </tr>
+    </table>
+    <input type="submit" value="추가" id="add">
+  </form>
+
+
 </body>
 </html>

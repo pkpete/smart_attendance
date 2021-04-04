@@ -19,12 +19,12 @@
   <div class="frame">
     
     <div class="logo">
-      <h2><a href="index.html">I'm Here</a></h2>
+      <h2><a href="index.html" th:href="@{/}">I'm Here</a></h2>
     </div>
 
 
 
-    <form role="form" th:action="@{/signup}" th:object="${accountForm}" method="post">
+    <form role="form" th:action="@{/signup}" th:object="${accountDto}" method="post">
       <p>회원정보를 입력해주세요</p>
 
 
