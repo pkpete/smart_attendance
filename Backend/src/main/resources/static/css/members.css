@@ -91,7 +91,11 @@ ul a:hover {
 table {
     margin-top: 50px;
     text-align: center;
-    width: 85%;
+    width: 87%;
+}
+
+table tr:nth-child(2n + 3) {
+    background-color: rgb(219, 219, 219);
 }
 
 table th {
@@ -104,10 +108,14 @@ table td {
     font: 540 1.25em 'Noto Sans KR', sans-serif;
 }
 
+table td:nth-child(5) {
+    width: 280px;
+}
+
 .edit {
     font: 540 1.05em 'Noto Sans KR', sans-serif;
     border: none;
-    background-color: white;
+    background-color: transparent;
 }
 
 .edit:hover {
