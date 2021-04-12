@@ -17,14 +17,14 @@
 
 
 <body>
-  
+<form role="form" th:action="@{/signup}" th:object="${accountDto}" method="post" name="signupForm">
   <div class="frame">
 
     <div class="logo">
       <h2><a href="index.html" th:href="@{/}">I'm Here</a></h2>
     </div>
 
-    <form role="form" th:action="@{/signup}" th:object="${accountDto}" method="post" name="signupForm">
+
 
       <p>회원정보를 입력해주세요</p>
 
@@ -51,21 +51,21 @@
 
       <input id="signupBtn" value="회원가입" type ="submit" onsubmit="errorCheck()">
 
-    </form>
+
 </div>
 
+  <div id="modalWrap" th:if="${#fields.hasErrors()}" style="display: flex;">
+    <a href="#" id="modalClose" onclick="offclick()">닫기</a>
 
-<div id="modalWrap" th:if="${#fields.hasErrors('username')}" style="display: flex;">
-  <a href="#" id="modalClose" onclick="offclick()">닫기</a>
-  
-  <div id="errorMes">
-  <p id="idError" th:if="${#fields.hasErrors('username')}" style="display:block">이미 존재하는 아이디입니다 ❗❗</p>
+    <div id="errorMes">
+      <p id="idError" th:if="${#fields.hasErrors('username')}" style="display:block">이미 존재하는 아이디입니다 ❗❗</p>
 
-  <p id="pwError">비밀번호가 일치하지 않습니다 ❗❗</p>
-</div>
-</div>
+      <p id="pwError" th:if="${#fields.hasErrors('password')}">비밀번호가 일치하지 않습니다 ❗❗</p>
+    </div>
+  </div>
+  <div id="bg_black" th:if="${#fields.hasErrors()}"></div>
 
-<div id="bg_black"></div>
+</form>
 
 <script>
 
