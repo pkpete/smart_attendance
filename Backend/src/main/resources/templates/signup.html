@@ -50,26 +50,12 @@
       </label>
 
       <input id="signupBtn" value="회원가입" type ="submit" onsubmit="errorCheck()">
-
-
-</div>
+  </div>
 
   <div id="modalWrap" th:if="${#fields.hasErrors()}" style="display: flex;">
     <a href="#" id="modalClose" onclick="offclick()">닫기</a>
 
-<<<<<<< HEAD
-<div id="modalWrap" th:if="${#fields.hasErrors('username')}" style="display: flex;">
-  <a href="#" id="modalClose" onclick="offclick()">닫기</a>
-  
-  <div id="errorMes">
 
-  <p id="idError" th:if="${#fields.hasErrors('username')}" style="display:block">이미 존재하는 아이디입니다 ❗❗</p>
-
-  <p id="pwError">비밀번호가 일치하지 않습니다 ❗❗</p>
-
-</div>
-</div>
-=======
     <div id="errorMes">
       <p id="idError" th:if="${#fields.hasErrors('username')}" style="display:block">이미 존재하는 아이디입니다 ❗❗</p>
 
@@ -77,7 +63,6 @@
     </div>
   </div>
   <div id="bg_black" th:if="${#fields.hasErrors()}"></div>
->>>>>>> 3498295fab7a128dae31e5511789e462b9a7f31f
 
 </form>
 

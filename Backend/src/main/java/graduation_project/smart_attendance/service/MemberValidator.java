@@ -22,8 +22,8 @@ public class MemberValidator implements Validator {
     @Override
     public void validate(Object obj, Errors errors) {
         AddMemberDto addMemberDto = (AddMemberDto) obj;
-        if(memberRepository.findByNumber(((AddMemberDto) obj).getNumber()) != null){
-            errors.rejectValue("number", "key", "이미 존재하는 번호입니다.");
+        if(memberRepository.findByNumberAndAccount(addMemberDto.getNumber(), addMemberDto.getAccount()) != null){
+            errors.rejectValue("number", "key");
         }
     }
 }

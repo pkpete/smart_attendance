@@ -46,15 +46,25 @@ public class MemberController {
 
     @PostMapping("/user/members/add")
     public String addMember(@RequestParam("memberPic") MultipartFile file, @Valid AddMemberDto addMemberDto, BindingResult bindingResult){
+        Account account = accountService.CurrentAccount();
+        addMemberDto.setAccount(account);
         memberValidator.validate(addMemberDto, bindingResult);
         if (bindingResult.hasErrors()){
             return "popup";
         }
-        Account account = accountService.CurrentAccount();
 
         try {
-            String baseDir = "C:\\Users\\kgsmy\\OneDrive\\문서\\attendance_image";
-            String filePath = baseDir + "\\" + addMemberDto.getName() + ".jpg";
+            String baseDir = "C:\\Users\\kgsmy\\OneDrive\\문서\\attendance_image\\" + account.getUsername();
+
+            if(!new File(baseDir).exists()){
+                try{
+                    new File(baseDir).mkdir();
+                }catch (Exception e){
+                    e.getStackTrace();
+                }
+            }
+
+            String filePath = baseDir + "\\" + addMemberDto.getNumber() + ".jpg";
             file.transferTo(new File(filePath));
 
             addMemberDto.setOrigFilename(file.getOriginalFilename());

@@ -49,6 +49,7 @@
         <td><input type="file" name="memberPic" style="width:200px;" accept="image/png, image/jpeg" id="imageAdd" value="사진"></td>
       </tr>
     </table>
+    <a th:if="${#fields.hasErrors('number')}">동일한 번호가 존재합니다.</a>
     <input type="submit" value="추가" id="add">
   </form>
 

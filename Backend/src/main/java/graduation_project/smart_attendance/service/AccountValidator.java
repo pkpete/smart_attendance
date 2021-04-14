@@ -21,10 +21,10 @@ public class AccountValidator implements Validator {
     @Override
     public void validate(Object obj, Errors errors) {
         AccountDto accountDto = (AccountDto) obj;
-        if(!((AccountDto) obj).getPassword().equals(((AccountDto) obj).getConfirmPassword())){
-            errors.rejectValue("password", "key", "비밀번호와 비밀번호 확인이 일치하지 않습니다.");
-        } else if(accountRepository.findByUsername(((AccountDto) obj).getUsername()) != null){
-            errors.rejectValue("username", "key", "이미 존재하는 아이디입니다.");
+        if(!accountDto.getPassword().equals(accountDto.getConfirmPassword())){
+            errors.rejectValue("password", "key");
+        } else if(accountRepository.findByUsername(accountDto.getUsername()) != null){
+            errors.rejectValue("username", "key");
         }
     }
 }
