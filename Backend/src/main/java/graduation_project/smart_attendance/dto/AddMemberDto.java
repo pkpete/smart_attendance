@@ -12,8 +12,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class AddMemberDto {
-
-    private Long id;
     private String number;
     private String name;
     private Long age;
