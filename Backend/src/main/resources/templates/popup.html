@@ -49,10 +49,31 @@
         <td><input type="file" name="memberPic" style="width:200px;" accept="image/png, image/jpeg" id="imageAdd" value="사진"></td>
       </tr>
     </table>
-    <a th:if="${#fields.hasErrors('number')}">동일한 번호가 존재합니다.</a>
-    <input type="submit" value="추가" id="add">
-  </form>
 
+<!-- 동일한 번호가 존재할 때 에러 -->
+    <div id="modalWrap" th:if="${#fields.hasErrors('number')}" style="display: flex;">
+      <a href="#" id="modalClose" onclick="offclick()">닫기</a>
+      
+      <div id="errorMes">
+        해당 번호가 이미 존재합니다 ❗❗
+      </div>
+
+    </div>
+
+    <div id="bg_black" th:if="${#fields.hasErrors('number')}"></div>
+
+
+    </form>
+
+<script>
+  function offclick() {
+    var modal=document.querySelector('#modalWrap');
+    var bg=document.querySelector('#bg_black');
+      
+    modal.style.display='none';
+    bg.style.display='none';
+    }
+</script>
 
 </body>
 </html>

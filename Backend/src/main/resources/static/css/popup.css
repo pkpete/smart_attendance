@@ -6,7 +6,8 @@ body {
 
 form {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
 }
 
 table {
@@ -60,4 +61,54 @@ input {
     transform: scale(1.08);
     transition: all 0.1s;
     transition-timing-function: ease-in;
+}
+
+/* Modal */
+
+#modalWrap {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 300px;
+    height: 200px;
+    border-radius: 7px;
+    position: absolute;
+    box-sizing: border-box;
+    top: 50%;
+    left: 50%;
+    margin: -125px 0 0 -175px;
+    background: #fff;
+    z-index: 5;
+}
+
+#errorMes {
+    font: 550 1.05em 'Noto Sans KR', sans-serif;
+}
+
+#bg_black {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(0, 0, 0, 0.55);
+    z-index: 2;
+}
+
+#modalClose {
+    position: absolute;
+    bottom: 10%;
+}
+
+#modalWrap > a {
+    text-decoration: none;
+    color: black;
+    border: 1.5px solid black;
+    padding: 5px 15px;
+    font: 600 0.9em 'Noto Sans KR', sans-serif;
+    border-radius: 7px;
+    box-shadow: 1px 1.5px 2px grey;
+    letter-spacing: 2px;
 }
