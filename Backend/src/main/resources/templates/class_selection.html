@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>I'm Here</title>
+</head>
+
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Bevan&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="../static/css/class_selection.css">
+
+<body>
+
+  <header>
+    <div class="logo">
+      <h2><a href="attendance.html">I'm Here</a></h2>
+    </div>
+    <nav class="menu">
+      <ul>
+        <li><a href="attendance.html">출석</a></li>
+        <li> <a href="class_selection.html">멤버관리</a></li>
+        <li> <a href="check.html">출결관리</a></li>
+      </ul>
+      <div><a href="index.html" id="logout">로그아웃</a></div>
+    </nav>
+  </header>
+
+
+  <div class="container">
+<h3>수업 목록</h3>
+<div class="classList">
+
+  <ul class="classContainer">
+<li><a href="#">자료구조</a></li>
+<li><a href="#">자료구조</a></li>
+<li><a href="#">자료구조</a></li>
+
+</ul>
+
+<input type="button" id="add" onclick="createClass()" value="추가+">
+
+</div>
+  </div>
+
+  <div id="modalWrap">
+    <a href="#" id="modalClose" onclick="offclick()">닫기</a>
+    <div id="classInsert">
+    <input style="display:block" placeholder="수업명을 입력해주세요.">
+    <input type="button" value="입력" id="insert">
+  </div>
+  </div>
+  <div id="bg_black"></div>
+  <script>
+
+    function createClass() {
+      var modal=document.querySelector('#modalWrap');
+      var bg=document.querySelector('#bg_black');
+      modal.style.display='flex';
+      bg.style.display='block';
+    }
+
+    function offclick() {
+      var modal=document.querySelector('#modalWrap');
+      var bg=document.querySelector('#bg_black');
+      modal.style.display='none';
+      bg.style.display='none';
+      }
+  </script>
+</body>
+</html>

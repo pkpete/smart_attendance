@@ -1,0 +1,226 @@
+body {
+    margin: 0;
+}
+
+/* header */
+
+header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0;
+    height: 100px;
+    background-color: #dcd8d5;
+}
+
+/* Logo */
+.logo {
+    display: flex;
+    height: 100px;
+    margin: 0;
+    background-image: url(../media/face-id.png);
+    background-size: 80px;
+    background-repeat: no-repeat;
+    background-position: left;
+}
+
+.logo a {
+    text-decoration: none;
+    color: #0e78e2;
+}
+
+h2 {
+    display: flex;
+    align-items: center;
+    font: 500 2em 'Bevan', cursive;
+    height: 100px;
+    margin: 0;
+    margin-left: 80px;
+    color: #0e78e2;
+    text-shadow: 1.5px 1.5px 1.5px gray;
+}
+
+nav {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+nav ul {
+    display: flex;
+    flex-direction: row;
+    margin-right: 30px;
+}
+
+ul li {
+    list-style: none;
+}
+
+.menu a {
+    text-decoration: none;
+    color: black;
+    font: 540 1.45em 'Noto Sans KR', sans-serif;
+    margin-right: 30px;
+    letter-spacing: 1.5px;
+    padding-bottom: 8px;
+}
+
+.menu a:hover {
+    border-bottom: 2.5px solid black;
+    /* transition: 0.5s;
+transition-timing-function: ease-out; */
+}
+
+#logout {
+    border: 2.5px solid rgb(126, 125, 125);
+    border-radius: 40px;
+    padding: 3px 5px;
+    font-size: 1em;
+    margin-right: 38px;
+}
+
+/*classList*/
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.container h3 {
+    font: 550 2.25em 'Noto Sans KR', sans-serif;
+    letter-spacing: 3px;
+    border-bottom: 2px solid rgb(155, 155, 155);
+}
+
+.classContainer {
+    display: flex;
+    flex-direction: row;
+    align-content: flex-start;
+    padding: 0;
+    flex-wrap: wrap;
+}
+
+.classList {
+    width: 60%;
+    height: 650px;
+    overflow: scroll;
+    background-color: rgb(180, 221, 250);
+    font: 550 1.95em 'Noto Sans KR', sans-serif;
+}
+
+.classContainer li {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 80px;
+    margin-right: 110px;
+    box-sizing: border-box;
+    width: 210px;
+    height: 210px;
+    background-color: #0e78e2;
+    box-shadow: 0 0 3px #eee;
+    border-radius: 10%;
+    color: white;
+}
+
+.classContainer a {
+    text-decoration: none !important;
+    color: white;
+}
+
+.classContainer a:hover {
+    text-decoration: none !important;
+}
+
+.classContainer li:hover {
+    transition: 0.3s;
+    transform: scale(1.15);
+}
+.classContainer li:nth-child(3n + 1) {
+    margin-left: 12%;
+}
+
+.classContainer li:nth-child(3n) {
+    margin-right: 0;
+}
+
+/* 추가 버튼  */
+#add {
+    position: fixed;
+    bottom: 10%;
+    left: 46.65%;
+    width: 120px;
+    height: 50px;
+    border: 2px solid rgb(160, 159, 159);
+    border-radius: 30px;
+    background-color: #23d83b;
+    color: white;
+    font: 570 21px 'Roboto', sans-serif;
+    letter-spacing: 0.9px;
+    cursor: pointer;
+}
+
+#add:hover {
+    background-color: #23d83b;
+    transform: scale(1.08);
+    transition: all 0.1s;
+    transition-timing-function: ease-in;
+}
+
+/* Modal */
+
+#modalWrap {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 280px;
+    height: 200px;
+    border-radius: 7px;
+    position: absolute;
+    box-sizing: border-box;
+    top: 50%;
+    left: 50%;
+    margin: -125px 0 0 -175px;
+    background: #fff;
+    z-index: 5;
+}
+
+#bg_black {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(0, 0, 0, 0.55);
+    z-index: 2;
+}
+
+#modalClose {
+    position: absolute;
+    bottom: 10%;
+}
+
+#modalWrap > a {
+    text-decoration: none;
+    color: black;
+    border: 1.5px solid black;
+    padding: 5px 15px;
+    font: 600 1em 'Noto Sans KR', sans-serif;
+    border-radius: 7px;
+    box-shadow: 1px 1.5px 2px grey;
+    letter-spacing: 2px;
+}
+
+#classInsert {
+    display: flex;
+    flex-direction: row;
+}
+
+#insert {
+    margin-left: 5px;
+    font-size: 15px;
+}
