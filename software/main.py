@@ -4,7 +4,6 @@ import tkinter
 from PIL import Image, ImageTk
 from time import strftime
 from datetime import datetime
-#import os
 from student_file import Student
 from developer import Developer
 from attendance import Attendance
@@ -15,6 +14,7 @@ class Face_Recognition_System:
         self.root = root
         self.root.geometry("1500x900+0+0")
         self.root.title("Face Recognition System")
+        self.root.resizable(False, False)
 
         def time():
             string_time = strftime('%H:%M:%S %p')

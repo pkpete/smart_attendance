@@ -17,6 +17,7 @@ class Attendance:
         self.root = root
         self.root.geometry("1500x900+0+0")
         self.root.title("Face Recognition System")
+        self.root.resizable(False, False)
 
         def time():
             string_time = strftime('%H:%M:%S %p')
