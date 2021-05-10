@@ -48,7 +48,7 @@
 
   <form id="form" th:object="${addCourseDto}" th:action="@{/user/courses}" method="post">
   <div id="modalWrap">
-    <a href="#" id="modalClose" onclick="offclick()">닫기</a>
+    <a th:href="@{/user/courses}" id="modalClose" onclick="offclick()">닫기</a>
     <div id="classInsert">
       <label th:for="courseName">
     <input type="text" th:field="*{courseName}" style="display:block" placeholder="수업명을 입력해주세요." >

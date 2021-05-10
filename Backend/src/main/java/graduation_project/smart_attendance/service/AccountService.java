@@ -28,10 +28,11 @@ public class AccountService {
     }
 
     public Boolean findUser(FindAccountDto findAccountDto){
-        String password = findAccountDto.getPassword();
-        findAccountDto.setPassword(new BCryptPasswordEncoder().encode(password));
-        return accountRepository.findByUsernameAndPassword(findAccountDto.getUsername(), findAccountDto.getPassword())
-                            .isPresent();
+        Account account = accountRepository.findByUsername(findAccountDto.getUsername());
+        if(account == null){
+            return false;
+        }
+        return new BCryptPasswordEncoder().matches(findAccountDto.getPassword(), account.getPassword());
     }
 
     public Account CurrentAccount(){

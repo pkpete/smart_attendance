@@ -42,16 +42,16 @@ public class MemberController {
         return "members";
     }
 
-    @GetMapping("/user/members/add/{cId}")
+    @GetMapping("/user/members/{cId}/add")
     public String addMemberForm(@PathVariable("cId") Long courseId, Model model){
         model.addAttribute("addMemberDto", new AddMemberDto());
         model.addAttribute("courseId", courseId);
         return "popup";
     }
 
-    @PostMapping("/user/members/add/{cId}")
-    public String addMember(@PathVariable("cId") Long courseId, @RequestParam("memberPic") MultipartFile file, @Valid AddMemberDto addMemberDto, BindingResult bindingResult){
-
+    @PostMapping("/user/members/{cId}/add")
+    public String addMember(Model model, @PathVariable("cId") Long courseId, @RequestParam("memberPic") MultipartFile file, @Valid AddMemberDto addMemberDto, BindingResult bindingResult){
+        model.addAttribute("courseId", courseId);
         Account account = accountService.CurrentAccount();
         Course course = courseService.findCourse(courseId);
         addMemberDto.setCourse(course);

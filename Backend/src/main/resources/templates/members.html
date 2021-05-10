@@ -40,6 +40,7 @@
         <th>수업</th>
         <th>관리</th>
         </tr>
+
       
       
       <tr th:each="member : ${members}">
@@ -63,7 +64,7 @@
   function showPopup(courseId){
     var popupX = (window.screen.width / 2) - (750 / 2);
     var popupY= (window.screen.height / 2) - (300 / 2);
-    window.open('/user/members/add/' + courseId, 'membeAdd', 'status=no, height=300, width=750, left='+ popupX + ', top='+ popupY);
+    window.open('/user/members/' + courseId + '/add', 'membeAdd', 'status=no, height=300, width=750, left='+ popupX + ', top='+ popupY);
 
   }
 </script>
