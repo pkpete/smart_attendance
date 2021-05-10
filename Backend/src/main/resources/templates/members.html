@@ -17,6 +17,22 @@
 
 <body>
 
+
+  <header>
+    <div class="logo">
+      <h2><a href="../html/attendance.html" th:href="@{/user/attendance}">I'm Here</a></h2>
+    </div>
+    <nav>
+      <ul>
+        <li><a href="attendance.html">출석</a></li>
+        <li> <a href="class_selection.html">수업관리</a></li>
+        <li> <a href="members.html" th:href="@{/user/courses}">멤버관리</a></li>
+        <li> <a href="check.html">출결관리</a></li>
+      </ul>
+      <div><a href="index.html" id="logout" th:href="@{/logout}">로그아웃</a></div>
+    </nav>
+  </header>
+
 <header>
   <div class="logo">
     <h2><a href="attendance.html" th:href="@{/user/attendance}">I'm Here</a></h2>
@@ -30,6 +46,7 @@
     <div><a href="index.html" id="logout" th:href="@{/logout}">로그아웃</a></div>
   </nav>
 </header>
+
 
   <div class="container" >
     <table class="members" >

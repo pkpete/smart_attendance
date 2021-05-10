@@ -12,25 +12,69 @@
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
 
-<link rel="stylesheet" href="../static/css/check.css">
+<link rel="stylesheet" href="../css/check.css">
 
 <body>
 
   <header>
     <div class="logo">
-      <h2><a href="attendance.html">I'm Here</a></h2>
+      <h2><a href="../html/attendance.html">I'm Here</a></h2>
     </div>
-    <nav>
+    <nav class="menu">
       <ul>
         <li><a href="attendance.html">출석</a></li>
-        <li> <a href="class_selection.html">멤버관리</a></li>
+        <li> <a href="class_selection.html">수업관리</a></li>
+        <li> <a href="members.html" th:href="@{/user/courses}">멤버관리</a></li>
         <li> <a href="check.html">출결관리</a></li>
+
       </ul>
       <div><a href="index.html" id="logout">로그아웃</a></div>
     </nav>
   </header>
 
   <div class="container">
+    <table class="members">
+      <tr>
+        <th>번호</th>
+        <th>이름</th>
+        <th>나이</th>
+        <th>출결 현황</th>
+      </tr>
+
+      <tbody id="attendanceCheck" onchange="check()">
+        <tr>
+          <td>39</td>
+          <td>정도식</td>
+          <td>26</td>
+          <td id="status">출석</td>
+        </tr>
+        <tr>
+          <td>39</td>
+          <td>정도식</td>
+          <td>26</td>
+          <td id="status">출석</td>
+        </tr>
+      </tbody>
+    </table>
+
 </div>
+
+
+<script>
+function check() {
+  var body =document.body
+  var table = document.querySelector("#attendanceCheck");
+  var tr= table.tr
+  var status=table.querySelector("#status").innerHTML;
+  
+  body.style.backgroundColor='orange';
+  if(status=='출석'){
+tr.style.backgroundColor='green';
+  }
+}
+
+
+</script>
 </body>
+
 </html>
