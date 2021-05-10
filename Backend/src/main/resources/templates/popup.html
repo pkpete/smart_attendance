@@ -16,7 +16,7 @@
 <link rel="stylesheet" href="../static/css/popup.css" th:href="@{/css/popup.css}">
 
 <body>
-  <form action="" method="post" enctype="multipart/form-data" th:action="@{/user/members/add}" th:object="${addMemberDto}">
+  <form action="" method="post" enctype="multipart/form-data" th:action="@{/user/members/add/{cid} (cid=${courseId})}" th:object="${addMemberDto}">
     <table>
       <tr>
         <th>번호</th>
@@ -49,6 +49,8 @@
         <td><input type="file" name="memberPic" style="width:200px;" accept="image/png, image/jpeg" id="imageAdd" value="사진"></td>
       </tr>
     </table>
+
+    <input type="submit" value="입력" style="position: fixed; top:150px;" id="insert">
 
 <!-- 동일한 번호가 존재할 때 에러 -->
     <div id="modalWrap" th:if="${#fields.hasErrors('number')}" style="display: flex;">

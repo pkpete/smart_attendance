@@ -55,5 +55,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .defaultSuccessUrl("/user/attendance")
                 .failureHandler(customFailureHandler)
                 .permitAll();
+        http.csrf().disable();
     }
 }

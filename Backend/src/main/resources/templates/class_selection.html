@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"
+      xmlns:th="https://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -12,34 +13,36 @@
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
 
-<link rel="stylesheet" href="../static/css/class_selection.css">
+<link rel="stylesheet" href="../static/css/class_selection.css" th:href="@{/css/class_selection.css}">
 
 <body>
 
   <header>
     <div class="logo">
-      <h2><a href="attendance.html">I'm Here</a></h2>
+      <h2><a href="attendance.html" th:href="@{/user/attendance}">I'm Here</a></h2>
     </div>
     <nav class="menu">
       <ul>
         <li><a href="attendance.html">출석</a></li>
+<<<<<<< HEAD
         <li> <a href="class_selection.html">수업관리</a></li>
         <li> <a href="members.html">멤버관리</a></li>
+=======
+        <li> <a href="class_selection.html" th:href="@{/user/courses}">멤버관리</a></li>
+>>>>>>> 79f872dfd77e5bf5a6d45484ab5679168088c3a2
         <li> <a href="check.html">출결관리</a></li>
       </ul>
-      <div><a href="index.html" id="logout">로그아웃</a></div>
+      <div><a href="index.html" id="logout" th:href="@{/logout}">로그아웃</a></div>
     </nav>
   </header>
 
 
   <div class="container">
 <h3>수업 목록</h3>
-<div class="classList">
+<div class="classList" id="list">
 
   <ul class="classContainer">
-<li><a href="#">자료구조</a></li>
-<li><a href="#">자료구조</a></li>
-<li><a href="#">자료구조</a></li>
+<li th:each="course: ${courses}"><a href="#" th:href="@{/user/members/{cId} (cId=${course.id})}" th:text="${course.courseName}"></a></li>
 
 </ul>
 
@@ -48,14 +51,18 @@
 </div>
   </div>
 
+  <form id="form" th:object="${addCourseDto}" th:action="@{/user/courses}" method="post">
   <div id="modalWrap">
     <a href="#" id="modalClose" onclick="offclick()">닫기</a>
     <div id="classInsert">
-    <input style="display:block" placeholder="수업명을 입력해주세요.">
-    <input type="button" value="입력" id="insert">
+      <label th:for="courseName">
+    <input type="text" th:field="*{courseName}" style="display:block" placeholder="수업명을 입력해주세요." >
+      </label>
+    <input type="submit" value="입력" id="insert" >
   </div>
   </div>
   <div id="bg_black"></div>
+</form>
   <script>
 
     function createClass() {
@@ -70,7 +77,8 @@
       var bg=document.querySelector('#bg_black');
       modal.style.display='none';
       bg.style.display='none';
-      }
+    }
+
   </script>
 </body>
 </html>

@@ -23,6 +23,6 @@ public class Account {
     private String role;
 
     @OneToMany(mappedBy = "account", cascade = CascadeType.ALL)
-    private List<Member> members = new ArrayList<>();
+    private List<Course> courses = new ArrayList<>();
 
 }

@@ -17,6 +17,7 @@
 
 <body>
 
+<<<<<<< HEAD
   <header>
     <div class="logo">
       <h2><a href="../html/attendance.html" th:href="@{/user/attendance}">I'm Here</a></h2>
@@ -31,9 +32,24 @@
       <div><a href="index.html" id="logout" th:href="@{/logout}">로그아웃</a></div>
     </nav>
   </header>
+=======
+<header>
+  <div class="logo">
+    <h2><a href="attendance.html" th:href="@{/user/attendance}">I'm Here</a></h2>
+  </div>
+  <nav class="menu">
+    <ul>
+      <li><a href="attendance.html">출석</a></li>
+      <li> <a href="class_selection.html" th:href="@{/user/courses}">멤버관리</a></li>
+      <li> <a href="check.html">출결관리</a></li>
+    </ul>
+    <div><a href="index.html" id="logout" th:href="@{/logout}">로그아웃</a></div>
+  </nav>
+</header>
+>>>>>>> 79f872dfd77e5bf5a6d45484ab5679168088c3a2
 
-  <div class="container">
-    <table class="members">
+  <div class="container" >
+    <table class="members" >
       <tr>
         <th>번호</th>
         <th>이름</th>
@@ -57,14 +73,15 @@
       </tr>
     </table>
 
-    <input type="button" id="add" onclick="showPopup();" value="추가+">
+    <input type="button" id="add" th:onclick="'javascript:showPopup('+ ${courseId} + ');'" value="추가+">
   </div>
 </body>
 <script>
-  function showPopup(){
+  function showPopup(courseId){
     var popupX = (window.screen.width / 2) - (750 / 2);
     var popupY= (window.screen.height / 2) - (300 / 2);
-    window.open('/user/members/add', 'membeAdd', 'status=no, height=300, width=750, left='+ popupX + ', top='+ popupY);
+    window.open('/user/members/add/' + courseId, 'membeAdd', 'status=no, height=300, width=750, left='+ popupX + ', top='+ popupY);
+
   }
 </script>
 </html>

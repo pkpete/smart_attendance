@@ -33,17 +33,17 @@ public class Member {
 
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "account_id")
-    private Account account;
+    @JoinColumn(name = "course_id")
+    private Course course;
 
-    public void setAccount(Account account) {
-        this.account = account;
-        account.getMembers().add(this);
+    public void setCourse(Course course) {
+        this.course = course;
+        course.getMembers().add(this);
     }
 
-    public static Member createMember(AddMemberDto addMemberDto, Account account){
+    public static Member createMember(AddMemberDto addMemberDto, Course course){
         Member member = addMemberDto.toEntity();
-        member.setAccount(account);
+        member.setCourse(course);
         return member;
     }
 }

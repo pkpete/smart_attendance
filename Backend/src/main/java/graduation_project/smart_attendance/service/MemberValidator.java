@@ -22,7 +22,7 @@ public class MemberValidator implements Validator {
     @Override
     public void validate(Object obj, Errors errors) {
         AddMemberDto addMemberDto = (AddMemberDto) obj;
-        if(memberRepository.findByNumberAndAccount(addMemberDto.getNumber(), addMemberDto.getAccount()) != null){
+        if(memberRepository.findByNumberAndCourse(addMemberDto.getNumber(), addMemberDto.toEntity().getCourse()) != null){
             errors.rejectValue("number", "key");
         }
     }

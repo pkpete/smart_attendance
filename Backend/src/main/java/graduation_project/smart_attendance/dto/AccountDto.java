@@ -20,7 +20,6 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor
 public class AccountDto {
 
-    private Long id;
     private String username;
     private String password;
     private String confirmPassword;
@@ -30,7 +29,6 @@ public class AccountDto {
 
     public Account toEntity(){
         return Account.builder()
-                .id(id)
                 .username(username)
                 .password(new BCryptPasswordEncoder().encode(password))
                 .name(name)

@@ -1,6 +1,7 @@
 package graduation_project.smart_attendance.dto;
 
 import graduation_project.smart_attendance.domain.Account;
+import graduation_project.smart_attendance.domain.Course;
 import graduation_project.smart_attendance.domain.Member;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -23,7 +24,7 @@ public class AddMemberDto {
 
     private String filepath;
 
-    private Account account;
+    private Course course;
 
     public Member toEntity(){
         return Member.builder()
@@ -34,7 +35,7 @@ public class AddMemberDto {
                 .origFilename(origFilename)
                 .filename(filename)
                 .filepath(filepath)
-                .account(account)
+                .course(course)
                 .build();
     }
 }
