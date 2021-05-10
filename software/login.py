@@ -88,7 +88,6 @@ class Login_Window:
             messagebox.showerror("Error", "All field required")
         else:
             print(self.txtuser.get(), self.txtpassword.get())
-
             # 여기서 아이디, 비번 보내고 확인 결과값 받아오기
             js= {"username": self.txtuser.get(), "password": self.txtpassword.get()}
             jsonObject = json.dumps(js) # JSOn 형태로 바꾸기

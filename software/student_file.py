@@ -180,8 +180,8 @@ class Student:
         empty_label = Label(class_student_frame)
         empty_label.grid(row=3, column=0, pady=3)
 
-        save_btn = Button(class_student_frame, text="Save", font=("times new roman", 12, "bold"), width=20, command=self.add_data)
-        save_btn.grid(row=4, column=0)
+        # save_btn = Button(class_student_frame, text="Save", font=("times new roman", 12, "bold"), width=20, command=self.add_data)
+        # save_btn.grid(row=4, column=0)
 
         update_btn = Button(class_student_frame, text="Update", font=("times new roman", 12, "bold"), width=20, command=self.update_data)
         update_btn.grid(row=4, column=2)
@@ -275,30 +275,30 @@ class Student:
 
     # Function declaration
     # Add Data to DB
-    def add_data(self):
-        if self.var_course.get() == "Select Course" or self.var_name.get() == "" or self.var_id.get() == "" or self.var_kor_name.get() == "" or self.var_photo_addr.get() == "":
-            messagebox.showerror("Error", "All Fields are required", parent=self.root)
-        else:
-            try:
-                conn = mysql.connector.connect(host="localhost", username="root", password="123456", database="face_recognizer")
-                my_cursor = conn.cursor()
-                my_cursor.execute("insert into student values(%s,%s,%s,%s,%s,%s,%s,%s,%s)",(
-                                                                                            self.var_id.get(),
-                                                                                            self.var_name.get(),
-                                                                                            self.var_kor_name.get(),
-                                                                                            self.var_dep.get(),
-                                                                                            self.var_course.get(),
-                                                                                            self.var_year.get(),
-                                                                                            self.var_semester.get(),
-                                                                                            self.var_phone.get(),
-                                                                                            self.var_photo_addr.get(),
-                                                                                            ))
-                conn.commit()
-                self.fetch_data()
-                conn.close()
-                messagebox.showinfo("Success", f"{self.var_kor_name.get()} Data Saved Successfully", parent=self.root)
-            except Exception as es:
-                messagebox.showerror("Error", f"Due To: {str(es)}", parent=self.root)
+    # def add_data(self):
+    #     if self.var_course.get() == "Select Course" or self.var_name.get() == "" or self.var_id.get() == "" or self.var_kor_name.get() == "" or self.var_photo_addr.get() == "":
+    #         messagebox.showerror("Error", "All Fields are required", parent=self.root)
+    #     else:
+    #         try:
+    #             conn = mysql.connector.connect(host="localhost", username="root", password="123456", database="face_recognizer")
+    #             my_cursor = conn.cursor()
+    #             my_cursor.execute("insert into student values(%s,%s,%s,%s,%s,%s,%s,%s,%s)",(
+    #                                                                                         self.var_id.get(),
+    #                                                                                         self.var_name.get(),
+    #                                                                                         self.var_kor_name.get(),
+    #                                                                                         self.var_dep.get(),
+    #                                                                                         self.var_course.get(),
+    #                                                                                         self.var_year.get(),
+    #                                                                                         self.var_semester.get(),
+    #                                                                                         self.var_phone.get(),
+    #                                                                                         self.var_photo_addr.get(),
+    #                                                                                         ))
+    #             conn.commit()
+    #             self.fetch_data()
+    #             conn.close()
+    #             messagebox.showinfo("Success", f"{self.var_kor_name.get()} Data Saved Successfully", parent=self.root)
+    #         except Exception as es:
+    #             messagebox.showerror("Error", f"Due To: {str(es)}", parent=self.root)
 
     # Fetch Data
     # 데이터 가져오기
