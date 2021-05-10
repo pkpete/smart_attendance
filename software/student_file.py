@@ -301,6 +301,8 @@ class Student:
                 messagebox.showerror("Error", f"Due To: {str(es)}", parent=self.root)
 
     # Fetch Data
+    # 데이터 가져오기
+    # 교수 id에 있는 모든 학생 가져오기
     def fetch_data(self):
         conn = mysql.connector.connect(host="localhost", username="root", password="123456", database="face_recognizer")
         my_cursor = conn.cursor()

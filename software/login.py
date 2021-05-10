@@ -94,13 +94,13 @@ class Login_Window:
             jsonObject = json.dumps(js) # JSOn 형태로 바꾸기
             print(jsonObject)
             r = requests.post(url="http://localhost:8080/python/login", data=jsonObject, headers={'Content-Type': 'application/json'})
+            print(r.text)
 
-
-            if r.text == "True":
-                #self.new_window = Toplevel(self.root)
-                self.app = Face_Recognition_System(self.root)
-            else:
+            if r.text == "False":
                 messagebox.showerror("Error", "Wrong ID or Password")
+            else:
+                # self.new_window = Toplevel(self.root)
+                self.app = Face_Recognition_System(self.root)
 
 
 
