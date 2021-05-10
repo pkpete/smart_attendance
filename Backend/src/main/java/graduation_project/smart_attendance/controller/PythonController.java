@@ -19,9 +19,6 @@ public class PythonController {
     @PostMapping("/python/login")
     public String login(@RequestBody FindAccountDto findAccountDto){
         log.info("username: {}, password: {}", findAccountDto.getUsername(), findAccountDto.getPassword());
-        if(accountService.findUser(findAccountDto)){
-            return "True";
-        }
-        return "False";
+        return accountService.findUser(findAccountDto);
     }
 }

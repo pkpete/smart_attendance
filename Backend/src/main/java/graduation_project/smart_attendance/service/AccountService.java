@@ -27,12 +27,15 @@ public class AccountService {
         return account.getId();
     }
 
-    public Boolean findUser(FindAccountDto findAccountDto){
+    public String findUser(FindAccountDto findAccountDto){
         Account account = accountRepository.findByUsername(findAccountDto.getUsername());
         if(account == null){
-            return false;
+            return "False";
         }
-        return new BCryptPasswordEncoder().matches(findAccountDto.getPassword(), account.getPassword());
+        if(new BCryptPasswordEncoder().matches(findAccountDto.getPassword(), account.getPassword())){
+            return account.getId().toString();
+        }
+        return "False";
     }
 
     public Account CurrentAccount(){
@@ -40,7 +43,7 @@ public class AccountService {
 
         User user = (User) authentication.getPrincipal();
 
-        
+
         return accountRepository.findByUsername(user.getUsername());
     }
 }
