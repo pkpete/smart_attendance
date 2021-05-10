@@ -6,6 +6,8 @@ from time import strftime
 from tkinter import messagebox
 from datetime import datetime
 from main import Face_Recognition_System
+import json
+import requests
 
 class Login_Window:
     def __init__(self, root):
@@ -85,10 +87,21 @@ class Login_Window:
         if self.txtuser.get() == "" or self.txtpassword.get() == "":
             messagebox.showerror("Error", "All field required")
         else:
-            print(self.txtpassword.get())
+            print(self.txtuser.get(), self.txtpassword.get())
+
             # 여기서 아이디, 비번 보내고 확인 결과값 받아오기
-            #self.new_window = Toplevel(self.root)
-            self.app = Face_Recognition_System(self.root)
+            js= {"username": self.txtuser.get(), "password": self.txtpassword.get()}
+            jsonObject = json.dumps(js) # JSOn 형태로 바꾸기
+            print(jsonObject)
+            r = requests.post(url="http://localhost:8080/python/login", data=jsonObject, headers={'Content-Type': 'application/json'})
+
+
+            if r.text == "True":
+                #self.new_window = Toplevel(self.root)
+                self.app = Face_Recognition_System(self.root)
+            else:
+                messagebox.showerror("Error", "Wrong ID or Password")
+
 
 
 
