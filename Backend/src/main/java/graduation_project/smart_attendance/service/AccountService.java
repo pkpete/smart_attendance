@@ -40,6 +40,7 @@ public class AccountService {
 
         User user = (User) authentication.getPrincipal();
 
+        
         return accountRepository.findByUsername(user.getUsername());
     }
 }
