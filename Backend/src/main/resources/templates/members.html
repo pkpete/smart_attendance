@@ -24,13 +24,14 @@
     </div>
     <nav>
       <ul>
-        <li><a href="attendance.html">출석</a></li>
+        <li><a href="attendance.html" th:href="@{/user/attendance}">출석</a></li>
         <li> <a href="class_selection.html" th:href="@{/user/courses}">수업관리</a></li>
-        <li> <a href="check.html">출결관리</a></li>
       </ul>
       <div><a href="index.html" id="logout" th:href="@{/logout}">로그아웃</a></div>
     </nav>
   </header>
+
+  <div><input type="button" id="attend" value="출석관리" th:href="@{/user/check}"></input></div>
 
   <div class="container" >
     <table class="members" >

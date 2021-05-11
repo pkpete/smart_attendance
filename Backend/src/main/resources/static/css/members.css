@@ -137,6 +137,22 @@ table td:nth-child(5) {
     cursor: pointer;
 }
 
+#attend {
+    position: absolute;
+    top: 100px;
+    right: 100px;
+    margin: auto;
+    width: 120px;
+    height: 50px;
+    border: 2px solid rgb(160, 159, 159);
+    border-radius: 30px;
+    background-color: #23d83b;
+    color: white;
+    font: 570 21px 'Roboto', sans-serif;
+    letter-spacing: 0.9px;
+    cursor: pointer;
+}
+
 #add:hover {
     background-color: #23d83b;
     transform: scale(1.08);

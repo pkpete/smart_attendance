@@ -23,10 +23,8 @@
     </div>
     <nav class="menu">
       <ul>
-        <li><a href="attendance.html">출석</a></li>
-        <li> <a href="class_selection.html">수업관리</a></li>
-        <li> <a href="members.html" th:href="@{/user/courses}">멤버관리</a></li>
-        <li> <a href="check.html">출결관리</a></li>
+        <li><a href="attendance.html" th:href="@{/user/attendance}">출석</a></li>
+        <li> <a href="class_selection.html" th:href="@{/user/courses}">수업관리</a></li>
       </ul>
       <div><a href="index.html" id="logout" th:href="@{/logout}">로그아웃</a></div>
     </nav>
@@ -37,28 +35,28 @@
     <h3>수업 목록</h3>
     <div class="classList">
     
-      <ul class="classContainer">
-    <li><a href="#" class="class">자료구조</a><a id="delete" ondblclick="deleteClass()"> ⛔</a></li>
-    <li><a href="#" class="class">자료구조</a><a id="delete" ondblclick="deleteClass()"> ⛔</a></li>
-    <li><a href="#" class="class">자료구조</a><a id="delete" ondblclick="deleteClass()"> ⛔</a></li>
-    <li><a href="#" class="class">자료구조</a><a id="delete" ondblclick="deleteClass()"> ⛔</a></li>
-    
+      <ul class="classContainer" >
+    <li th:each="course : ${courses}"><a href="#" th:href="@{/user/members/{id} (id=${course.id})}" class="class" th:text="${course.getCourseName()}"></a><a id="delete" ondblclick="deleteClass()"> ⛔</a></li>
+
     </ul>
-    
-    <div class="btns">
+
+    </div>
+      </div>
+  <div class="btns" style="margin-top: auto">
     <input type="button" class="btn" id="add" onclick="createClass()" value="추가">
     <input type="button" class="btn" id="change" onclick="change()" value="삭제">
     <input type="button" class="btn" id="done" onclick= "changeDone()" value="완료">
-    </div>
-    
-    </div>
-      </div>
+  </div>
     
       <div class= "modalWrap" id="modalInsert">
         <a href="#" id="modalClose" onclick="offclick()">닫기</a>
         <div id="classInsert">
-        <input style="display:block" placeholder="수업명을 입력해주세요.">
-        <input type="button" value="입력" id="insert">
+          <form method="post" th:action="@{/user/courses}" th:object="${addCourseDto}">
+            <label th:for="coursename">
+        <input style="display:block" placeholder="수업명을 입력해주세요." th:field="${addCourseDto.courseName}">
+            </label>
+        <input type="submit" value="입력" id="insert">
+          </form>
       </div>
       </div>
     

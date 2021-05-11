@@ -52,7 +52,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .formLogin()
                 .loginPage("/")
                 .loginProcessingUrl("/login_proc")
-                .defaultSuccessUrl("/user/attendance")
+                .defaultSuccessUrl("/user/courses")
                 .failureHandler(customFailureHandler)
                 .permitAll();
         http.csrf().disable();
