@@ -79,3 +79,28 @@ ul a:hover {
     font-size: 1em;
     margin-right: 38px;
 }
+
+/*members*/
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+table {
+    border-collapse: collapse;
+    margin-top: 50px;
+    text-align: center;
+    width: 72%;
+}
+
+table th {
+    background-color: #0e78e2;
+    color: white;
+    font: 300 1.15em 'Noto Sans KR', sans-serif;
+}
+
+tbody {
+    font: 540 1.25em 'Noto Sans KR', sans-serif;
+}
