@@ -25,7 +25,7 @@
       <ul>
         <li><a href="attendance.html">출석</a></li>
         <li> <a href="class_selection.html">수업관리</a></li>
-        <li> <a href="class_selection.html" th:href="@{/user/courses}">멤버관리</a></li>
+        <li> <a href="members.html" th:href="@{/user/courses}">멤버관리</a></li>
         <li> <a href="check.html">출결관리</a></li>
       </ul>
       <div><a href="index.html" id="logout" th:href="@{/logout}">로그아웃</a></div>
@@ -34,47 +34,114 @@
 
 
   <div class="container">
-<h3>수업 목록</h3>
-<div class="classList" id="list">
-
-  <ul class="classContainer">
-<li th:each="course: ${courses}"><a href="#" th:href="@{/user/members/{cId} (cId=${course.id})}" th:text="${course.courseName}"></a></li>
-
-</ul>
-
-<input type="button" id="add" onclick="createClass()" value="추가+">
-
-</div>
-  </div>
-
-  <form id="form" th:object="${addCourseDto}" th:action="@{/user/courses}" method="post">
-  <div id="modalWrap">
-    <a th:href="@{/user/courses}" id="modalClose" onclick="offclick()">닫기</a>
-    <div id="classInsert">
-      <label th:for="courseName">
-    <input type="text" th:field="*{courseName}" style="display:block" placeholder="수업명을 입력해주세요." >
-      </label>
-    <input type="submit" value="입력" id="insert" >
-  </div>
-  </div>
-  <div id="bg_black"></div>
-</form>
-  <script>
-
-    function createClass() {
-      var modal=document.querySelector('#modalWrap');
-      var bg=document.querySelector('#bg_black');
-      modal.style.display='flex';
-      bg.style.display='block';
-    }
-
-    function offclick() {
-      var modal=document.querySelector('#modalWrap');
-      var bg=document.querySelector('#bg_black');
-      modal.style.display='none';
-      bg.style.display='none';
-    }
-
-  </script>
-</body>
-</html>
+    <h3>수업 목록</h3>
+    <div class="classList">
+    
+      <ul class="classContainer">
+    <li><a href="#" class="class">자료구조</a><a id="delete" ondblclick="deleteClass()"> ⛔</a></li>
+    <li><a href="#" class="class">자료구조</a><a id="delete" ondblclick="deleteClass()"> ⛔</a></li>
+    <li><a href="#" class="class">자료구조</a><a id="delete" ondblclick="deleteClass()"> ⛔</a></li>
+    <li><a href="#" class="class">자료구조</a><a id="delete" ondblclick="deleteClass()"> ⛔</a></li>
+    
+    </ul>
+    
+    <div class="btns">
+    <input type="button" class="btn" id="add" onclick="createClass()" value="추가">
+    <input type="button" class="btn" id="change" onclick="change()" value="삭제">
+    <input type="button" class="btn" id="done" onclick= "changeDone()" value="완료">
+    </div>
+    
+    </div>
+      </div>
+    
+      <div class= "modalWrap" id="modalInsert">
+        <a href="#" id="modalClose" onclick="offclick()">닫기</a>
+        <div id="classInsert">
+        <input style="display:block" placeholder="수업명을 입력해주세요.">
+        <input type="button" value="입력" id="insert">
+      </div>
+      </div>
+    
+      <div class= "modalWrap" id="modalConfirm">
+        <div>삭제하시겠습니까 ?</div>
+        <div>
+        <form action="#" id="confirmSend">
+        <input type="button" value="확인" class="confirmBtns" id="confirm" onclick="confirmed()">
+        <input type="button" value="취소" class="confirmBtns" id="cancel" onclick="offclick()">
+      </form>
+      </div>
+      </div>
+    
+      <div id="bg_black"></div>
+      <script>
+    
+        function createClass() //수업 추가
+        { 
+          var modal=document.querySelector('#modalInsert');
+          var bg=document.querySelector('#bg_black');
+          modal.style.display='flex';
+          bg.style.display='block';
+        }
+    
+        function deleteClass() //수업 삭제 
+        {
+          var modal=document.querySelector('#modalConfirm');
+          var bg=document.querySelector('#bg_black');
+          modal.style.display='flex';
+          bg.style.display='block';
+        }
+    
+        function change() //변경 버튼을 눌렀을 때 
+        {
+          var deleteBtn=document.querySelectorAll('#delete');
+          var addBtn=document.querySelector('#add');
+          var changeBtn=document.querySelector('#change');
+          var doneBtn=document.querySelector('#done');
+          var classes=document.querySelectorAll('.class')
+    
+          for(var i=0; i<deleteBtn.length;i++){
+            deleteBtn[i].style.display='block';
+            classes[i].style.pointerEvents = 'none';
+          }
+          addBtn.style.display='none';
+          changeBtn.style.display='none';
+          doneBtn.style.display='block';
+        }
+    
+    
+        function changeDone()
+        {
+          var deleteBtn=document.querySelectorAll('#delete');
+          var addBtn=document.querySelector('#add');
+          var addBtn=document.querySelector('#add');
+          var changeBtn=document.querySelector('#change');
+          var doneBtn=document.querySelector('#done');
+          
+          for(var i=0; i<deleteBtn.length;i++){
+            deleteBtn[i].style.display='none';
+          }
+          addBtn.style.display='block';
+          changeBtn.style.display='block';
+          doneBtn.style.display='none';
+        }
+        
+    
+        function offclick() {
+          var modalInsert=document.querySelector('#modalInsert');
+          var modalConfirm=document.querySelector('#modalConfirm');
+          var bg=document.querySelector('#bg_black');
+          modalInsert.style.display='none';
+          modalConfirm.style.display='none';
+          bg.style.display='none';
+          }
+    
+          function confirmed() {
+            var modalConfirm=document.querySelector('#modalConfirm');
+            var bg=document.querySelector('#bg_black');
+            document.querySelector('#confirmSend').submit();
+            modalConfirm.style.display='none';
+            bg.style.display='none';
+            }
+      </script>
+    </body>
+    </html>

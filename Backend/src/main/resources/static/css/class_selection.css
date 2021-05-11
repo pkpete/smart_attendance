@@ -97,7 +97,7 @@ transition-timing-function: ease-out; */
 .classContainer {
     display: flex;
     flex-direction: row;
-    align-content: flex-start;
+    align-content: space-between;
     padding: 0;
     flex-wrap: wrap;
 }
@@ -110,10 +110,14 @@ transition-timing-function: ease-out; */
     font: 550 1.95em 'Noto Sans KR', sans-serif;
 }
 
+.classContainer ul {
+    padding: 0;
+}
+
 .classContainer li {
     display: flex;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
     margin-top: 80px;
     margin-right: 110px;
     box-sizing: border-box;
@@ -138,19 +142,63 @@ transition-timing-function: ease-out; */
     transition: 0.3s;
     transform: scale(1.15);
 }
+
 .classContainer li:nth-child(3n + 1) {
-    margin-left: 12%;
+    margin-left: 5%;
 }
 
 .classContainer li:nth-child(3n) {
-    margin-right: 0;
+    margin-right: 5%;
+}
+
+/* 수업 삭제 버튼 */
+#delete {
+    display: none;
+    cursor: pointer;
+}
+#delete:hover {
+    transform: scale(1.28);
+    transition: all 0.1s;
+    transition-timing-function: ease-in;
 }
 
 /* 추가 버튼  */
+.btns {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-top: 10%;
+}
+
 #add {
-    position: fixed;
-    bottom: 10%;
-    left: 46.65%;
+    display: block;
+    width: 120px;
+    height: 50px;
+    margin-right: 20px;
+    border: 2px solid rgb(160, 159, 159);
+    border-radius: 30px;
+    background-color: #23d83b;
+    color: white;
+    font: 570 21px 'Roboto', sans-serif;
+    letter-spacing: 0.9px;
+    cursor: pointer;
+}
+
+#change {
+    display: block;
+    width: 120px;
+    height: 50px;
+    border: 2px solid rgb(160, 159, 159);
+    border-radius: 30px;
+    background-color: #ec2e2ed0;
+    color: white;
+    font: 570 21px 'Roboto', sans-serif;
+    letter-spacing: 0.9px;
+    cursor: pointer;
+}
+
+#done {
+    display: none;
     width: 120px;
     height: 50px;
     border: 2px solid rgb(160, 159, 159);
@@ -162,8 +210,7 @@ transition-timing-function: ease-out; */
     cursor: pointer;
 }
 
-#add:hover {
-    background-color: #23d83b;
+.btn:hover {
     transform: scale(1.08);
     transition: all 0.1s;
     transition-timing-function: ease-in;
@@ -171,7 +218,7 @@ transition-timing-function: ease-out; */
 
 /* Modal */
 
-#modalWrap {
+.modalWrap {
     display: none;
     flex-direction: column;
     align-items: center;
@@ -204,7 +251,7 @@ transition-timing-function: ease-out; */
     bottom: 10%;
 }
 
-#modalWrap > a {
+.modalWrap > a {
     text-decoration: none;
     color: black;
     border: 1.5px solid black;
@@ -223,4 +270,26 @@ transition-timing-function: ease-out; */
 #insert {
     margin-left: 5px;
     font-size: 15px;
+}
+
+#modalConfirm {
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 45px 0%;
+    font: 550 1.3em 'Noto Sans KR', sans-serif;
+}
+
+.confirmBtns {
+    color: black;
+    border: 1.5px solid black;
+    padding: 5px 15px;
+    font: 585 0.8em 'Noto Sans KR', sans-serif;
+    border-radius: 7px;
+    box-shadow: 1px 1.5px 2px grey;
+    letter-spacing: 2px;
+}
+
+#confirm {
+    margin-right: 25px;
 }
