@@ -34,8 +34,10 @@
     <div class="classList">
     
       <ul class="classContainer" >
-    <li th:each="course : ${courses}"><a href="#" th:href="@{/user/course/{id}/dates (id=${course.id})}" class="class" th:text="${course.getCourseName()}"></a><a id="delete" onclick="deleteClass()"> ⛔</a></li>
-
+    <li th:each="course : ${courses}">
+        <a href="#" th:href="@{/user/course/{id}/dates (id=${course.id})}" class="class" th:text="${course.getCourseName()}"></a>
+        <a id="delete" onclick="deleteClass()" th:href="@{/user/course/{id}/delete (id=${course.id})}"> ⛔</a>
+    </li>
     </ul>
 
     </div>
@@ -57,12 +59,12 @@
           </form>
       </div>
       </div>
-    
-      <div class= "modalWrap" id="modalConfirm">
+
+      <div class= "modalWrap" id="modalConfirm" >
         <div>삭제하시겠습니까 ?</div>
         <div>
         <form action="#" id="confirmSend">
-        <input type="button" value="확인" class="confirmBtns" id="confirm" onclick="confirmed()">
+            <a class="confirmBtns" id="confirm"  th:href="@{/user/course/{cId}/delete/reset(cId=${courseId})}">확인</a>
         <input type="button" value="취소" class="confirmBtns" id="cancel" onclick="offclick()">
       </form>
       </div>
@@ -79,7 +81,7 @@
           bg.style.display='block';
         }
     
-        function deleteClass() //수업 삭제 
+        function deleteClass() //수업 삭제
         {
           var modal=document.querySelector('#modalConfirm');
           var bg=document.querySelector('#bg_black');
@@ -139,5 +141,7 @@
             bg.style.display='none';
             }
       </script>
+  <script th:if="${courseId != 0}">change(); deleteClass();</script>
+
     </body>
     </html>

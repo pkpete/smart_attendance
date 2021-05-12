@@ -50,8 +50,7 @@ public class MemberController {
     }
 
     @PostMapping("/user/course/{cId}/members/add")
-    public String addMember(Model model, @PathVariable("cId") Long courseId, @RequestParam("memberPic") MultipartFile file, @Valid AddMemberDto addMemberDto, BindingResult bindingResult){
-        model.addAttribute("courseId", courseId);
+    public String addMember(@PathVariable("cId") Long courseId, @RequestParam("memberPic") MultipartFile file, @Valid AddMemberDto addMemberDto, BindingResult bindingResult){
         Account account = accountService.CurrentAccount();
         Course course = courseService.findCourse(courseId);
         addMemberDto.setCourse(course);
@@ -61,7 +60,7 @@ public class MemberController {
         }
 
         try {
-            String baseDir = "C:\\Users\\kgsmy\\OneDrive\\문서\\attendance_image\\" + account.getUsername();
+            String baseDir = "C:\\Users\\kgsmy\\OneDrive\\문서\\attendance_image\\" + account.getId() + "\\" + courseId;
 
             if(!new File(baseDir).exists()){
                 try{
@@ -86,35 +85,57 @@ public class MemberController {
 
     }
 
+    @GetMapping("/user/course/{cId}/members/{mId}/delete")
+    public String deleteMember(@PathVariable("cId") Long courseId, @PathVariable("mId") Long memberId){
+        memberService.deleteMember(memberId);
+        return "redirect:/user/course/" + courseId.toString() + "/members";
+    }
+
     @GetMapping("/user/members/close")
     public String close(Model model){
         return "close";
     }
 
-//    @GetMapping("/user/{id}/edit")
-//    public String editMemberForm(@PathVariable("id") Long id, Model model){
-//        Member member = memberRepository.getOne(id);
-//
-//        AddMemberDto addMemberDto = new AddMemberDto();
-//        addMemberDto.setId(member.getId());
-//        addMemberDto.setNumber(member.getNumber());
-//        addMemberDto.setName(member.getName());
-//        addMemberDto.setAge(member.getAge());
-//        addMemberDto.setClassname(member.getClassname());
-//        addMemberDto.setOrigFilename(member.getOrigFilename());
-//        addMemberDto.setFilename(member.getFilename());
-//        addMemberDto.setFilepath(member.getFilepath());
-//        addMemberDto.setAccount(member.getAccount());
-//
-//        model.addAttribute("addMemberDto", addMemberDto);
-//        return "updatePopup";
-//    }
-//
-//    @PostMapping("/user/{id}/edit")
-//    public String editMember(@PathVariable Long id, @ModelAttribute AddMemberDto addMemberDto){
-//
-//        memberService.updateMember(id, addMemberDto);
-//
-//        return "redirect:/user/members/close";
-//    }
+    @GetMapping("/user/course/{cId}/member/{mId}/update")
+    public String updateMember(@PathVariable("cId") Long courseId, @PathVariable("mId") Long memberId, Model model){
+        model.addAttribute("addMemberDto", new AddMemberDto());
+        model.addAttribute("courseId", courseId);
+        model.addAttribute("memberId", memberId);
+        return "updatePopup";
+    }
+
+    @PostMapping("/user/course/{cId}/member/{mId}/update")
+    public String editMember(@PathVariable("cId") Long courseId, @PathVariable("mId") Long memberId, @Valid AddMemberDto addMemberDto, @RequestParam("memberPic") MultipartFile file, BindingResult bindingResult){
+        Account account = accountService.CurrentAccount();
+        Course course = courseService.findCourse(courseId);
+        addMemberDto.setCourse(course);
+        memberValidator.validate(addMemberDto, bindingResult);
+        if (bindingResult.hasErrors()){
+            return "popup";
+        }
+
+        try {
+            String baseDir = "C:\\Users\\kgsmy\\OneDrive\\문서\\attendance_image\\" + account.getId() + "\\" + courseId;
+
+            if(!new File(baseDir).exists()){
+                try{
+                    new File(baseDir).mkdir();
+                }catch (Exception e){
+                    e.getStackTrace();
+                }
+            }
+
+            String filePath = baseDir + "\\" + addMemberDto.getNumber() + ".jpg";
+            file.transferTo(new File(filePath));
+
+            addMemberDto.setOrigFilename(file.getOriginalFilename());
+            addMemberDto.setFilename(addMemberDto.getName());
+            addMemberDto.setFilepath(filePath);
+
+            memberService.updateMember(addMemberDto, course, memberId);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return "redirect:/user/members/close";
+    }
 }

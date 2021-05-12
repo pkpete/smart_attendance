@@ -37,7 +37,7 @@ public class Member {
     @JoinColumn(name = "course_id")
     private Course course;
 
-    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "member", cascade = CascadeType.MERGE)
     private List<AttendCheck> attendChecks = new ArrayList<>();
 
     public void setCourse(Course course) {

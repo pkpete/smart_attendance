@@ -32,4 +32,9 @@ public class CourseService {
         courseRepository.save(course);
         return course.getId();
     }
+
+    @Transactional
+    public void deleteCourse(Long courseId){
+        courseRepository.deleteById(courseId);
+    }
 }

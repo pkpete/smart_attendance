@@ -22,7 +22,7 @@ public class Account {
     private String email;
     private String role;
 
-    @OneToMany(mappedBy = "account", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "account", cascade = CascadeType.MERGE)
     private List<Course> courses = new ArrayList<>();
 
 }

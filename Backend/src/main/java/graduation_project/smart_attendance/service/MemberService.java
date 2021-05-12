@@ -23,7 +23,7 @@ public class MemberService {
     }
 
     public List<Member> findMembers(Long courseId){
-        return memberRepository.findMembers(courseId);
+        return memberRepository.findMembersByCourse_Id(courseId);
     }
 
     @Transactional
@@ -33,16 +33,21 @@ public class MemberService {
         return member.getId();
     }
 
-//    @Transactional
-//    public void updateMember(Long id, AddMemberDto addMemberDto){
-//        Member findMember = memberRepository.getOne(id);
-//
-//        findMember.setNumber(addMemberDto.getNumber());
-//        findMember.setName(addMemberDto.getName());
-//        findMember.setAge(addMemberDto.getAge());
-//        findMember.setClassname(addMemberDto.getClassname());
-//        findMember.setOrigFilename(addMemberDto.getOrigFilename());
-//        findMember.setFilename(addMemberDto.getFilename());
-//        findMember.setFilepath(addMemberDto.getFilepath());
-//    }
+    @Transactional
+    public Long updateMember(AddMemberDto addMemberDto, Course course, Long memberId){
+        Member member = Member.createMember(addMemberDto, course);
+        member.setId(memberId);
+        memberRepository.save(member);
+        return member.getId();
+    }
+
+    @Transactional
+    public void deleteMember(Long memberId){
+        memberRepository.deleteById(memberId);
+    }
+
+    @Transactional
+    public void updateMember(Long memberId){
+
+    }
 }

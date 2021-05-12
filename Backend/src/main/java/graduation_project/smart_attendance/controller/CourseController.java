@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -31,8 +32,10 @@ public class CourseController {
     public String courseList(Model model){
         Account account = accountService.CurrentAccount();
         List<Course> courses = courseService.findCourses(account);
+        Long courseId = 0L;
         model.addAttribute("courses", courses);
         model.addAttribute("addCourseDto", new AddCourseDto());
+        model.addAttribute("courseId", courseId);
 
         return "class_selection";
     }
@@ -48,6 +51,22 @@ public class CourseController {
 
         courseService.course(addCourseDto, account);
 
+        return "redirect:/user/courses";
+    }
+
+    @GetMapping("/user/course/{cId}/delete")
+    public String deleteResponse(@PathVariable("cId") Long courseId, Model model){
+        Account account = accountService.CurrentAccount();
+        List<Course> courses = courseService.findCourses(account);
+        model.addAttribute("courses", courses);
+        model.addAttribute("addCourseDto", new AddCourseDto());
+        model.addAttribute("courseId", courseId);
+        return "class_selection";
+    }
+
+    @GetMapping("/user/course/{cId}/delete/reset")
+    public String delete(@PathVariable("cId") Long courseId){
+        courseService.deleteCourse(courseId);
         return "redirect:/user/courses";
     }
 

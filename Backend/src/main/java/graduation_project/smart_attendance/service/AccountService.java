@@ -12,6 +12,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.io.File;
+
 @Service
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
@@ -24,6 +26,16 @@ public class AccountService {
         Account account = accountDto.toEntity();
         account.setRole("ROLE_USER");
         accountRepository.save(account);
+
+        String baseDir = "C:\\Users\\kgsmy\\OneDrive\\문서\\attendance_image\\" + account.getId();
+
+        if(!new File(baseDir).exists()){
+            try{
+                new File(baseDir).mkdir();
+            }catch (Exception e){
+                e.getStackTrace();
+            }
+        }
         return account.getId();
     }
 

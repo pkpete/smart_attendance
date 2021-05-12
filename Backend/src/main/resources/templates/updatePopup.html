@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org"
+      lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>I'm Here</title>
+</head>
+
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Bevan&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="../static/css/popup.css" th:href="@{/css/popup.css}">
+
+<body>
+<form action="" method="post" enctype="multipart/form-data" th:href="@{/user/course/{cId}/member/{mId}/update (cId=${courseId}, mId=${memberId})}" th:object="${addMemberDto}">
+    <table>
+        <tr>
+            <th>번호</th>
+            <th>이름</th>
+            <th>나이</th>
+            <th>수업</th>
+            <th>사진</th>
+        </tr>
+        <tr>
+            <td>
+                <label th:for="number">
+                    <input type="text" style="width:80px;" th:field="*{number}">
+                </label>
+            </td>
+            <td>
+                <label th:for="name">
+                    <input type="text" style="width:160px;" th:field="*{name}">
+                </label>
+            </td>
+            <td>
+                <label th:for="age">
+                    <input type="text" style="width:110px;" th:field="*{age}">
+                </label>
+            </td>
+            <td>
+                <label th:for="classname">
+                    <input type="text" style="width:90px;" th:field="*{classname}">
+                </label>
+            </td>
+            <td><input type="file" name="memberPic" style="width:200px;" accept="image/png, image/jpeg" id="imageAdd" value="사진"></td>
+        </tr>
+    </table>
+
+    <input type="submit" value="수정" style="position: fixed; top:150px;" id="insert">
+
+    <!-- 동일한 번호가 존재할 때 에러 -->
+    <div id="modalWrap" th:if="${#fields.hasErrors('number')}" style="display: flex;">
+        <a href="#" th:href="@{/user/course/{cId}/member/{mId}/update (cId=${courseId}, mId=${memberId})}" id="modalClose" onclick="offclick()">닫기</a>
+
+        <div id="errorMes">
+            해당 번호가 이미 존재합니다 ❗❗
+        </div>
+
+    </div>
+
+    <div id="bg_black" th:if="${#fields.hasErrors('number')}"></div>
+
+
+</form>
+
+<script>
+    function offclick() {
+        var modal=document.querySelector('#modalWrap');
+        var bg=document.querySelector('#bg_black');
+
+        modal.style.display='none';
+        bg.style.display='none';
+    }
+</script>
+
+</body>
+</html>

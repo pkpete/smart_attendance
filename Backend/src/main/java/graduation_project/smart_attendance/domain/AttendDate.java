@@ -26,7 +26,7 @@ public class AttendDate {
     @JoinColumn(name = "course_id")
     private Course course;
 
-    @OneToMany(mappedBy = "attendDate", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "attendDate", cascade = CascadeType.MERGE)
     private List<AttendCheck> attendChecks = new ArrayList<>();
 
     public void setCourse(Course course) {

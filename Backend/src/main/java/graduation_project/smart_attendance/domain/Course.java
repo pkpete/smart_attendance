@@ -23,10 +23,10 @@ public class Course {
     @JoinColumn(name = "account_id")
     private Account account;
 
-    @OneToMany(mappedBy = "course", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "course", cascade = CascadeType.MERGE)
     private List<Member> members = new ArrayList<>();
 
-    @OneToMany(mappedBy = "course", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "course", cascade = CascadeType.MERGE)
     private List<AttendDate> attendDates = new ArrayList<>();
 
     public void setAccount(Account account){

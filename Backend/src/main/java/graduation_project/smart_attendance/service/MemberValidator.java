@@ -1,5 +1,6 @@
 package graduation_project.smart_attendance.service;
 
+import graduation_project.smart_attendance.domain.Member;
 import graduation_project.smart_attendance.dto.AccountDto;
 import graduation_project.smart_attendance.dto.AddMemberDto;
 import graduation_project.smart_attendance.repository.MemberRepository;
@@ -26,4 +27,5 @@ public class MemberValidator implements Validator {
             errors.rejectValue("number", "key");
         }
     }
+
 }

@@ -17,6 +17,5 @@ public interface MemberRepository extends JpaRepository<Member, Long> {
 
     Member findByNumberAndCourse(String number, Course course);
 
-    @Query(value = "select DISTINCT m from Member m join m.course c on c.id = :courseId")
-    List<Member> findMembers(@Param("courseId") Long courseId);
+    List<Member> findMembersByCourse_Id(Long courseId);
 }
