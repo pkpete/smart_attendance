@@ -4,6 +4,8 @@ import graduation_project.smart_attendance.dto.AddMemberDto;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Builder
@@ -31,10 +33,12 @@ public class Member {
     @Column(nullable = false)
     private String filepath;
 
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "course_id")
     private Course course;
+
+    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
+    private List<AttendCheck> attendChecks = new ArrayList<>();
 
     public void setCourse(Course course) {
         this.course = course;

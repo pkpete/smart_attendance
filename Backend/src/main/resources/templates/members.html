@@ -18,20 +18,19 @@
 <body>
 
 
-  <header>
-    <div class="logo">
-      <h2><a href="../html/attendance.html" th:href="@{/user/attendance}">I'm Here</a></h2>
-    </div>
-    <nav>
-      <ul>
-        <li><a href="attendance.html" th:href="@{/user/attendance}">출석</a></li>
-        <li> <a href="class_selection.html" th:href="@{/user/courses}">수업관리</a></li>
-      </ul>
-      <div><a href="index.html" id="logout" th:href="@{/logout}">로그아웃</a></div>
-    </nav>
-  </header>
-
-  <div><input type="button" id="attend" value="출석관리" th:href="@{/user/check}"></input></div>
+<header>
+  <div class="logo">
+    <h2><a href="../html/attendance.html" th:href="@{/user/attendance}">I'm Here</a></h2>
+  </div>
+  <nav>
+    <ul>
+      <li> <a href="class_selection.html" th:href="@{/user/courses}">수업관리</a></li>
+      <li> <a href="date.html" th:href="@{/user/course/{id}/dates (id=${courseId})}">출석관리</a></li>
+      <li> <a href="members.html" th:href="@{/user/course/{id}/members (id=${courseId})}">멤버관리</a></li>
+    </ul>
+    <div><a href="index.html" id="logout" th:href="@{/logout}">로그아웃</a></div>
+  </nav>
+</header>
 
   <div class="container" >
     <table class="members" >
@@ -59,14 +58,14 @@
       </tr>
     </table>
 
-    <input type="button" id="add" th:onclick="'javascript:showPopup('+ ${courseId} + ');'" value="추가+">
+    <input type="button" id="add" th:onclick="'javascript:showPopup('+ ${courseId} +');'" value="추가+">
   </div>
 </body>
 <script>
   function showPopup(courseId){
     var popupX = (window.screen.width / 2) - (750 / 2);
     var popupY= (window.screen.height / 2) - (300 / 2);
-    window.open('/user/members/' + courseId + '/add', 'membeAdd', 'status=no, height=300, width=750, left='+ popupX + ', top='+ popupY);
+    window.open('/user/course/' + courseId + '/members/add', 'membeAdd', 'status=no, height=300, width=750, left='+ popupX + ', top='+ popupY);
 
   }
 </script>

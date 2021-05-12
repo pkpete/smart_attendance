@@ -23,8 +23,6 @@
     </div>
     <nav class="menu">
       <ul>
-        <li><a href="attendance.html" th:href="@{/user/attendance}">출석</a></li>
-        <li> <a href="class_selection.html" th:href="@{/user/courses}">수업관리</a></li>
       </ul>
       <div><a href="index.html" id="logout" th:href="@{/logout}">로그아웃</a></div>
     </nav>
@@ -36,7 +34,7 @@
     <div class="classList">
     
       <ul class="classContainer" >
-    <li th:each="course : ${courses}"><a href="#" th:href="@{/user/members/{id} (id=${course.id})}" class="class" th:text="${course.getCourseName()}"></a><a id="delete" ondblclick="deleteClass()"> ⛔</a></li>
+    <li th:each="course : ${courses}"><a href="#" th:href="@{/user/course/{id}/dates (id=${course.id})}" class="class" th:text="${course.getCourseName()}"></a><a id="delete" onclick="deleteClass()"> ⛔</a></li>
 
     </ul>
 

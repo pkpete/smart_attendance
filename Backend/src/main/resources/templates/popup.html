@@ -16,7 +16,7 @@
 <link rel="stylesheet" href="../static/css/popup.css" th:href="@{/css/popup.css}">
 
 <body>
-  <form action="" method="post" enctype="multipart/form-data" th:action="@{/user/members/{cid}/add (cid=${courseId})}" th:object="${addMemberDto}">
+  <form action="" method="post" enctype="multipart/form-data" th:action="@{/user/course/{cid}/members/add (cid=${courseId})}" th:object="${addMemberDto}">
     <table>
       <tr>
         <th>번호</th>
@@ -54,7 +54,7 @@
 
 <!-- 동일한 번호가 존재할 때 에러 -->
     <div id="modalWrap" th:if="${#fields.hasErrors('number')}" style="display: flex;">
-      <a href="#" th:href="@{/user/members/{cid}/add (cid=${courseId})}" id="modalClose" onclick="offclick()">닫기</a>
+      <a href="#" th:href="@{/user/course/{cid}/members/add (cid=${courseId})}" id="modalClose" onclick="offclick()">닫기</a>
       
       <div id="errorMes">
         해당 번호가 이미 존재합니다 ❗❗

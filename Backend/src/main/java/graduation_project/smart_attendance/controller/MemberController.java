@@ -33,7 +33,7 @@ public class MemberController {
     private final AccountService accountService;
     private final CourseService courseService;
 
-    @GetMapping("/user/members/{cId}")
+    @GetMapping("/user/course/{cId}/members")
     public String memberList(@PathVariable("cId") Long courseId, Model model){
         List<Member> members = memberService.findMembers(courseId);
         model.addAttribute("members", members);
@@ -42,14 +42,14 @@ public class MemberController {
         return "members";
     }
 
-    @GetMapping("/user/members/{cId}/add")
+    @GetMapping("/user/course/{cId}/members/add")
     public String addMemberForm(@PathVariable("cId") Long courseId, Model model){
         model.addAttribute("addMemberDto", new AddMemberDto());
         model.addAttribute("courseId", courseId);
         return "popup";
     }
 
-    @PostMapping("/user/members/{cId}/add")
+    @PostMapping("/user/course/{cId}/members/add")
     public String addMember(Model model, @PathVariable("cId") Long courseId, @RequestParam("memberPic") MultipartFile file, @Valid AddMemberDto addMemberDto, BindingResult bindingResult){
         model.addAttribute("courseId", courseId);
         Account account = accountService.CurrentAccount();

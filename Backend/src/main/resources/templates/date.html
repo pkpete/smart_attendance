@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org"
+      lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>I'm Here</title>
+</head>
+
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Bevan&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="../static/css/members.css" th:href="@{/css/members.css}">
+
+<body>
+
+
+<header>
+    <div class="logo">
+        <h2><a href="../html/attendance.html" th:href="@{/user/attendance}">I'm Here</a></h2>
+    </div>
+    <nav>
+        <ul>
+            <li> <a href="class_selection.html" th:href="@{/user/courses}">수업관리</a></li>
+            <li> <a href="date.html" th:href="@{/user/course/{id}/dates (id=${courseId})}">출석관리</a></li>
+            <li> <a href="members.html" th:href="@{/user/course/{id}/members (id=${courseId})}">멤버관리</a></li>
+        </ul>
+        <div><a href="index.html" id="logout" th:href="@{/logout}">로그아웃</a></div>
+    </nav>
+</header>
+
+<div class="container" >
+    <table class="members" >
+        <tr>
+            <th>날짜</th>
+            <th>출석체크</th>
+        </tr>
+
+
+
+        <tr th:each="date : ${attendDates}">
+            <td th:text="${date.attendDate}"></td>
+            <td><input class = "edit" id="fix" type="button" value="조회" th:href="@{/user/course/{cId}/date/{dId}/checks (cId=${courseId}, dId=${date.id})}"></td>
+        </tr>
+
+
+        <tr>
+
+        </tr>
+    </table>
+
+</div>
+</body>
+</html>

@@ -26,6 +26,9 @@ public class Course {
     @OneToMany(mappedBy = "course", cascade = CascadeType.ALL)
     private List<Member> members = new ArrayList<>();
 
+    @OneToMany(mappedBy = "course", cascade = CascadeType.ALL)
+    private List<AttendDate> attendDates = new ArrayList<>();
+
     public void setAccount(Account account){
         this.account = account;
         account.getCourses().add(this);
