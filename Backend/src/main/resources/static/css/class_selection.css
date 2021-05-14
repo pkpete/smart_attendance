@@ -290,6 +290,11 @@ label {
     font: 550 1.3em 'Noto Sans KR', sans-serif;
 }
 
+#confirmSend {
+    display: flex;
+    flex-direction: row;
+}
+
 .confirmBtns {
     color: black;
     border: 1.5px solid black;
