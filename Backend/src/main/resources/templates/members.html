@@ -50,7 +50,10 @@
         <td th:text="${member.age}"></td>
         <td th:text="${member.classname}"></td>
         <td th:with="mId=${member.id}"><input class = "edit" id="fix" type="submit" value="수정" th:onclick="'javascript:updatePopup(\'' + ${courseId} +'\',\'' + ${mId} +'\');'"> /
-          <a class = "edit" id="dlt" th:href="@{/user/course/${courseId}/members/${mId}/delete}" >삭제</a></td>
+          <form method="get" th:action="@{/user/course/${courseId}/members/${mId}/delete}">
+          <input class = "edit" id="dlt" value="삭제" >
+        </form>
+        </td>
       </tr>
 
       

@@ -42,7 +42,7 @@
 
     </div>
       </div>
-  <div class="btns" style="margin-top: auto">
+  <div class="btns" >
     <input type="button" class="btn" id="add" onclick="createClass()" value="추가">
     <input type="button" class="btn" id="change" onclick="change()" value="삭제">
     <input type="button" class="btn" id="done" onclick= "changeDone()" value="완료">
@@ -62,11 +62,14 @@
 
       <div class= "modalWrap" id="modalConfirm" >
         <div>삭제하시겠습니까 ?</div>
-        <div>
-        <form action="#" id="confirmSend">
-            <a class="confirmBtns" id="confirm"  th:href="@{/user/course/{cId}/delete/reset(cId=${courseId})}">확인</a>
-            <a type="button"  class="confirmBtns" id="cancel" onclick="offclick()" th:href="@{/user/courses}">취소</a>
-      </form>
+        <div id="confirmSend">
+        <form action="#"  method="get" th:action="@{/user/course/{cId}/delete/reset(cId=${courseId})}">
+            <input type="submit" class="confirmBtns" id="confirm" value="확인">
+        </form>
+        <form action="#" method="get" th:action="@{/user/courses}">
+            <input type="submit" class="confirmBtns" value="취소" id="cancel" onclick="offclick()">
+        </form>
+
       </div>
       </div>
     
