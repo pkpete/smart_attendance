@@ -65,7 +65,7 @@
         <div>
         <form action="#" id="confirmSend">
             <a class="confirmBtns" id="confirm"  th:href="@{/user/course/{cId}/delete/reset(cId=${courseId})}">확인</a>
-        <input type="button" value="취소" class="confirmBtns" id="cancel" onclick="offclick()">
+            <a type="button"  class="confirmBtns" id="cancel" onclick="offclick()" th:href="@{/user/courses}">취소</a>
       </form>
       </div>
       </div>

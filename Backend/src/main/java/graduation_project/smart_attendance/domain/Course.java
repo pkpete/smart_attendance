@@ -2,7 +2,6 @@ package graduation_project.smart_attendance.domain;
 
 import graduation_project.smart_attendance.dto.AddCourseDto;
 import lombok.*;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import javax.persistence.*;
 import java.util.ArrayList;
