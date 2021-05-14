@@ -25,8 +25,9 @@
     <nav>
         <ul>
             <li> <a href="class_selection.html" th:href="@{/user/courses}">수업관리</a></li>
-            <li> <a href="date.html" th:href="@{/user/course/{id}/dates (id=${courseId})}">출석관리</a></li>
             <li> <a href="members.html" th:href="@{/user/course/{id}/members (id=${courseId})}">멤버관리</a></li>
+            <li> <a href="date.html" th:href="@{/user/course/{id}/dates (id=${courseId})}">출결관리</a></li>
+
         </ul>
         <div><a href="index.html" id="logout" th:href="@{/logout}">로그아웃</a></div>
     </nav>

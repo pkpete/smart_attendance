@@ -30,34 +30,35 @@
 
 
   <div class="container">
-    <h3>수업 목록</h3>
-    <div class="classList">
-    
-      <ul class="classContainer" >
-    <li th:each="course : ${courses}">
-        <a href="#" th:href="@{/user/course/{id}/dates (id=${course.id})}" class="class" th:text="${course.getCourseName()}"></a>
-        <a id="delete" onclick="deleteClass()" th:href="@{/user/course/{id}/delete (id=${course.id})}"> ⛔</a>
-    </li>
-    </ul>
+      <h3>수업 목록</h3>
+      <div class="classList">
+      
+        <ul class="classContainer" >
+          <li th:each="course : ${courses}">
+              <a href="#" th:href="@{/user/course/{id}/dates (id=${course.id})}" class="class" th:text="${course.getCourseName()}"></a>
+              <a id="delete" onclick="deleteClass()" th:href="@{/user/course/{id}/delete (id=${course.id})}"> ⛔</a>
+          </li>
+        </ul>
 
-    </div>
-      </div>
-  <div class="btns" style="margin-top: auto">
+
+  <div class="btns">
     <input type="button" class="btn" id="add" onclick="createClass()" value="추가">
     <input type="button" class="btn" id="change" onclick="change()" value="삭제">
     <input type="button" class="btn" id="done" onclick= "changeDone()" value="완료">
+    </div>
   </div>
+</div>
     
       <div class= "modalWrap" id="modalInsert">
         <a href="#" id="modalClose" onclick="offclick()">닫기</a>
         <div id="classInsert">
           <form method="post" th:action="@{/user/courses}" th:object="${addCourseDto}">
             <label th:for="coursename">
-        <input style="display:block" placeholder="수업명을 입력해주세요." th:field="${addCourseDto.courseName}">
+                <input style="display:block; height:25.98px" placeholder="수업명을 입력해주세요." th:field="${addCourseDto.courseName}">
             </label>
-        <input type="submit" value="입력" id="insert">
+            <input type="submit" value="입력" id="insert">
           </form>
-      </div>
+        </div>
       </div>
 
       <div class= "modalWrap" id="modalConfirm" >
@@ -72,7 +73,6 @@
     
       <div id="bg_black"></div>
       <script>
-    
         function createClass() //수업 추가
         { 
           var modal=document.querySelector('#modalInsert');

@@ -235,6 +235,16 @@ transition-timing-function: ease-out; */
     z-index: 5;
 }
 
+#modalInsert form {
+    display: flex;
+    flex-direction: row;
+}
+
+label {
+    margin: 0;
+    padding: 0;
+}
+
 #bg_black {
     display: none;
     position: absolute;
@@ -268,7 +278,7 @@ transition-timing-function: ease-out; */
 }
 
 #insert {
-    margin-left: 5px;
+    margin-left: 8px;
     font-size: 15px;
 }
 
