@@ -18,7 +18,7 @@ public class LoginRestController {
 
     private final AccountService accountService;
 
-    @PostMapping("/sw/login")
+    @PostMapping("/python/login")
     public String login(@RequestBody FindAccountDto findAccountDto){
         log.info("username: {}, password: {}", findAccountDto.getUsername(), findAccountDto.getPassword());
         return accountService.findUser(findAccountDto);
