@@ -10,11 +10,12 @@ from attendance import Attendance
 
 
 class Face_Recognition_System:
-    def __init__(self, root):
+    def __init__(self, root, id):
         self.root = root
         self.root.geometry("1500x900+0+0")
         self.root.title("Face Recognition System")
         self.root.resizable(False, False)
+        self.id = id
 
         def time():
             string_time = strftime('%H:%M:%S %p')
@@ -139,13 +140,13 @@ class Face_Recognition_System:
     # Function buttons
     def student_details(self):
         #self.new_window = Toplevel(self.root)
-        self.app = Student(self.root)
+        self.app = Student(self.root, self.id)
 
     def develop_details(self):
-        self.app = Developer(self.root)
+        self.app = Developer(self.root, self.id)
 
     def attendance_details(self):
-        self.app = Attendance(self.root)
+        self.app = Attendance(self.root, self.id)
 
     def exit(self):
         self.exit = tkinter.messagebox.askyesno("Face Rcognition", "Exit this project")
@@ -159,5 +160,5 @@ class Face_Recognition_System:
 
 if __name__ == "__main__":
     root = Tk()
-    obj = Face_Recognition_System(root)
+    obj = Face_Recognition_System(root, -1)
     root.mainloop()

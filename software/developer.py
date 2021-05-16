@@ -9,11 +9,12 @@ import mysql.connector
 
 
 class Developer:
-    def __init__(self, root):
+    def __init__(self, root, id):
         self.root = root
         self.root.geometry("1500x900+0+0")
         self.root.title("Face Recognition System")
         self.root.resizable(False, False)
+        self.id = id
 
         def time():
             string_time = strftime('%H:%M:%S %p')
@@ -95,7 +96,7 @@ class Developer:
     # Function buttons
     def home_details(self):
         from main import Face_Recognition_System
-        self.app = Face_Recognition_System(self.root)
+        self.app = Face_Recognition_System(self.root, self.id)
 
 
 if __name__ == "__main__":

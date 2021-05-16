@@ -99,7 +99,7 @@ class Login_Window:
                 messagebox.showerror("Error", "Wrong ID or Password")
             else:
                 # self.new_window = Toplevel(self.root)
-                self.app = Face_Recognition_System(self.root)
+                self.app = Face_Recognition_System(self.root, int(r.text))
 
 
 
