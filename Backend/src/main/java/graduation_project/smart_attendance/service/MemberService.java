@@ -4,11 +4,14 @@ import graduation_project.smart_attendance.domain.Account;
 import graduation_project.smart_attendance.domain.Course;
 import graduation_project.smart_attendance.domain.Member;
 import graduation_project.smart_attendance.dto.AddMemberDto;
+import graduation_project.smart_attendance.dto.FindAccountDto;
+import graduation_project.smart_attendance.dto.SearchMemberDto;
 import graduation_project.smart_attendance.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -24,6 +27,20 @@ public class MemberService {
 
     public List<Member> findMembers(Long courseId){
         return memberRepository.findMembersByCourse_Id(courseId);
+    }
+
+    public List<SearchMemberDto> findMembersByCourseName(String username, String courseName){
+        List<Member> members = memberRepository.findMembersByCourse_Account_UsernameAndCourse_CourseName(username, courseName);
+        List<SearchMemberDto> searchMemberDtos= new ArrayList<>();
+        members.forEach(x -> searchMemberDtos.add(new SearchMemberDto(x.getNumber(), x.getName(), x.getCourse().getCourseName())));
+        return searchMemberDtos;
+    }
+
+    public List<SearchMemberDto> findMembersLikeName(String username, String search){
+        List<Member> members = memberRepository.findMembersByCourse_Account_UsernameAndNumberContaining(username, search);
+        List<SearchMemberDto> searchMemberDtos= new ArrayList<>();
+        members.forEach(x -> searchMemberDtos.add(new SearchMemberDto(x.getNumber(), x.getName(), x.getCourse().getCourseName())));
+        return searchMemberDtos;
     }
 
     @Transactional

@@ -14,18 +14,14 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @Slf4j
-public class PythonController {
+public class LoginRestController {
 
     private final AccountService accountService;
 
-    @PostMapping("/python/login")
+    @PostMapping("/sw/login")
     public String login(@RequestBody FindAccountDto findAccountDto){
         log.info("username: {}, password: {}", findAccountDto.getUsername(), findAccountDto.getPassword());
         return accountService.findUser(findAccountDto);
     }
 
-//    @PostMapping("/python/student-detail")
-//    public List<Member> studentDetail(){
-//
-//    }
 }

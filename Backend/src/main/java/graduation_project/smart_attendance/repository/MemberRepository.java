@@ -18,4 +18,8 @@ public interface MemberRepository extends JpaRepository<Member, Long> {
     Member findByNumberAndCourse(String number, Course course);
 
     List<Member> findMembersByCourse_Id(Long courseId);
+
+    List<Member> findMembersByCourse_Account_UsernameAndCourse_CourseName(String username, String courseName);
+
+    List<Member> findMembersByCourse_Account_UsernameAndNumberContaining(String username, String memberNumber);
 }
