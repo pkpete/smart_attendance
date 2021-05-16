@@ -7,6 +7,8 @@ from datetime import datetime
 import cv2
 import mysql.connector
 import os
+import json
+import requests
 
 
 class Student:
@@ -305,17 +307,18 @@ class Student:
     # 데이터 가져오기
     # 교수 id에 있는 모든 학생 가져오기
     def fetch_data(self):
-        conn = mysql.connector.connect(host="localhost", username="root", password="123456", database="face_recognizer")
-        my_cursor = conn.cursor()
-        my_cursor.execute("select * from student")
-        data = my_cursor.fetchall()
-
-        if len(data) != 0:
-            self.student_table.delete(*self.student_table.get_children())
-            for i in data:
-                self.student_table.insert("", END, values=i)
-            conn.commit()
-        conn.close()
+        pass
+        # conn = mysql.connector.connect(host="localhost", username="root", password="123456", database="face_recognizer")
+        # my_cursor = conn.cursor()
+        # my_cursor.execute("select * from student")
+        # data = my_cursor.fetchall()
+        #
+        # if len(data) != 0:
+        #     self.student_table.delete(*self.student_table.get_children())
+        #     for i in data:
+        #         self.student_table.insert("", END, values=i)
+        #     conn.commit()
+        # conn.close()
 
     # Get Data
     def get_data(self, event=""):
@@ -392,16 +395,27 @@ class Student:
 
     # Search Data
     def search_data(self):
-        conn = mysql.connector.connect(host="localhost", username="root", password="123456", database="face_recognizer")
-        my_cursor = conn.cursor()
-        my_cursor.execute("SELECT * FROM STUDENT WHERE " + str(self.search_by.get()) + " = '" + str(self.search_text.get()) + "'")
-        data = my_cursor.fetchall()
-        if len(data) != 0:
-            self.student_table.delete(*self.student_table.get_children())
-            for i in data:
-                self.student_table.insert("", END, values=i)
-            conn.commit()
-        conn.close()
+        print(self.search_by.get(), self.search_text.get())
+        search_by =""
+        if self.search_by.get() == "Course":
+            search_by = "course"
+        elif self.search_by.get() == "Student_id":
+            search_by = "id"
+        js = {"id":self.id, "search":search_by, "info":self.search_text.get()}
+        jsonObject = json.dumps(js)
+        print(jsonObject)
+        r = requests.post(url="http://localhost:8080/sw/search-members", data=jsonObject, headers={'Content-Type': 'application/json'})
+        print(r.text)
+        # conn = mysql.connector.connect(host="localhost", username="root", password="123456", database="face_recognizer")
+        # my_cursor = conn.cursor()
+        # my_cursor.execute("SELECT * FROM STUDENT WHERE " + str(self.search_by.get()) + " = '" + str(self.search_text.get()) + "'")
+        # data = my_cursor.fetchall()
+        # if len(data) != 0:
+        #     self.student_table.delete(*self.student_table.get_children())
+        #     for i in data:
+        #         self.student_table.insert("", END, values=i)
+        #     conn.commit()
+        # conn.close()
 
 
 
