@@ -44,7 +44,10 @@
 
         <tr th:each="date : ${attendDates}">
             <td th:text="${date.attendDate}"></td>
-            <td><input class = "edit" id="fix" type="button" value="조회" th:href="@{/user/course/{cId}/date/{dId}/checks (cId=${courseId}, dId=${date.id})}"></td>
+            <td><form method="get" th:action="@{/user/course/{cId}/date/{dId}/checks (cId=${courseId}, dId=${date.id})}">
+                <input class = "edit" id="fix" type="submit" value="조회" >
+            </form>
+            </td>
         </tr>
 
 

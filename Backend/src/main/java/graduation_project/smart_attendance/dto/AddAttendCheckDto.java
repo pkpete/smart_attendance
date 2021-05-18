@@ -17,11 +17,11 @@ public class AddAttendCheckDto {
     public AttendCheck toEntity(){
         AttendStatus attendStatus;
         if(attendCheck == "1"){
-            attendStatus = AttendStatus.ATTEND;
+            attendStatus = AttendStatus.출석;
         }else if(attendCheck == "2"){
-            attendStatus = AttendStatus.LATE;
+            attendStatus = AttendStatus.지각;
         }else{
-            attendStatus = AttendStatus.ABSENCE;
+            attendStatus = AttendStatus.결석;
         }
 
         return AttendCheck.builder()
