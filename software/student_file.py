@@ -28,12 +28,12 @@ class Student:
         # ======variables======
         self.var_dep = StringVar()
         self.var_course = StringVar()
-        self.var_year = StringVar()
-        self.var_semester = StringVar()
+        # self.var_year = StringVar()
+        # self.var_semester = StringVar()
         self.var_id = StringVar()
         self.var_name = StringVar()
-        self.var_phone = StringVar()
-        self.var_kor_name = StringVar()
+        # self.var_phone = StringVar()
+        # self.var_kor_name = StringVar()
         self.var_photo_addr = StringVar()
         self.search_by = StringVar()
         self.search_text = StringVar()
@@ -51,7 +51,7 @@ class Student:
         time()
 
         # Home Button
-        img1 = Image.open(r"C:\Users\LG\PycharmProjects\SmartAttendance\smart_attendance\software\Images\home.jpg")
+        img1 = Image.open(r"./Images/home.jpg")
         img1 = img1.resize((200, 200), Image.ANTIALIAS)
         self.photoimg1 = ImageTk.PhotoImage(img1)
 
@@ -59,7 +59,7 @@ class Student:
         b1.place(x=0, y=0, width=200, height=200)
 
         # second image
-        img2 = Image.open(r"C:\Users\LG\PycharmProjects\SmartAttendance\smart_attendance\software\Images\face-id.jpg")
+        img2 = Image.open(r"./Images/face-id.jpg")
         img2 = img2.resize((200, 200), Image.ANTIALIAS)
         self.photoimg2 = ImageTk.PhotoImage(img2)
 
@@ -86,34 +86,30 @@ class Student:
 
         # Course
         course_label = Label(current_course_frame, text="Course", font=("times new roman", 12, "bold"))
-        course_label.grid(row=0, column=2, padx=10, pady=10, sticky=W)
+        course_label.grid(row=1, column=0, padx=10, pady=10, sticky=W)
 
         course_combo = ttk.Combobox(current_course_frame, font=("times new roman", 12, "bold"), state="readonly", textvariable=self.var_course)
-        # if self.var_dep.get() == "Computer":
-        #     course_combo["values"] = ("시스템 프로그래밍", "인공지능", "소프트웨어 프로그래밍")
-        # elif self.var_dep.get() == "Industrial":
-        #     course_combo["values"] = ("산업공학과", "산공", "산업")
         course_combo["values"] = ("SP", "AI", "SWE")
         course_combo.set("Select Course")
-        course_combo.grid(row=0, column=3, padx=2, pady=10, sticky=W)
+        course_combo.grid(row=1, column=1, padx=2, pady=10, sticky=W)
 
-        # Year
-        year_label = Label(current_course_frame, text="Year", font=("times new roman", 12, "bold"))
-        year_label.grid(row=1, column=0, padx=10, sticky=W)
-
-        year_combo = ttk.Combobox(current_course_frame, font=("times new roman", 12, "bold"), state="readonly", textvariable=self.var_year)
-        year_combo["values"] = ("2021", "2020", "2019")
-        year_combo.set("Select Year")
-        year_combo.grid(row=1, column=1, padx=2, pady=10, sticky=W)
-
-        # Semester
-        semester_label = Label(current_course_frame, text="Semester", font=("times new roman", 12, "bold"))
-        semester_label.grid(row=1, column=2, padx=10, sticky=W)
-
-        semester_combo = ttk.Combobox(current_course_frame, font=("times new roman", 12, "bold"), state="readonly", textvariable=self.var_semester)
-        semester_combo["values"] = ("1", "2")
-        semester_combo.set("Select Semester")
-        semester_combo.grid(row=1, column=3, padx=2, pady=10, sticky=W)
+        # # Year
+        # year_label = Label(current_course_frame, text="Year", font=("times new roman", 12, "bold"))
+        # year_label.grid(row=1, column=0, padx=10, sticky=W)
+        #
+        # year_combo = ttk.Combobox(current_course_frame, font=("times new roman", 12, "bold"), state="readonly", textvariable=self.var_year)
+        # year_combo["values"] = ("2021", "2020", "2019")
+        # year_combo.set("Select Year")
+        # year_combo.grid(row=1, column=1, padx=2, pady=10, sticky=W)
+        #
+        # # Semester
+        # semester_label = Label(current_course_frame, text="Semester", font=("times new roman", 12, "bold"))
+        # semester_label.grid(row=1, column=2, padx=10, sticky=W)
+        #
+        # semester_combo = ttk.Combobox(current_course_frame, font=("times new roman", 12, "bold"), state="readonly", textvariable=self.var_semester)
+        # semester_combo["values"] = ("1", "2")
+        # semester_combo.set("Select Semester")
+        # semester_combo.grid(row=1, column=3, padx=2, pady=10, sticky=W)
 
         # Class Student information
         class_student_frame = LabelFrame(Left_frame, bd=2, relief=RIDGE, text="Class Student information", font=("times new roman", 12, "bold"))
@@ -128,57 +124,18 @@ class Student:
 
         # Student name
         student_name_label = Label(class_student_frame, text="Student Name : ", font=("times new roman", 12, "bold"))
-        student_name_label.grid(row=0, column=2, padx=10, pady=10, sticky=W)
+        student_name_label.grid(row=1, column=0, padx=10, pady=10, sticky=W)
 
         student_name_entry = ttk.Entry(class_student_frame, width=20, font=("times new roman", 12, "bold"), textvariable=self.var_name)
-        student_name_entry.grid(row=0, column=3, padx=10, pady=10, sticky=W)
+        student_name_entry.grid(row=1, column=1, padx=10, pady=10, sticky=W)
 
-        # Student Phone no
-        phone_label = Label(class_student_frame, text="Phone (000-0000-0000):", font=("times new roman", 12, "bold"))
-        phone_label.grid(row=1, column=0, padx=10, pady=10, sticky=W)
-
-        phone_entry = ttk.Entry(class_student_frame, width=20, font=("times new roman", 12, "bold"), textvariable=self.var_phone)
-        phone_entry.grid(row=1, column=1, padx=10, pady=10, sticky=W)
-
-        # Korean name
-        email_label = Label(class_student_frame, text="Student Korean Name : ", font=("times new roman", 12, "bold"))
-        email_label.grid(row=1, column=2, padx=10, pady=10, sticky=W)
-
-        email_entry = ttk.Entry(class_student_frame, width=20, font=("times new roman", 12, "bold"), textvariable=self.var_kor_name)
-        email_entry.grid(row=1, column=3, padx=10, pady=10, sticky=W)
-
-        # # Gender
-        # gender_label = Label(class_student_frame, text="Gender : ", font=("times new roman", 12, "bold"))
-        # gender_label.grid(row=2, column=0, padx=10, pady=10, sticky=W)
-        #
-        # gender_combo = ttk.Combobox(class_student_frame, font=("times new roman", 12, "bold"), state="readonly", textvariable=self.var_gender, width = 18)
-        # gender_combo["values"] = ("Select Gender", "Male", "Female")
-        # gender_combo.current(0)
-        # gender_combo.grid(row=2, column=1, padx=10, pady=10, sticky=W)
-
-        # gender_entry = ttk.Entry(class_student_frame, width=20, font=("times new roman", 12, "bold"), textvariable=self.var_gender)
-        # gender_entry.grid(row=2, column=1, padx=10, pady=10, sticky=W)
-
-        # # DOB
-        # dob_label = Label(class_student_frame, text="DOB : ", font=("times new roman", 12, "bold"))
-        # dob_label.grid(row=2, column=2, padx=10, pady=10, sticky=W)
-        #
-        # dob_entry = ttk.Entry(class_student_frame, width=20, font=("times new roman", 12, "bold"), textvariable=self.var_dob)
-        # dob_entry.grid(row=2, column=3, padx=10, pady=10, sticky=W)
-
-        # Radio Button
-        # radiobtn1 = ttk.Radiobutton(class_student_frame, text="Take Photo Sample", value="Yes", variable=self.var_radio1)
-        # radiobtn1.grid(row=2, column=0, padx=10, pady=10, sticky=W)
-
-        # radiobtn2 = ttk.Radiobutton(class_student_frame, text="NO Photo Sample", value="No", variable=self.var_radio1)
-        # radiobtn2.grid(row=2, column=1, padx=10, pady=10, sticky=W)
 
         # take photo
         take_photo_btn = Button(class_student_frame, text="Take Sample Photo", font=("times new roman", 12, "bold"), width=15, command=self.take_photo)
         take_photo_btn.grid(row=2, column=0)
 
         take_photo_entry = ttk.Entry(class_student_frame, width=65, font=("times new roman", 12, "bold"), textvariable=self.var_photo_addr)
-        take_photo_entry.place(x=200, y=95)
+        take_photo_entry.place(x=200, y=75)
 
         empty_label = Label(class_student_frame)
         empty_label.grid(row=3, column=0, pady=3)
@@ -187,10 +144,10 @@ class Student:
         # save_btn.grid(row=4, column=0)
 
         update_btn = Button(class_student_frame, text="Update", font=("times new roman", 12, "bold"), width=20, command=self.update_data)
-        update_btn.grid(row=4, column=2)
+        update_btn.grid(row=5, column=0)
 
         delete_btn = Button(class_student_frame, text="Delete", font=("times new roman", 12, "bold"), width=20, command=self.delete_data)
-        delete_btn.grid(row=5, column=0)
+        delete_btn.grid(row=5, column=1)
 
         reset_btn = Button(class_student_frame, text="Reset", font=("times new roman", 12, "bold"), width=20, command=self.reset_data)
         reset_btn.grid(row=5, column=2)
@@ -239,31 +196,23 @@ class Student:
         scroll_x = ttk.Scrollbar(table_frame, orient=HORIZONTAL)
         scroll_y = ttk.Scrollbar(table_frame, orient=VERTICAL)
 
-        self.student_table = ttk.Treeview(table_frame, column=("ID", "Name", "Korean Name", "Dep", "Course", "Year", "Semester", "Phone No"), xscrollcommand=scroll_x.set, yscrollcommand=scroll_y.set)
+        self.student_table = ttk.Treeview(table_frame, column=("ID", "Name", "Course", "Major"), xscrollcommand=scroll_x.set, yscrollcommand=scroll_y.set)
 
         scroll_x.pack(side=BOTTOM, fill=X)
         scroll_y.pack(side=RIGHT, fill=Y)
         scroll_x.config(command=self.student_table.xview)
         scroll_y.config(command=self.student_table.yview)
 
-        self.student_table.heading("Dep", text="Department")
         self.student_table.heading("Course", text="Course")
-        self.student_table.heading("Year", text="Year")
-        self.student_table.heading("Semester", text="Semester")
         self.student_table.heading("ID", text="ID")
         self.student_table.heading("Name", text="Name")
-        self.student_table.heading("Korean Name", text="Korean Name")
-        self.student_table.heading("Phone No", text="Phone No")
+        self.student_table.heading("Major", text="Major")
         self.student_table["show"] = "headings"
 
-        self.student_table.column("Dep", width=100)
         self.student_table.column("Course", width=100)
-        self.student_table.column("Year", width=100)
-        self.student_table.column("Semester", width=100)
         self.student_table.column("ID", width=100)
         self.student_table.column("Name", width=100)
-        self.student_table.column("Korean Name", width=100)
-        self.student_table.column("Phone No", width=100)
+        self.student_table.column("Major", width=100)
 
         self.student_table.pack(fill=BOTH, expand=1)
         self.student_table.bind("<ButtonRelease>", self.get_data)
@@ -366,19 +315,26 @@ class Student:
             webcam = cv2.VideoCapture(0, cv2.CAP_DSHOW)
             img_id = self.var_id.get()
             img_course = self.var_course.get()
-            path = 'C:/Users/LG/PycharmProjects/SmartAttendance/FaceImages/' + img_course #+ '/' + img_id
+            path = './FaceImages/' + str(self.id) #img_course #+ '/' + img_id
             num_images = 0
             while True:
                 success, img = webcam.read()
                 imgGray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-                face_location = face_classifier.detectMultiScale(imgGray, 1.1, 5)
+                face_location = face_classifier.detectMultiScale(imgGray, scaleFactor=1.5, minNeighbors=5)
                 for (x, y, w, h) in face_location:
                     cv2.rectangle(img, (x, y), (x + w, y + h), (255, 0, 0), 2)
+                    cv2.putText(img, "Face Detected " + str(num_images), (50,50), cv2.FONT_HERSHEY_SIMPLEX, 1, (0,0,255), 2)
                     num_images += 1
-                    if not os.path.isdir(path):         # FaceImages/과목명
+
+                    # 사진 저장 위치 FaceImages/로그인 ID/과목명/학번
+                    if not os.path.isdir(path):
                         os.mkdir(path)
 
-                    file = path + '/' + img_id          # FaceImages/과목명/학번
+                    subject = path + '/' + img_course
+                    if not os.path.isdir(subject):         # FaceImages/과목명
+                        os.mkdir(subject)
+
+                    file = subject + '/' + img_id          # FaceImages/과목명/학번
                     if not os.path.isdir(file):
                         os.mkdir(file)
                     pic_path = file + "/" + str(num_images) + ".jpg"
@@ -390,8 +346,8 @@ class Student:
                     break
             webcam.release()
             cv2.destroyAllWindows()
-            self.var_photo_addr.set(path)
-            messagebox.showinfo("Result", f"{self.var_kor_name.get()} face data added\n Click Save Button")
+            self.var_photo_addr.set(file)
+            messagebox.showinfo("Result", f"{self.var_name.get()} face data added")
 
     # Search Data
     def search_data(self):
@@ -416,8 +372,6 @@ class Student:
         #         self.student_table.insert("", END, values=i)
         #     conn.commit()
         # conn.close()
-
-
 
 
 if __name__ == "__main__":

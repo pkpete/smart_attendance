@@ -35,7 +35,7 @@ class Face_Recognition_System:
         time()
 
         # first image
-        img1 = Image.open(r"C:\Users\LG\PycharmProjects\SmartAttendance\smart_attendance\software\Images\face-id.jpg")
+        img1 = Image.open(r"./Images/face-id.jpg")
         img1 = img1.resize((200,200), Image.ANTIALIAS)
         self.photoimg1 = ImageTk.PhotoImage(img1)
 
@@ -43,7 +43,7 @@ class Face_Recognition_System:
         f_lbl.place(x=0, y=0, width=200, height=200)
 
         # second image
-        img2 = Image.open(r"C:\Users\LG\PycharmProjects\SmartAttendance\smart_attendance\software\Images\face-id.jpg")
+        img2 = Image.open(r"./Images/face-id.jpg")
         img2 = img2.resize((200, 200), Image.ANTIALIAS)
         self.photoimg2 = ImageTk.PhotoImage(img2)
 
@@ -55,7 +55,7 @@ class Face_Recognition_System:
         frame.place(x=0, y=200, width=1500, height=700)
 
         # Student button
-        img3 = Image.open(r"C:\Users\LG\PycharmProjects\SmartAttendance\smart_attendance\software\Images\button.jpg")
+        img3 = Image.open(r"./Images/button.jpg")
         img3 = img3.resize((200, 200), Image.ANTIALIAS)
         self.photoimg3 = ImageTk.PhotoImage(img3)
 
@@ -75,7 +75,7 @@ class Face_Recognition_System:
         # b1_1.place(x=500, y=250, width=200, height=40)
 
         # Attendance face button
-        img5 = Image.open(r"C:\Users\LG\PycharmProjects\SmartAttendance\smart_attendance\software\Images\button.jpg")
+        img5 = Image.open(r"./Images/button.jpg")
         img5 = img5.resize((200, 200), Image.ANTIALIAS)
         self.photoimg5 = ImageTk.PhotoImage(img5)
 
@@ -116,7 +116,7 @@ class Face_Recognition_System:
         # b1_1.place(x=500, y=550, width=200, height=40)
 
         # Developer button
-        img9 = Image.open(r"C:\Users\LG\PycharmProjects\SmartAttendance\smart_attendance\software\Images\button.jpg")
+        img9 = Image.open(r"./Images/button.jpg")
         img9 = img9.resize((200, 200), Image.ANTIALIAS)
         self.photoimg9 = ImageTk.PhotoImage(img9)
 
@@ -127,7 +127,7 @@ class Face_Recognition_System:
         b1_1.place(x=800, y=350, width=200, height=40)
 
         # Exit button
-        img10 = Image.open(r"C:\Users\LG\PycharmProjects\SmartAttendance\smart_attendance\software\Images\exit.jpg")
+        img10 = Image.open(r"./Images/exit.jpg")
         img10 = img10.resize((200, 200), Image.ANTIALIAS)
         self.photoimg10 = ImageTk.PhotoImage(img10)
 

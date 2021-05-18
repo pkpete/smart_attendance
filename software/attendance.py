@@ -1,9 +1,11 @@
 from tkinter import *
 from tkinter import ttk
 from tkinter import messagebox
+import pickle
 from PIL import Image, ImageTk, ImageFont, ImageDraw
 from time import strftime
 from datetime import datetime
+import time
 import os
 import numpy as np
 import cv2
@@ -42,8 +44,7 @@ class Attendance:
         time()
 
         # Home Button
-        img1 = Image.open(
-            r"C:\Users\LG\PycharmProjects\SmartAttendance\smart_attendance\software\Images\home.jpg")
+        img1 = Image.open(r"./Images/home.jpg")
         img1 = img1.resize((200, 200), Image.ANTIALIAS)
         self.photoimg1 = ImageTk.PhotoImage(img1)
 
@@ -52,8 +53,7 @@ class Attendance:
         b1.place(x=0, y=0, width=200, height=200)
 
         # second image
-        img2 = Image.open(
-            r"C:\Users\LG\PycharmProjects\SmartAttendance\smart_attendance\software\Images\face-id.jpg")
+        img2 = Image.open(r"./Images/face-id.jpg")
         img2 = img2.resize((200, 200), Image.ANTIALIAS)
         self.photoimg2 = ImageTk.PhotoImage(img2)
         f_lbl = Label(self.root, image=self.photoimg2)
@@ -146,7 +146,7 @@ class Attendance:
         scroll_y = ttk.Scrollbar(table_frame, orient=VERTICAL)
 
         self.attendance_table = ttk.Treeview(table_frame, column=(
-            "ID", "Name", "Korean Name", "Course", "Date", "Time"), xscrollcommand=scroll_x.set,
+            "ID", "Name", "Course", "Date", "Time"), xscrollcommand=scroll_x.set,
             yscrollcommand=scroll_y.set)
 
         scroll_x.pack(side=BOTTOM, fill=X)
@@ -156,7 +156,6 @@ class Attendance:
 
         self.attendance_table.heading("ID", text="ID")
         self.attendance_table.heading("Name", text="Name")
-        self.attendance_table.heading("Korean Name", text="Korean Name")
         self.attendance_table.heading("Course", text="Course")
         self.attendance_table.heading("Date", text="Date")
         self.attendance_table.heading("Time", text="Time")
@@ -164,7 +163,6 @@ class Attendance:
 
         self.attendance_table.column("ID", width=100)
         self.attendance_table.column("Name", width=100)
-        self.attendance_table.column("Korean Name", width=100)
         self.attendance_table.column("Course", width=100)
         self.attendance_table.column("Date", width=100)
         self.attendance_table.column("Date", width=100)
@@ -177,129 +175,131 @@ class Attendance:
             messagebox.showerror(
                 "Error", "Please select course", parent=self.root)
         else:
-            data_dir = ("FaceImages/" + self.var_course.get())
-            file_path = [data_dir + "/" +
-                         file for file in os.listdir(data_dir)]
-            faces = []
-            ids = []
-            for file in file_path:
-                path = [file + "/" + img for img in os.listdir(file)]
+            face_classifier = cv2.CascadeClassifier("Resources/haarcascade_frontalface_default.xml")
+            recognizer = cv2.face.LBPHFaceRecognizer_create()
 
-                for image in path:
-                    img = Image.open(image).convert('L')
-                    imageNP = np.array(img, 'uint8')
-                    id = int(image.split('/')[2][1:])   # B511006에서 B 빼기
-                    faces.append(imageNP)
-                    ids.append(id)
-                    cv2.imshow("Training", imageNP)
-                    cv2.waitKey(1) == 13
-            ids = np.array(ids)
+            # 사진 경로
+            BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+            image_dir = os.path.join(BASE_DIR, "FaceImages")
+            image_dir = os.path.join(image_dir, str(self.id))
+            image_dir = os.path.join(image_dir, self.var_course.get())
 
-            clf = cv2.face.LBPHFaceRecognizer_create()
-            clf.train(faces, ids)
-            clf.write(self.var_course.get() + " classifier.xml")
+            current_id = 0
+            label_ids = {}
+            y_labels = []
+            x_train = []
+
+            for root, dirs, files in os.walk(image_dir):
+                for file in files:
+                    if file.endswith("png") or file.endswith("jpg"):
+                        path = os.path.join(root, file)
+                        label = os.path.basename(root)  # 해당 사진의 학번
+                        # print(path, label)
+                        # label 리스트 만들기
+                        if not label in label_ids:
+                            label_ids[label] = current_id   # {"B511006" : "0" , ...}
+                            current_id += 1
+                        id_ = label_ids[label]
+                        pil_image = Image.open(path).convert("L") # grayscale
+                        final_image = pil_image.resize((550,550), Image.ANTIALIAS)
+                        image_array = np.array(final_image, "uint8")
+                        cv2.imshow("Training", image_array)
+                        cv2.waitKey(1) == 13
+                        face_location = face_classifier.detectMultiScale(image_array, scaleFactor=1.5, minNeighbors=5)
+                        for (x,y,w,h) in face_location:
+                            roi = image_array[y:y+h, x:x+w]
+                            x_train.append(roi)
+                            y_labels.append(id_)
+
+            file = str(self.id) + "_" + self.var_course.get() + ".pickle"
+            print(label_ids)
+            with open(file, "wb+") as f:
+                pickle.dump(label_ids, f)
+
+            recognizer.train(x_train, np.array(y_labels))
+            recognizer.save(str(self.id) + "_" + self.var_course.get() + "_face-train.yml")
             cv2.destroyAllWindows()
             messagebox.showinfo("Result", "Training datasets completed!!")
 
-    def mark_attendance(self, name, kor_name, id, course):
-        with open("attendance.csv", "r+", newline="\n") as f:
-            myDataList = f.readlines()
-            name_list = []
-            for line in myDataList:
-                entry = line.split(",")
-                name_list.append(entry[0])
-            if (name not in name_list) and (kor_name not in name_list) and (id not in name_list) and (course not in name_list):
-                now = datetime.now()
-                string_time = now.strftime('%H:%M:%S')
-                string_date = now.strftime('%Y/%m/%d')
-                f.writelines(
-                    f"\n{id}, {kor_name}, {name}, {course}, {string_date}, {string_time}")
-                try:
-                    conn = mysql.connector.connect(host="localhost", username="root", password="123456",
-                                                   database="face_recognizer")
-                    my_cursor = conn.cursor()
-                    my_cursor.execute("insert into attendance values(%s,%s,%s,%s,%s,%s)", (
-                        id,
-                        kor_name,
-                        name,
-                        course,
-                        string_date,
-                        string_time
-                    ))
-                    conn.commit()
-                    self.fetch_data()
-                    conn.close()
-                except Exception as es:
-                    messagebox.showerror(
-                        "Error", f"Due To: {str(es)}", parent=self.root)
+    # def mark_attendance(self, name, kor_name, id, course):
+    #     with open("attendance.csv", "r+", newline="\n") as f:
+    #         myDataList = f.readlines()
+    #         name_list = []
+    #         for line in myDataList:
+    #             entry = line.split(",")
+    #             name_list.append(entry[0])
+    #         if (name not in name_list) and (kor_name not in name_list) and (id not in name_list) and (course not in name_list):
+    #             now = datetime.now()
+    #             string_time = now.strftime('%H:%M:%S')
+    #             string_date = now.strftime('%Y/%m/%d')
+    #             f.writelines(
+    #                 f"\n{id}, {kor_name}, {name}, {course}, {string_date}, {string_time}")
+    #             try:
+    #                 conn = mysql.connector.connect(host="localhost", username="root", password="123456",
+    #                                                database="face_recognizer")
+    #                 my_cursor = conn.cursor()
+    #                 my_cursor.execute("insert into attendance values(%s,%s,%s,%s,%s,%s)", (
+    #                     id,
+    #                     kor_name,
+    #                     name,
+    #                     course,
+    #                     string_date,
+    #                     string_time
+    #                 ))
+    #                 conn.commit()
+    #                 self.fetch_data()
+    #                 conn.close()
+    #             except Exception as es:
+    #                 messagebox.showerror(
+    #                     "Error", f"Due To: {str(es)}", parent=self.root)
 
     def face_recognition(self):
-        def draw_boundray(img, classifier, scaleFactor, minNeighbors, color, text, clf):
-            gray_image = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-            features = classifier.detectMultiScale(
-                gray_image, scaleFactor, minNeighbors)
+        face_classifier = cv2.CascadeClassifier("Resources/haarcascade_frontalface_default.xml")
+        recognizer = cv2.face.LBPHFaceRecognizer_create()
+        recognizer.read(str(self.id) + "_" + self.var_attendance_course.get() + "_face-train.yml")
 
-            coord = []
+        labels = {}
+        file = str(self.id) + "_" + self.var_attendance_course.get() + ".pickle"
+        with open(file, "rb") as f:
+            original_labels = pickle.load(f)
+            labels = {v:k for k,v in original_labels.items()}
 
-            for(x, y, w, h) in features:
-                id, predict = clf.predict(gray_image[y:y+h, x:x+w])
-                id = "B" + str(id)
-                #confidence = int(100*(1-predict/300))
-
-                conn = mysql.connector.connect(host="localhost", username="root", password="123456",
-                                               database="face_recognizer")
-                my_cursor = conn.cursor(buffered=True)
-
-                my_cursor.execute(
-                    "SELECT Name FROM STUDENT WHERE Student_id = '" + str(id) + "'")
-                name = my_cursor.fetchone()
-                name = "+".join(name)
-
-                my_cursor.execute(
-                    "SELECT Kor_Name FROM STUDENT WHERE Student_id = '" + str(id) + "'")
-                kor_name = my_cursor.fetchone()
-                kor_name = "+".join(kor_name)
-                print(kor_name)
-
-                # if confidence > 75:
-                if predict < 80:
-                    cv2.rectangle(img, (x - 20, y - 20),
-                                  (x + w + 20, y + h + 20), (0, 255, 0), 3)
-                    cv2.rectangle(img, (x-20, y-20+h),
-                                  (x+20+w, y+20+h+50), (0, 255, 0), cv2.FILLED)
-                    cv2.putText(img, f"{id} {name}", (x, y+h + 30),
-                                cv2.FONT_HERSHEY_COMPLEX, 0.8, (255, 255, 255), 1)
-                    self.mark_attendance(
-                        name, kor_name, id, self.var_attendance_course.get())
-                else:
-                    cv2.rectangle(img, (x-20, y-20),
-                                  (x+20 + w, y+20 + h), (0, 0, 255), 3)
-                    cv2.putText(img, "Unknown Face", (x, y - 55),
-                                cv2.FONT_HERSHEY_COMPLEX, 0.8, (0, 0, 255), 3)
-
-                coord = [x, y, w, y]
-
-            return coord
-
-        def recognize(img, clf, faceCascade):
-            coord = draw_boundray(img, faceCascade, 1.1,
-                                  10, (255, 25, 255), "Face", clf)
-            return img
-
-        face_classifier = cv2.CascadeClassifier(
-            "Resources/haarcascade_frontalface_default.xml")
-        clf = cv2.face.LBPHFaceRecognizer_create()
-        clf.read(self.var_attendance_course.get() + " classifier.xml")
-
-        webcam = cv2.VideoCapture(0)
+        print(len(labels))
+        attendance_list = []
+        webcam = cv2.VideoCapture(0, cv2.CAP_DSHOW)
+        cur_min = datetime.now().minute
 
         while True:
             success, img = webcam.read()
-            img = recognize(img, clf, face_classifier)
-            cv2.imshow("Attendance", img)
+            #img = recognize(img, recognizer, face_classifier)
+            gray_img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+            faces = face_classifier.detectMultiScale(gray_img, scaleFactor=1.5, minNeighbors=5)
 
-            if cv2.waitKey(1) == 13:
+            for (x,y,w,h) in faces:
+                roi_gray = gray_img[y:y+h, x:x+w]
+                id, conf = recognizer.predict(roi_gray)
+                if conf >= 45:
+                    cv2.rectangle(img, (x - 20, y - 20), (x + w + 20, y + h + 20), (0, 255, 0), 3)
+                    cv2.rectangle(img, (x-20, y-20+h), (x+20+w, y+20+h+50), (0, 255, 0), cv2.FILLED)
+                    cv2.putText(img, f"{labels[id]}", (x, y + h + 30), cv2.FONT_HERSHEY_COMPLEX, 0.8, (255, 255, 255), 1)
+                    # 민수한테 출석한 학번 전달
+                    if labels[id] not in attendance_list:
+                        attendance_list.append(labels[id])
+                        print(labels[id])
+                        print(len(attendance_list))
+
+                    #print(id)
+
+                else :
+                    cv2.rectangle(img, (x - 20, y - 20), (x+20 + w, y+20 + h), (0, 0, 255), 3)
+                    cv2.putText(img, "Unknown Face", (x, y - 55), cv2.FONT_HERSHEY_COMPLEX, 0.8, (0, 0, 255), 3)
+
+
+            cv2.imshow("Attendance", img)
+            if cv2.waitKey(1) == 13 or len(labels) == len(attendance_list) or cur_min+1 == datetime.now().minute:
+                print(attendance_list)
                 break
+
         webcam.release()
         cv2.destroyAllWindows()
 
