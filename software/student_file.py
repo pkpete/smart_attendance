@@ -352,7 +352,7 @@ class Student:
             search_by = "course"
         elif self.search_by.get() == "Student_id":
             search_by = "id"
-        js = {"id":self.id, "search":search_by, "info":self.search_text.get()}
+        js = {"profID":self.id, "search":search_by, "info":self.search_text.get()}
         jsonObject = json.dumps(js)
         print(jsonObject)
         r = requests.post(url="http://localhost:8080/sw/search-members", data=jsonObject, headers={'Content-Type': 'application/json'})
