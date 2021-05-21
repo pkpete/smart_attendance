@@ -1,5 +1,6 @@
 package graduation_project.smart_attendance.controller;
 
+import graduation_project.smart_attendance.dto.SwSaveCheckDto;
 import graduation_project.smart_attendance.dto.SwSaveDateDto;
 import graduation_project.smart_attendance.service.AttendDateService;
 import lombok.RequiredArgsConstructor;
@@ -14,8 +15,14 @@ public class SwDateNCheckController {
     private final AttendDateService attendDateService;
 
     @PostMapping("sw/date")
-    public String dateNCheck(@RequestBody SwSaveDateDto swSaveDateDto){
+    public String date(@RequestBody SwSaveDateDto swSaveDateDto){
         attendDateService.saveDate(swSaveDateDto.getProfID(), swSaveDateDto.getCourse());
+        return "True";
+    }
+
+    @PostMapping("sw/check")
+    public String check(@RequestBody SwSaveCheckDto swSaveCheckDto){
+        System.out.println("save: " + swSaveCheckDto);
         return "True";
     }
 }

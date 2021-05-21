@@ -39,8 +39,9 @@ public class AttendCheck {
         attendDate.getAttendChecks().add(this);
     }
 
-    public static AttendCheck createAttendCheck(AddAttendCheckDto addAttendCheckDto, Member member, AttendDate attendDate){
-        AttendCheck attendCheck = addAttendCheckDto.toEntity();
+    public static AttendCheck createAttendCheck(Member member, AttendDate attendDate){
+        AttendCheck attendCheck = new AttendCheck();
+        attendCheck.setAttendCheck(AttendStatus.결석);
         attendCheck.setMember(member);
         attendCheck.setAttendDate(attendDate);
         return attendCheck;

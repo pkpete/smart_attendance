@@ -29,5 +29,7 @@ public class AttendDateService {
         AddAttendDateDto addAttendDateDto = new AddAttendDateDto(LocalDate.now());
         AttendDate attendDate = AttendDate.createAttendDate(addAttendDateDto, course);
         attendDateRepository.save(attendDate);
+
+
     }
 }
