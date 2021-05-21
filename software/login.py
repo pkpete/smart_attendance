@@ -34,7 +34,7 @@ class Login_Window:
         time()
 
         # first image
-        img1 = Image.open(r"C:\Users\LG\PycharmProjects\SmartAttendance\smart_attendance\software\Images\face-id.jpg")
+        img1 = Image.open(r"./Images/face-id.jpg")
         img1 = img1.resize((200,200), Image.ANTIALIAS)
         self.photoimg1 = ImageTk.PhotoImage(img1)
 
@@ -42,7 +42,7 @@ class Login_Window:
         f_lbl.place(x=0, y=0, width=200, height=200)
 
         # second image
-        img2 = Image.open(r"C:\Users\LG\PycharmProjects\SmartAttendance\smart_attendance\software\Images\face-id.jpg")
+        img2 = Image.open(r"./Images/face-id.jpg")
         img2 = img2.resize((200, 200), Image.ANTIALIAS)
         self.photoimg2 = ImageTk.PhotoImage(img2)
 
@@ -56,7 +56,7 @@ class Login_Window:
         login_frame = Frame(frame, bg="black")
         login_frame.place(x=580, y=100, width=360, height=480)
 
-        img3 = Image.open(r"C:\Users\LG\PycharmProjects\SmartAttendance\smart_attendance\software\Images\login.png")
+        img3 = Image.open(r"./Images/login.png")
         img3 = img3.resize((100,100), Image.ANTIALIAS)
         self.photoimg3 = ImageTk.PhotoImage(img3)
 
@@ -99,7 +99,7 @@ class Login_Window:
                 messagebox.showerror("Error", "Wrong ID or Password")
             else:
                 # self.new_window = Toplevel(self.root)
-                self.app = Face_Recognition_System(self.root)
+                self.app = Face_Recognition_System(self.root, int(r.text))
 
 
 

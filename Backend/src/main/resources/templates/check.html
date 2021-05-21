@@ -13,7 +13,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
 
-<link rel="stylesheet" href="../static/css/check.css">
+<link rel="stylesheet" href="../static/css/check.css" th:href="@{/css/check.css}">
 
 <body>
 
@@ -40,23 +40,11 @@
         <th>출결 현황</th>
       </tr>
       <tbody>
-        <tr>
-          <td>39</td>
-          <td>정도식 </td>
-          <td>26</td>
-          <td id="status">출석</td>
-        </tr>
-        <tr>
-          <td>39</td>
-          <td>정도식</td>
-          <td>26</td>
-          <td id="status">결석</td>
-        </tr>
-        <tr>
-          <td>39</td>
-          <td>정도식 </td>
-          <td>26</td>
-          <td id="status">지각</td>
+        <tr th:each="check : ${attendChecks}">
+          <td th:text="${check.member.number}"></td>
+          <td th:text="${check.member.name}"></td>
+          <td th:text="${check.member.age}"></td>
+          <td id="status" th:text="${check.attendCheck}"></td>
         </tr>
       </tbody>
     </table>

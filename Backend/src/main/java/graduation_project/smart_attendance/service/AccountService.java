@@ -27,15 +27,15 @@ public class AccountService {
         account.setRole("ROLE_USER");
         accountRepository.save(account);
 
-        String baseDir = "C:\\Users\\kgsmy\\OneDrive\\문서\\attendance_image\\" + account.getId();
-
-        if(!new File(baseDir).exists()){
-            try{
-                new File(baseDir).mkdir();
-            }catch (Exception e){
-                e.getStackTrace();
-            }
-        }
+//        String baseDir = "C:\\Users\\kgsmy\\OneDrive\\문서\\attendance_image\\" + account.getId();
+//
+//        if(!new File(baseDir).exists()){
+//            try{
+//                new File(baseDir).mkdir();
+//            }catch (Exception e){
+//                e.getStackTrace();
+//            }
+//        }
         return account.getId();
     }
 

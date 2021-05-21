@@ -32,9 +32,9 @@ public class AddMemberDto {
                 .name(name)
                 .age(age)
                 .classname(classname)
-                .origFilename(origFilename)
-                .filename(filename)
-                .filepath(filepath)
+//                .origFilename(origFilename)
+//                .filename(filename)
+//                .filepath(filepath)
                 .course(course)
                 .build();
     }

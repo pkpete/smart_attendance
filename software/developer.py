@@ -9,11 +9,12 @@ import mysql.connector
 
 
 class Developer:
-    def __init__(self, root):
+    def __init__(self, root, id):
         self.root = root
         self.root.geometry("1500x900+0+0")
         self.root.title("Face Recognition System")
         self.root.resizable(False, False)
+        self.id = id
 
         def time():
             string_time = strftime('%H:%M:%S %p')
@@ -34,7 +35,7 @@ class Developer:
         time()
 
         # Home Button
-        img1 = Image.open(r"C:\Users\LG\PycharmProjects\SmartAttendance\smart_attendance\software\Images\home.jpg")
+        img1 = Image.open(r"./Images/home.jpg")
         img1 = img1.resize((200, 200), Image.ANTIALIAS)
         self.photoimg1 = ImageTk.PhotoImage(img1)
 
@@ -42,7 +43,7 @@ class Developer:
         b1.place(x=0, y=0, width=200, height=200)
 
         # second image
-        img2 = Image.open(r"C:\Users\LG\PycharmProjects\SmartAttendance\smart_attendance\software\Images\face-id.jpg")
+        img2 = Image.open(r"./Images/face-id.jpg")
         img2 = img2.resize((200, 200), Image.ANTIALIAS)
         self.photoimg2 = ImageTk.PhotoImage(img2)
 
@@ -53,7 +54,7 @@ class Developer:
         frame = Frame(bd=2, relief=RIDGE)
         frame.place(x=0, y=200, width=1500, height=700)
 
-        img3 = Image.open(r"C:\Users\LG\PycharmProjects\SmartAttendance\smart_attendance\software\Images\ko.jpg")
+        img3 = Image.open(r"./Images/ko.jpg")
         img3 = img3.resize((200, 170), Image.ANTIALIAS)
         self.photoimg3 = ImageTk.PhotoImage(img3)
 
@@ -66,7 +67,7 @@ class Developer:
         ko_label = Label(ko_frame, text="자동 출석 관리 시스템에서 SW 개발을 담당하고 있습니다.", font=("times new roman", 12, "bold"))
         ko_label.place(x=10, y=60)
 
-        img4 = Image.open(r"C:\Users\LG\PycharmProjects\SmartAttendance\smart_attendance\software\Images\kim.jpg")
+        img4 = Image.open(r"./Images/kim.jpg")
         img4 = img4.resize((200, 170), Image.ANTIALIAS)
         self.photoimg4 = ImageTk.PhotoImage(img4)
 
@@ -79,7 +80,7 @@ class Developer:
         kim_label = Label(kim_frame, text="자동 출석 관리 시스템에서 Backend 개발을 담당하고 있습니다.", font=("times new roman", 12, "bold"))
         kim_label.place(x=10, y=60)
 
-        img5 = Image.open(r"C:\Users\LG\PycharmProjects\SmartAttendance\smart_attendance\software\Images\jung.jpg")
+        img5 = Image.open(r"./Images/jung.jpg")
         img5 = img5.resize((200, 170), Image.ANTIALIAS)
         self.photoimg5 = ImageTk.PhotoImage(img5)
 
@@ -95,7 +96,7 @@ class Developer:
     # Function buttons
     def home_details(self):
         from main import Face_Recognition_System
-        self.app = Face_Recognition_System(self.root)
+        self.app = Face_Recognition_System(self.root, self.id)
 
 
 if __name__ == "__main__":
