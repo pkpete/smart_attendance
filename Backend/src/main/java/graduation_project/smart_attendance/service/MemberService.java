@@ -38,6 +38,8 @@ public class MemberService {
 
     public List<SearchMemberDto> findMembersLikeName(String username, String search){
         List<Member> members = memberRepository.findMembersByCourse_Account_UsernameAndNumberContaining(username, search);
+        System.out.println("username " + username + "search:" + search);
+        System.out.println("find: " + members);
         List<SearchMemberDto> searchMemberDtos= new ArrayList<>();
         members.forEach(x -> searchMemberDtos.add(new SearchMemberDto(x.getNumber(), x.getName(), x.getCourse().getCourseName())));
         return searchMemberDtos;

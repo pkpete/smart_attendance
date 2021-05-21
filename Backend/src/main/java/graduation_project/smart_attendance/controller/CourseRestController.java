@@ -20,9 +20,11 @@ public class CourseRestController {
     @PostMapping("/sw/search-members")
     public List<SearchMemberDto> searchMember(@RequestBody RequestSearchDto requestSearchDto){
         if(requestSearchDto.getSearch().equals("course")){
-            return memberService.findMembersByCourseName(requestSearchDto.getProfID(), requestSearchDto.getSearch());
+            return memberService.findMembersByCourseName(requestSearchDto.getProfID(), requestSearchDto.getInfo());
         }else if (requestSearchDto.getSearch().equals("id")){
-            return memberService.findMembersLikeName(requestSearchDto.getProfID(), requestSearchDto.getSearch());
+            List<SearchMemberDto> searchMemberDtos = memberService.findMembersLikeName(requestSearchDto.getProfID(), requestSearchDto.getInfo());
+            System.out.println("sear:" + searchMemberDtos);
+            return searchMemberDtos;
         }
         else {
             return null;
