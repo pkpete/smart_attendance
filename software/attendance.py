@@ -297,21 +297,20 @@ class Attendance:
                         # 날짜 시간
                         now = datetime.now()
                         string_time = now.strftime('%H:%M:%S')
-                        string_date = now.strftime('%Y/%m/%d')
+                        string_date = now.strftime('%Y-%m-%d')
 
                         # 교수id, 강의명, 학생학번, 날짜, 시간 딕셔너리에 넣기
-                        js = {"ProfID": str(self.id), "Course": self.var_attendance_course.get(),
-                              "Student ID": labels[id], "Date":string_date, "Time":string_time}
+                        js = {"profID": str(self.id), "course": self.var_attendance_course.get(),
+                              "studentID": labels[id], "date":string_date, "time":string_time}
                         jsonObject = json.dumps(js)  # JsOn 형태로 바꾸기
                         print(jsonObject)
-                        #r = requests.post(url="http://localhost:8080/python/login", data=jsonObject,
-                        #                  headers={'Content-Type': 'application/json'})
-                        #print(r.text)
+                        r = requests.post(url="http://localhost:8080/sw/check", data=jsonObject,
+                                          headers={'Content-Type': 'application/json'})
+                        print(r.text)
 
-                        a = "True"
 
                         # True이면 attendance_list에 넣기 / False이면 attendance_list에 저장하지 말기
-                        if a == "True":
+                        if r.text == "True":
                             # 해당 학생 레이블 가져오기
                             attendance_list.append(labels[id])
                             print(labels[id])
@@ -328,7 +327,7 @@ class Attendance:
 
 
             cv2.imshow("Attendance", img)
-            if cv2.waitKey(1) == 13 or len(labels) == len(attendance_list) or cur_min+1 == datetime.now().minute:
+            if cv2.waitKey(1) == 13  or cur_min+1 == datetime.now().minute:
                 print(attendance_list)
                 break
 

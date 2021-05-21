@@ -202,9 +202,9 @@ class Student:
         scroll_x.config(command=self.student_table.xview)
         scroll_y.config(command=self.student_table.yview)
 
-        self.student_table.heading("Course", text="Course")
-        self.student_table.heading("ID", text="ID")
-        self.student_table.heading("Name", text="Name")
+        self.student_table.heading("Course", text="Course", anchor=CENTER)
+        self.student_table.heading("ID", text="ID", anchor=CENTER)
+        self.student_table.heading("Name", text="Name", anchor=CENTER)
         self.student_table["show"] = "headings"
 
         self.student_table.column("Course", width=100)
@@ -354,12 +354,10 @@ class Student:
         print(jsonObject)
         r = requests.post(url="http://localhost:8080/sw/search-members", data=jsonObject, headers={'Content-Type': 'application/json'})
 
-        # list = r.json()
-        # print(list)
-        # print(type(list))
-        # print(len(list))
-
         print(r.json())
+
+        for item in self.student_table.get_children():
+            self.student_table.delete(item)
 
         for i in r.json():
             self.student_table.insert("", "end", text = "", values=(i["memberNumber"], i["memberName"], i["courseName"]))
