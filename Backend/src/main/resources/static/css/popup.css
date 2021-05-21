@@ -6,8 +6,7 @@ body {
 
 form {
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    justify-content: center;
 }
 
 table {
@@ -24,9 +23,11 @@ table th {
     color: white;
     border: 1px solid #ccc;
 }
+
 table td {
     border: 1px solid #ccc;
 }
+
 table tr {
     height: 30px;
     border-collapse: collapse;
@@ -57,7 +58,26 @@ input {
 }
 
 #add:hover {
+    transform: scale(1.08);
+    transition: all 0.1s;
+    transition-timing-function: ease-in;
+}
+
+#insert {
+    position: fixed;
+    bottom: 10%;
+    width: 80px;
+    height: 42px;
+    border: 2px solid rgb(160, 159, 159);
+    border-radius: 30px;
     background-color: #23d83b;
+    color: white;
+    font: 570 18px 'Roboto', sans-serif;
+    letter-spacing: 0.9px;
+    cursor: pointer;
+}
+
+#insert:hover {
     transform: scale(1.08);
     transition: all 0.1s;
     transition-timing-function: ease-in;
@@ -87,12 +107,13 @@ input {
 }
 
 #bg_black {
-    display: block;
-    position: absolute;
+    display: none;
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
+    overflow: auto;
     background-color: rgb(0, 0, 0, 0.55);
     z-index: 2;
 }

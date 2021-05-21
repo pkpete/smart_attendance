@@ -22,7 +22,7 @@
         <th>번호</th>
         <th>이름</th>
         <th>나이</th>
-        <th>수업</th>
+        <!-- <th>수업</th> -->
         <th>사진</th>
       </tr>
       <tr>
@@ -41,12 +41,14 @@
             <input type="text" style="width:110px;" th:field="*{age}">
           </label>
         </td>
-        <td>
+        <!-- <td>
           <label th:for="classname">
             <input type="text" style="width:90px;" th:field="*{classname}">
           </label>
+        </td> -->
+        <td>
+          <input type="file" name="memberPic" style="width:200px;" accept="image/png, image/jpeg" id="imageAdd" value="사진">
         </td>
-        <td><input type="file" name="memberPic" style="width:200px;" accept="image/png, image/jpeg" id="imageAdd" value="사진"></td>
       </tr>
     </table>
 
@@ -55,11 +57,9 @@
 <!-- 동일한 번호가 존재할 때 에러 -->
     <div id="modalWrap" th:if="${#fields.hasErrors('number')}" style="display: flex;">
       <a href="#" th:href="@{/user/course/{cid}/members/add (cid=${courseId})}" id="modalClose" onclick="offclick()">닫기</a>
-      
       <div id="errorMes">
         해당 번호가 이미 존재합니다 ❗❗
       </div>
-
     </div>
 
     <div id="bg_black" th:if="${#fields.hasErrors('number')}"></div>

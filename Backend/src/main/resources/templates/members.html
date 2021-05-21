@@ -38,7 +38,6 @@
         <th>번호</th>
         <th>이름</th>
         <th>나이</th>
-        <th>수업</th>
         <th>관리</th>
         </tr>
 
@@ -48,10 +47,10 @@
         <td th:text="${member.number}"></td>
         <td th:text="${member.name}"></td>
         <td th:text="${member.age}"></td>
-        <td th:text="${member.classname}"></td>
-        <td th:with="mId=${member.id}"><input class = "edit" id="fix" type="submit" value="수정" th:onclick="'javascript:updatePopup(\'' + ${courseId} +'\',\'' + ${mId} +'\');'"> /
+        <td th:with="mId=${member.id}">
           <form method="get" th:action="@{/user/course/${courseId}/members/${mId}/delete}">
-          <input class = "edit" id="dlt" value="삭제" >
+          <input class = "edit" id="fix" type="submit" value="수정" th:onclick="'javascript:updatePopup(\'' + ${courseId} +'\',\'' + ${mId} +'\');'"> /
+          <input class = "edit" id="dlt" value="삭제" type="submit" >
         </form>
         </td>
       </tr>
@@ -67,16 +66,16 @@
 </body>
 <script>
   function showPopup(courseId){
-    var popupX = (window.screen.width / 2) - (750 / 2);
-    var popupY= (window.screen.height / 2) - (300 / 2);
-    window.open('/user/course/' + courseId + '/members/add', 'membeAdd', 'status=no, height=300, width=750, left='+ popupX + ', top='+ popupY);
+    var popupX = (window.screen.width / 2) - (680 / 2);
+    var popupY= (window.screen.height / 2) - (250 / 2);
+    window.open('/user/course/' + courseId + '/members/add', 'membeAdd', 'status=no, height=250, width=680, left='+ popupX + ', top='+ popupY);
 
   }
 
   function updatePopup(courseId, memberId){
-    var popupX = (window.screen.width / 2) - (750 / 2);
-    var popupY= (window.screen.height / 2) - (300 / 2);
-    window.open('/user/course/' + courseId + '/member/' + memberId + '/update', 'membeAdd', 'status=no, height=300, width=750, left='+ popupX + ', top='+ popupY);
+    var popupX = (window.screen.width / 2) - (680 / 2);
+    var popupY= (window.screen.height / 2) - (250 / 2);
+    window.open('/user/course/' + courseId + '/member/' + memberId + '/update', 'membeAdd', 'status=no, height=250, width=680, left='+ popupX + ', top='+ popupY);
 
   }
 </script>

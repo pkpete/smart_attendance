@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org"
+      lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>I'm Here</title>
+</head>
+
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Bevan&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="../static/css/date_selection.css" th:href="@{/css/members.css}">
+
+<body>
+
+
+<header>
+    <div class="logo">
+        <h2><a href="../html/attendance.html" th:href="@{/user/attendance}">I'm Here</a></h2>
+    </div>
+    <nav>
+        <ul>
+            <li> <a href="class_selection.html" th:href="@{/user/courses}">수업관리</a></li>
+            <li> <a href="members.html" th:href="@{/user/course/{id}/members (id=${courseId})}">멤버관리</a></li>
+            <li> <a href="date.html" th:href="@{/user/course/{id}/dates (id=${courseId})}">출결관리</a></li>
+
+        </ul>
+        <div><a href="index.html" id="logout" th:href="@{/logout}">로그아웃</a></div>
+    </nav>
+</header>
+
+<div class="container">
+    <table class="members" >
+        <tr>
+            <th>수업일</th>
+            <th>수업시간</th>
+            <th>수업</th>
+        </tr>
+        
+        <tr>
+            <a href="#">
+            <td>2021.05.31</td>
+            <td>09:00 ~ 12:00</td>
+            <td>자료구조</td>
+            </a>
+        </tr>
+        <tr onclick="location.href='#'">
+            <td>2021.05.31</td>
+            <td>09:00 ~ 12:00</td>
+            <td>자료구조</td>
+        </tr>
+        <tr th:each="date : ${attendDates}">
+            <!-- <td th:text="${date.attendDate}"></td>
+            <td><input class = "edit" id="fix" type="button" value="조회" th:href="@{/user/course/{cId}/date/{dId}/checks (cId=${courseId}, dId=${date.id})}">
+            </td> -->
+        </tr>
+    </table>
+
+</div>
+</body>
+</html>

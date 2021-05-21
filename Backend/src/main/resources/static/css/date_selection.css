@@ -80,7 +80,7 @@ ul a:hover {
     margin-right: 38px;
 }
 
-/*members*/
+/*contents*/
 
 .container {
     display: flex;
@@ -92,9 +92,18 @@ table {
     margin-top: 50px;
     text-align: center;
     width: 72%;
+    border-collapse: collapse;
 }
 
-table tr:nth-child(2n + 3) {
+table tr {
+    cursor: pointer;
+}
+
+table tr:hover {
+    transform: scale(1.008);
+}
+
+table tr:nth-child(2n) {
     background-color: rgb(219, 219, 219);
 }
 
@@ -109,43 +118,9 @@ table td {
 }
 
 table td:nth-child(1) {
-    width: 180px;
-}
-table td:nth-child(3) {
-    width: 180px;
-}
-table td:nth-child(4) {
-    width: 420px;
+    width: 20%;
 }
 
-.edit {
-    font: 540 1.05em 'Noto Sans KR', sans-serif;
-    border: none;
-    background-color: transparent;
-}
-
-.edit:hover {
-    text-decoration: underline;
-    cursor: pointer;
-}
-
-#add {
-    position: fixed;
-    bottom: 10%;
-    width: 120px;
-    height: 50px;
-    border: 2px solid rgb(160, 159, 159);
-    border-radius: 30px;
-    background-color: #23d83b;
-    color: white;
-    font: 570 21px 'Roboto', sans-serif;
-    letter-spacing: 0.9px;
-    cursor: pointer;
-}
-
-#add:hover {
-    background-color: #23d83b;
-    transform: scale(1.08);
-    transition: all 0.1s;
-    transition-timing-function: ease-in;
+table td:nth-child(2) {
+    width: 37%;
 }
