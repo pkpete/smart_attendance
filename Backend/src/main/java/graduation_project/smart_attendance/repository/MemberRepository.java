@@ -19,7 +19,7 @@ public interface MemberRepository extends JpaRepository<Member, Long> {
 
     List<Member> findMembersByCourse_Id(Long courseId);
 
-    List<Member> findMembersByCourse_Account_UsernameAndCourse_CourseName(String username, String courseName);
+    List<Member> findMembersByCourse_Account_IdAndCourse_CourseName(Long username, String courseName);
 
-    List<Member> findMembersByCourse_Account_UsernameAndNumberContaining(String username, String memberNumber);
+    List<Member> findMembersByCourse_Account_IdAndNumberContaining(Long username, String memberNumber);
 }

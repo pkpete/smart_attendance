@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class RequestSearchDto {
-    private String profID;
+    private Long profID;
     private String search;
     private String info;
 }

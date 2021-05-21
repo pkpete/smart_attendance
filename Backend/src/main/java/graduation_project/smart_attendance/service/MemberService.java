@@ -29,15 +29,15 @@ public class MemberService {
         return memberRepository.findMembersByCourse_Id(courseId);
     }
 
-    public List<SearchMemberDto> findMembersByCourseName(String username, String courseName){
-        List<Member> members = memberRepository.findMembersByCourse_Account_UsernameAndCourse_CourseName(username, courseName);
+    public List<SearchMemberDto> findMembersByCourseName(Long username, String courseName){
+        List<Member> members = memberRepository.findMembersByCourse_Account_IdAndCourse_CourseName(username, courseName);
         List<SearchMemberDto> searchMemberDtos= new ArrayList<>();
         members.forEach(x -> searchMemberDtos.add(new SearchMemberDto(x.getNumber(), x.getName(), x.getCourse().getCourseName())));
         return searchMemberDtos;
     }
 
-    public List<SearchMemberDto> findMembersLikeName(String username, String search){
-        List<Member> members = memberRepository.findMembersByCourse_Account_UsernameAndNumberContaining(username, search);
+    public List<SearchMemberDto> findMembersLikeName(Long username, String search){
+        List<Member> members = memberRepository.findMembersByCourse_Account_IdAndNumberContaining(username, search);
         System.out.println("username " + username + "search:" + search);
         System.out.println("find: " + members);
         List<SearchMemberDto> searchMemberDtos= new ArrayList<>();
