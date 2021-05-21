@@ -19,11 +19,10 @@ public class CourseRestController {
 
     @PostMapping("/sw/search-members")
     public List<SearchMemberDto> searchMember(@RequestBody RequestSearchDto requestSearchDto){
-        System.out.println(requestSearchDto.getAccountUsername() +" "+ requestSearchDto.getChoice() + " " + requestSearchDto.getSearch());
-        if(requestSearchDto.getChoice().equals("course")){
-            return memberService.findMembersByCourseName(requestSearchDto.getAccountUsername(), requestSearchDto.getSearch());
-        }else if (requestSearchDto.getChoice().equals("id")){
-            return memberService.findMembersLikeName(requestSearchDto.getAccountUsername(), requestSearchDto.getSearch());
+        if(requestSearchDto.getSearch().equals("course")){
+            return memberService.findMembersByCourseName(requestSearchDto.getProfID(), requestSearchDto.getSearch());
+        }else if (requestSearchDto.getSearch().equals("id")){
+            return memberService.findMembersLikeName(requestSearchDto.getProfID(), requestSearchDto.getSearch());
         }
         else {
             return null;
