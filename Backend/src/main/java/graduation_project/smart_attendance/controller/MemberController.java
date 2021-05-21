@@ -59,28 +59,31 @@ public class MemberController {
             return "popup";
         }
 
-        try {
-            String baseDir = "C:\\Users\\kgsmy\\OneDrive\\문서\\attendance_image\\" + account.getId() + "\\" + courseId;
+//        try {
+//            String baseDir = "C:\\Users\\kgsmy\\OneDrive\\문서\\attendance_image\\" + account.getId() + "\\" + courseId;
+//
+//            if(!new File(baseDir).exists()){
+//                try{
+//                    new File(baseDir).mkdir();
+//                }catch (Exception e){
+//                    e.getStackTrace();
+//                }
+//            }
+//
+//            String filePath = baseDir + "\\" + addMemberDto.getNumber() + ".jpg";
+//            file.transferTo(new File(filePath));
+//
+//            addMemberDto.setOrigFilename(file.getOriginalFilename());
+//            addMemberDto.setFilename(addMemberDto.getName());
+//            addMemberDto.setFilepath(filePath);
+//
+//
+//        }catch (Exception e){
+//            e.printStackTrace();
+//        }
 
-            if(!new File(baseDir).exists()){
-                try{
-                    new File(baseDir).mkdir();
-                }catch (Exception e){
-                    e.getStackTrace();
-                }
-            }
+        memberService.member(addMemberDto, course);
 
-            String filePath = baseDir + "\\" + addMemberDto.getNumber() + ".jpg";
-            file.transferTo(new File(filePath));
-
-            addMemberDto.setOrigFilename(file.getOriginalFilename());
-            addMemberDto.setFilename(addMemberDto.getName());
-            addMemberDto.setFilepath(filePath);
-
-            memberService.member(addMemberDto, course);
-        }catch (Exception e){
-            e.printStackTrace();
-        }
         return "redirect:/user/members/close";
 
     }
@@ -114,28 +117,28 @@ public class MemberController {
             return "popup";
         }
 
-        try {
-            String baseDir = "C:\\Users\\kgsmy\\OneDrive\\문서\\attendance_image\\" + account.getId() + "\\" + courseId;
-
-            if(!new File(baseDir).exists()){
-                try{
-                    new File(baseDir).mkdir();
-                }catch (Exception e){
-                    e.getStackTrace();
-                }
-            }
-
-            String filePath = baseDir + "\\" + addMemberDto.getNumber() + ".jpg";
-            file.transferTo(new File(filePath));
-
-            addMemberDto.setOrigFilename(file.getOriginalFilename());
-            addMemberDto.setFilename(addMemberDto.getName());
-            addMemberDto.setFilepath(filePath);
-
-            memberService.updateMember(addMemberDto, course, memberId);
-        }catch (Exception e){
-            e.printStackTrace();
-        }
+//        try {
+//            String baseDir = "C:\\Users\\kgsmy\\OneDrive\\문서\\attendance_image\\" + account.getId() + "\\" + courseId;
+//
+//            if(!new File(baseDir).exists()){
+//                try{
+//                    new File(baseDir).mkdir();
+//                }catch (Exception e){
+//                    e.getStackTrace();
+//                }
+//            }
+//
+//            String filePath = baseDir + "\\" + addMemberDto.getNumber() + ".jpg";
+//            file.transferTo(new File(filePath));
+//
+//            addMemberDto.setOrigFilename(file.getOriginalFilename());
+//            addMemberDto.setFilename(addMemberDto.getName());
+//            addMemberDto.setFilepath(filePath);
+//
+//            memberService.updateMember(addMemberDto, course, memberId);
+//        }catch (Exception e){
+//            e.printStackTrace();
+//        }
         return "redirect:/user/members/close";
     }
 }

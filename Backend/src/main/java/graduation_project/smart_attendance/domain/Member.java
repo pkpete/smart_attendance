@@ -24,13 +24,10 @@ public class Member {
     private Long age;
     private String classname;
 
-    @Column(nullable = false)
     private String origFilename;
 
-    @Column(nullable = false)
     private String filename;
 
-    @Column(nullable = false)
     private String filepath;
 
     @ManyToOne(fetch = FetchType.LAZY)
