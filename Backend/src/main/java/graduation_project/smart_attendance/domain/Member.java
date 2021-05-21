@@ -9,7 +9,8 @@ import java.util.List;
 
 @Entity
 @Builder
-@Data
+@Getter
+@Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 public class Member {
@@ -23,12 +24,12 @@ public class Member {
     private String name;
     private Long age;
     private String classname;
-
-    private String origFilename;
-
-    private String filename;
-
-    private String filepath;
+//
+//    private String origFilename;
+//
+//    private String filename;
+//
+//    private String filepath;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "course_id")

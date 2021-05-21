@@ -8,7 +8,8 @@ import java.util.List;
 import java.util.Set;
 
 @Entity
-@Data
+@Getter
+@Setter
 @Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
@@ -24,5 +25,6 @@ public class Account {
 
     @OneToMany(mappedBy = "account", cascade = CascadeType.MERGE)
     private List<Course> courses = new ArrayList<>();
+
 
 }
