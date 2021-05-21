@@ -256,6 +256,14 @@ class Attendance:
     #                     "Error", f"Due To: {str(es)}", parent=self.root)
 
     def face_recognition(self):
+
+        js = {"profID": str(self.id), "course": self.var_attendance_course.get()}
+        jsonObject = json.dumps(js)  # JSOn 형태로 바꾸기
+        print(jsonObject)
+        r = requests.post(url="http://localhost:8080/sw/date", data=jsonObject,
+                          headers={'Content-Type': 'application/json'})
+        print(r.text)
+
         face_classifier = cv2.CascadeClassifier("Resources/haarcascade_frontalface_default.xml")
         recognizer = cv2.face.LBPHFaceRecognizer_create()
         recognizer.read(str(self.id) + "_" + self.var_attendance_course.get() + "_face-train.yml")
@@ -293,7 +301,7 @@ class Attendance:
                         string_date = now.strftime('%Y/%m/%d')
 
                         # 교수id, 강의명, 학생학번, 날짜, 시간 딕셔너리에 넣기
-                        js = {"Prof ID": str(self.id), "Course": self.var_attendance_course.get(),
+                        js = {"ProfID": str(self.id), "Course": self.var_attendance_course.get(),
                               "Student ID": labels[id], "Date":string_date, "Time":string_time}
                         jsonObject = json.dumps(js)  # JsOn 형태로 바꾸기
                         print(jsonObject)

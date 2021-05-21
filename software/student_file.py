@@ -352,12 +352,26 @@ class Student:
             search_by = "course"
         elif self.search_by.get() == "Student_id":
             search_by = "id"
-        js = {"profID":self.id, "search":search_by, "info":self.search_text.get()}
+        js = {"profID":str(self.id), "search":search_by, "info":self.search_text.get().upper()}
         jsonObject = json.dumps(js)
         print(jsonObject)
         r = requests.post(url="http://localhost:8080/sw/search-members", data=jsonObject, headers={'Content-Type': 'application/json'})
-        print(r.text)
-        # conn = mysql.connector.connect(host="localhost", username="root", password="123456", database="face_recognizer")
+
+        # list = r.json()
+        # print(list)
+        # print(type(list))
+        # print(len(list))
+
+        print(r.json())
+
+        # for i in r.json():
+        #     self.student_table.insert(i["memberNumber"], END, 0)
+        #     self.student_table.insert(i["memberName"], END, 1)
+        #     self.student_table.insert(i["courseName"], END, 2)
+
+
+
+
         # my_cursor = conn.cursor()
         # my_cursor.execute("SELECT * FROM STUDENT WHERE " + str(self.search_by.get()) + " = '" + str(self.search_text.get()) + "'")
         # data = my_cursor.fetchall()
