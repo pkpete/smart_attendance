@@ -6,12 +6,14 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
+
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class AddAttendDateDto {
-    private String attendDate;
+    private LocalDate attendDate;
 
     public AttendDate toEntity(){
         return AttendDate.builder()

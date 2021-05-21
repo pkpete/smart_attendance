@@ -20,6 +20,6 @@ public class AttendDateController {
         List<AttendDate> attendDates = attendDateRepository.findAttendDatesByCourse_Id(courseId);
         model.addAttribute("attendDates", attendDates);
         model.addAttribute("courseId", courseId);
-        return "date";
+        return "date_selection";
     }
 }
