@@ -9,7 +9,6 @@ import time
 import os
 import numpy as np
 import cv2
-import mysql.connector
 import json
 import requests
 import csv
@@ -337,19 +336,20 @@ class Attendance:
         cv2.destroyAllWindows()
 
     def fetch_data(self):
-        conn = mysql.connector.connect(
-            host="localhost", username="root", password="123456", database="face_recognizer")
-        my_cursor = conn.cursor()
-        # WHERE COURSE = '" + self.var_attendance_course.get() +"'")
-        my_cursor.execute("SELECT * FROM ATTENDANCE")
-        data = my_cursor.fetchall()
-
-        if len(data) != 0:
-            self.attendance_table.delete(*self.attendance_table.get_children())
-            for i in data:
-                self.attendance_table.insert("", END, values=i)
-            conn.commit()
-        conn.close()
+        pass
+        # conn = mysql.connector.connect(
+        #     host="localhost", username="root", password="123456", database="face_recognizer")
+        # my_cursor = conn.cursor()
+        # # WHERE COURSE = '" + self.var_attendance_course.get() +"'")
+        # my_cursor.execute("SELECT * FROM ATTENDANCE")
+        # data = my_cursor.fetchall()
+        #
+        # if len(data) != 0:
+        #     self.attendance_table.delete(*self.attendance_table.get_children())
+        #     for i in data:
+        #         self.attendance_table.insert("", END, values=i)
+        #     conn.commit()
+        # conn.close()
 
         # Search Data
 

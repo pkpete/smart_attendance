@@ -5,7 +5,6 @@ from PIL import Image, ImageTk
 from time import strftime
 from datetime import datetime
 import cv2
-import mysql.connector
 
 
 class Developer:
