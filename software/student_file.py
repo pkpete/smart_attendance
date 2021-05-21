@@ -5,7 +5,6 @@ from PIL import Image, ImageTk
 from time import strftime
 from datetime import datetime
 import cv2
-import mysql.connector
 import os
 import json
 import requests
@@ -196,7 +195,7 @@ class Student:
         scroll_x = ttk.Scrollbar(table_frame, orient=HORIZONTAL)
         scroll_y = ttk.Scrollbar(table_frame, orient=VERTICAL)
 
-        self.student_table = ttk.Treeview(table_frame, column=("ID", "Name", "Course", "Major"), xscrollcommand=scroll_x.set, yscrollcommand=scroll_y.set)
+        self.student_table = ttk.Treeview(table_frame, column=("ID", "Name", "Course"), xscrollcommand=scroll_x.set, yscrollcommand=scroll_y.set)
 
         scroll_x.pack(side=BOTTOM, fill=X)
         scroll_y.pack(side=RIGHT, fill=Y)
@@ -206,13 +205,11 @@ class Student:
         self.student_table.heading("Course", text="Course")
         self.student_table.heading("ID", text="ID")
         self.student_table.heading("Name", text="Name")
-        self.student_table.heading("Major", text="Major")
         self.student_table["show"] = "headings"
 
         self.student_table.column("Course", width=100)
         self.student_table.column("ID", width=100)
         self.student_table.column("Name", width=100)
-        self.student_table.column("Major", width=100)
 
         self.student_table.pack(fill=BOTH, expand=1)
         self.student_table.bind("<ButtonRelease>", self.get_data)
@@ -279,7 +276,7 @@ class Student:
         self.var_id.set(data[0])
         self.var_name.set(data[1])
         self.var_course.set(data[2])
-        self.var_dep.set(data[3])
+        #self.var_dep.set(data[3])
 
 
     # Update Data -> 오류 날 수도 있음
@@ -364,23 +361,9 @@ class Student:
 
         print(r.json())
 
-        # for i in r.json():
-        #     self.student_table.insert(i["memberNumber"], END, 0)
-        #     self.student_table.insert(i["memberName"], END, 1)
-        #     self.student_table.insert(i["courseName"], END, 2)
+        for i in r.json():
+            self.student_table.insert("", "end", text = "", values=(i["memberNumber"], i["memberName"], i["courseName"]))
 
-
-
-
-        # my_cursor = conn.cursor()
-        # my_cursor.execute("SELECT * FROM STUDENT WHERE " + str(self.search_by.get()) + " = '" + str(self.search_text.get()) + "'")
-        # data = my_cursor.fetchall()
-        # if len(data) != 0:
-        #     self.student_table.delete(*self.student_table.get_children())
-        #     for i in data:
-        #         self.student_table.insert("", END, values=i)
-        #     conn.commit()
-        # conn.close()
 
 
 if __name__ == "__main__":
