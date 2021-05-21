@@ -186,8 +186,8 @@ class Student:
         search_btn = Button(Search_frame, text="Search", font=("times new roman", 12, "bold"), width=13, command=self.search_data)
         search_btn.grid(row=0, column=3, padx=4)
 
-        show_all_btn = Button(Search_frame, text="Show All", font=("times new roman", 12, "bold"), width=13, command=self.fetch_data)
-        show_all_btn.grid(row=0, column=4, padx=4)
+        # show_all_btn = Button(Search_frame, text="Show All", font=("times new roman", 12, "bold"), width=13, command=self.fetch_data)
+        # show_all_btn.grid(row=0, column=4, padx=4)
 
         # table frame
         table_frame = Frame(Right_frame, bd=2, relief=RIDGE)
@@ -270,6 +270,7 @@ class Student:
         # conn.close()
 
     # Get Data
+    # 오른쪽 테이블에서 해당 열을 클릭시 왼쪽 테이블에 정보 입력시키기
     def get_data(self, event=""):
         cursor_focus = self.student_table.focus()
         content = self.student_table.item(cursor_focus)
@@ -277,13 +278,9 @@ class Student:
 
         self.var_id.set(data[0])
         self.var_name.set(data[1])
-        self.var_kor_name.set(data[2])
+        self.var_course.set(data[2])
         self.var_dep.set(data[3])
-        self.var_course.set(data[4])
-        self.var_year.set(data[5])
-        self.var_semester.set(data[6])
-        self.var_phone.set(data[7])
-        self.var_photo_addr.set(data[8])
+
 
     # Update Data -> 오류 날 수도 있음
     def update_data(self):
@@ -297,16 +294,13 @@ class Student:
     def reset_data(self):
         self.var_id.set("")
         self.var_name.set("")
-        self.var_kor_name.set("")
         self.var_dep.set("Select Major")
         self.var_course.set("Select Course")
-        self.var_year.set("Select Year")
-        self.var_semester.set("Select Semester")
-        self.var_phone.set("")
         self.var_photo_addr.set("")
 
 
-    #========== Take photo samples ===========
+    # ========== Take photo samples ===========
+    # 해당 사용자의 얼굴 사진 100장 저장하기
     def take_photo(self):
         if self.var_dep.get() == "Select Department" or self.var_name.get() == "" or self.var_id.get() == "":
             messagebox.showerror("Error", "All Fields are required", parent=self.root)
@@ -350,9 +344,10 @@ class Student:
             messagebox.showinfo("Result", f"{self.var_name.get()} face data added")
 
     # Search Data
+    # 오른쪽 테이블에서 해당 학생의 정보 확인하기
     def search_data(self):
         print(self.search_by.get(), self.search_text.get())
-        search_by =""
+        search_by = ""
         if self.search_by.get() == "Course":
             search_by = "course"
         elif self.search_by.get() == "Student_id":

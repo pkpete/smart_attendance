@@ -10,6 +10,8 @@ import os
 import numpy as np
 import cv2
 import mysql.connector
+import json
+import requests
 import csv
 
 
@@ -89,19 +91,19 @@ class Attendance:
         attendance_frame.place(x=20, y=500, width=500, height=200)
 
         # Attendance Start
-        course_label = Label(attendance_frame, text="Attendance Start", font=(
+        course_label = Label(attendance_frame, text="Course", font=(
             "times new roman", 12, "bold"))
-        course_label.grid(row=0, column=0)
+        course_label.place(x=30, y=70)
 
         select_course_combo = ttk.Combobox(attendance_frame, font=("times new roman", 12, "bold"), state="readonly",
                                            textvariable=self.var_attendance_course)
         select_course_combo["values"] = ("AI", "SWE", "SP")
         select_course_combo.set("Select Course")
-        select_course_combo.grid(row=0, column=1)
+        select_course_combo.place(x=100, y =70)
 
         start_btn = Button(attendance_frame, text="Start Attendance", font=(
             "times new roman", 12, "bold"), width=15, command=self.face_recognition)
-        start_btn.grid(row=0, column=2)
+        start_btn.place(x=330, y=65)
 
         # Right Frame
         Right_frame = LabelFrame(bd=2, relief=RIDGE, text="Attendance Chart", font=(
@@ -283,10 +285,33 @@ class Attendance:
                     cv2.rectangle(img, (x-20, y-20+h), (x+20+w, y+20+h+50), (0, 255, 0), cv2.FILLED)
                     cv2.putText(img, f"{labels[id]}", (x, y + h + 30), cv2.FONT_HERSHEY_COMPLEX, 0.8, (255, 255, 255), 1)
                     # 민수한테 출석한 학번 전달
+                    # 교수id, 강의명, 학생학번, 날짜, 시간
                     if labels[id] not in attendance_list:
-                        attendance_list.append(labels[id])
-                        print(labels[id])
-                        print(len(attendance_list))
+                        # 날짜 시간
+                        now = datetime.now()
+                        string_time = now.strftime('%H:%M:%S')
+                        string_date = now.strftime('%Y/%m/%d')
+
+                        # 교수id, 강의명, 학생학번, 날짜, 시간 딕셔너리에 넣기
+                        js = {"Prof ID": str(self.id), "Course": self.var_attendance_course.get(),
+                              "Student ID": labels[id], "Date":string_date, "Time":string_time}
+                        jsonObject = json.dumps(js)  # JsOn 형태로 바꾸기
+                        print(jsonObject)
+                        #r = requests.post(url="http://localhost:8080/python/login", data=jsonObject,
+                        #                  headers={'Content-Type': 'application/json'})
+                        #print(r.text)
+
+                        a = "True"
+
+                        # True이면 attendance_list에 넣기 / False이면 attendance_list에 저장하지 말기
+                        if a == "True":
+                            # 해당 학생 레이블 가져오기
+                            attendance_list.append(labels[id])
+                            print(labels[id])
+                            print(len(attendance_list))
+
+                            # messagebox.showinfo("Attendance", labels[id] + " 출석 처리 완료")
+
 
                     #print(id)
 
