@@ -80,7 +80,7 @@ ul a:hover {
     margin-right: 38px;
 }
 
-/*members*/
+/* 출결현황 */
 
 .container {
     display: flex;
@@ -88,9 +88,18 @@ ul a:hover {
     align-items: center;
 }
 
+h3 {
+    display: inline-block;
+    font: 300 1.45em 'Noto Sans KR', sans-serif;
+    margin: 50px 0 0 105px;
+    border-bottom: 1.2px solid black;
+    padding: 5px 8px;
+}
+
 table {
     border-collapse: collapse;
     margin-top: 50px;
+    margin-bottom: 50px;
     text-align: center;
     width: 72%;
 }
@@ -101,6 +110,46 @@ table th {
     font: 300 1.15em 'Noto Sans KR', sans-serif;
 }
 
+select {
+    height: 30px;
+    width: 65px;
+    font: 200 0.85em 'Noto Sans KR', sans-serif;
+}
+
+#status {
+    display: block;
+}
+
+#statusList {
+    display: none;
+}
 tbody {
     font: 540 1.25em 'Noto Sans KR', sans-serif;
+}
+
+/* 수정버튼 */
+
+.btn {
+    position: absolute;
+    bottom: 5%;
+    left: 45.24%;
+    width: 120px;
+    height: 50px;
+    border: 2px solid rgb(160, 159, 159);
+    border-radius: 30px;
+    background-color: #23d83b;
+    color: white;
+    font: 570 21px 'Roboto', sans-serif;
+    letter-spacing: 0.9px;
+    cursor: pointer;
+}
+
+.btn:hover {
+    transform: scale(1.08);
+    transition: all 0.1s;
+    transition-timing-function: ease-in;
+}
+
+#done {
+    display: none;
 }

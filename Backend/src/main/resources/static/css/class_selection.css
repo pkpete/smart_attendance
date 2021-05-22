@@ -88,29 +88,24 @@ transition-timing-function: ease-out; */
     align-items: center;
 }
 
-.container h3 {
+.container h3 /*  수업목록 글씨*/ {
     font: 550 2.25em 'Noto Sans KR', sans-serif;
     letter-spacing: 3px;
     border-bottom: 2px solid rgb(155, 155, 155);
 }
 
-.classContainer {
-    display: flex;
-    flex-direction: row;
-    align-content: space-between;
-    padding: 0;
-    flex-wrap: wrap;
-}
-
 .classList {
     width: 60%;
-    height: 650px;
+    height: 680px;
     overflow: scroll;
     background-color: rgb(180, 221, 250);
     font: 550 1.95em 'Noto Sans KR', sans-serif;
 }
 
-.classContainer ul {
+.classContainer {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    justify-items: center;
     padding: 0;
 }
 
@@ -118,19 +113,19 @@ transition-timing-function: ease-out; */
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-top: 80px;
-    margin-right: 110px;
-    box-sizing: border-box;
+    cursor: pointer;
+    margin: 30px;
     width: 210px;
     height: 210px;
     background-color: #0e78e2;
-    box-shadow: 0 0 3px #eee;
+    box-shadow: 3px 4px 0px 0px #1564ad;
     border-radius: 10%;
     color: white;
 }
 
 .classContainer a {
     text-decoration: none !important;
+    cursor: pointer;
     color: white;
 }
 
@@ -141,14 +136,6 @@ transition-timing-function: ease-out; */
 .classContainer li:hover {
     transition: 0.3s;
     transform: scale(1.15);
-}
-
-.classContainer li:nth-child(3n + 1) {
-    margin-left: 5%;
-}
-
-.classContainer li:nth-child(3n) {
-    margin-right: 5%;
 }
 
 /* 수업 삭제 버튼 */
@@ -163,6 +150,14 @@ transition-timing-function: ease-out; */
 }
 
 /* 추가 버튼  */
+.btnContainer {
+    display: block;
+    position: fixed;
+    left: 50%;
+    bottom: 7%;
+    transform: translateX(-50%);
+}
+
 .btns {
     display: flex;
     flex-direction: row;
@@ -174,7 +169,7 @@ transition-timing-function: ease-out; */
     display: block;
     width: 120px;
     height: 50px;
-    margin-right: 50px;
+    margin-right: 30px;
     border: 2px solid rgb(160, 159, 159);
     border-radius: 30px;
     background-color: #23d83b;
@@ -223,63 +218,65 @@ transition-timing-function: ease-out; */
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 280px;
-    height: 200px;
+    width: 350px;
+    height: 250px;
     border-radius: 7px;
     position: absolute;
     box-sizing: border-box;
     top: 50%;
     left: 50%;
     margin: -125px 0 0 -175px;
+    padding: 0;
     background: #fff;
     z-index: 5;
 }
 
-#modalInsert form {
-    display: flex;
-    flex-direction: row;
-}
-
-label {
-    margin: 0;
-    padding: 0;
+.modalWrap input {
+    width: 80px;
+    height: 25px;
+    margin-bottom: 15px;
 }
 
 #bg_black {
     display: none;
-    position: fixed;
+    position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    overflow: auto;
     background-color: rgb(0, 0, 0, 0.55);
     z-index: 2;
 }
 
 #modalClose {
-    position: absolute;
-    bottom: 10%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    position: relative;
+    bottom: -20px;
+    left: 20px;
 }
 
-.modalWrap > a {
+#modalClose a,
+input {
+    font: 550 1em 'Noto Sans KR', sans-serif;
+    letter-spacing: 2px;
     text-decoration: none;
     color: black;
     border: 1.5px solid black;
     padding: 5px 15px;
-    font: 600 1em 'Noto Sans KR', sans-serif;
     border-radius: 7px;
     box-shadow: 1px 1.5px 2px grey;
-    letter-spacing: 2px;
+    margin-right: 40px;
 }
 
 #classInsert {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
 }
 
 #insert {
-    margin-left: 8px;
+    margin-left: 5px;
     font-size: 15px;
 }
 
@@ -287,25 +284,6 @@ label {
     display: none;
     flex-direction: column;
     justify-content: space-between;
-    padding: 45px 0%;
+    padding: 70px 0;
     font: 550 1.3em 'Noto Sans KR', sans-serif;
-}
-
-#confirmSend {
-    display: flex;
-    flex-direction: row;
-}
-
-.confirmBtns {
-    color: black;
-    border: 1.5px solid black;
-    padding: 5px 15px;
-    font: 585 0.8em 'Noto Sans KR', sans-serif;
-    border-radius: 7px;
-    box-shadow: 1px 1.5px 2px grey;
-    letter-spacing: 2px;
-}
-
-#confirm {
-    margin-right: 25px;
 }

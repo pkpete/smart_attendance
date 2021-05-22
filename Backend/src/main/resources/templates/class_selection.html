@@ -31,8 +31,8 @@
 
   <div class="container">
       <h3>수업 목록</h3>
+
       <div class="classList">
-      
         <ul class="classContainer" >
           <li th:each="course : ${courses}">
               <a href="#" th:href="@{/user/course/{id}/dates (id=${course.id})}" class="class" th:text="${course.getCourseName()}"></a>
@@ -40,15 +40,21 @@
           </li>
         </ul>
         
-  <div class="btns">
-    <input type="button" class="btn" id="add" onclick="createClass()" value="추가">
-    <input type="button" class="btn" id="change" onclick="change()" value="삭제">
-    <input type="button" class="btn" id="done" onclick= "changeDone()" value="완료">
-    </div>
+  <div class="btnContainer">
+
+      <div class="btns">
+        <input type="button" class="btn" id="add" onclick="createClass()" value="추가">
+        <input type="button" class="btn" id="change" onclick="change()" value="삭제">
+        <input type="button" class="btn" id="done" onclick= "changeDone()" value="완료">
+        </div>
+
   </div>
 </div>
-    
-      <div class= "modalWrap" id="modalInsert">
+</div>
+
+      <!-- 추가 버튼을 눌렀을 경우 모달창 -->
+      <!-- ----------전 버전------------- -->
+      <!-- <div class= "modalWrap" id="modalInsert">
         <a href="#" id="modalClose" onclick="offclick()">닫기</a>
         <div id="classInsert">
           <form method="post" th:action="@{/user/courses}" th:object="${addCourseDto}">
@@ -58,9 +64,30 @@
             <input type="submit" value="입력" id="insert">
           </form>
         </div>
+      </div> -->
+      <div class= "modalWrap" id="modalInsert">
+        <div id="classInsert">
+            <div>
+              <label for="className">수업명 : </label>
+            <input name="className" placeholder="수업명을 입력해주세요." style="width: 150px; margin-left:15px;"  required>
+          </div>
+            <div>
+            <label for="startTime">시작시간 : </label>
+            <input type="time" id="appt" name="startTime" required >
+          </div>
+          <div>
+            <label for="endTime">종료시간 : </label>
+            <input type="time" id="appt" name="endTime" required >
+          </div>
       </div>
+      <div id="modalClose"> 
+      <a href="#" onclick="offclick()">입력</a>
+      <a href="#" onclick="offclick()">닫기</a>
+      </div>
+    </div>
 
-      <div class= "modalWrap" id="modalConfirm" >
+    <!-- --------- 전 버전 ------------- -->
+      <!-- <div class= "modalWrap" id="modalConfirm" >
         <div>삭제하시겠습니까 ?</div>
         <div id="confirmSend">
         <form action="#"  method="get" th:action="@{/user/course/{cId}/delete/reset(cId=${courseId})}">
@@ -69,10 +96,19 @@
         <form action="#" method="get" th:action="@{/user/courses}">
             <input type="submit" class="confirmBtns" value="취소" id="cancel" onclick="offclick()">
         </form>
-
       </div>
-      </div>
+      </div> -->
     
+      <div class= "modalWrap" id="modalConfirm">
+        <div style="font-size: 1.1em;">삭제하시겠습니까 ?</div>
+        <form action="#" >
+          <div id="modalClose">
+        <a href="#" onclick="confirmed()">확인</a>
+        <a href="#" onclick="offclick()">취소</a>
+      </div>
+        </form>
+      </div>
+      
       <div id="bg_black"></div>
       
       <script>

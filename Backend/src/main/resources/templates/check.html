@@ -31,6 +31,8 @@
   </nav>
 </header>
 
+
+<h3>출석한 학생들</h3>
   <div class="container">
     <table class="members">
       <tr id="th">
@@ -45,12 +47,46 @@
           <td th:text="${check.member.name}"></td>
           <td th:text="${check.member.age}"></td>
           <td id="status" th:text="${check.attendCheck}"></td>
+          <td id="statusList">
+            <select >
+              <option value="">출석</option>
+              <option value="">지각</option>
+              <option value="">결석</option>
+            </select>
+          </td>
         </tr>
       </tbody>
     </table>
 </div>
 
-
+<h3>결석한 학생들</h3>
+  <div class="container">
+    <table class="members">
+      <tr id="th">
+        <th>번호</th>
+        <th>이름</th>
+        <th>나이</th>
+        <th>출결 현황</th>
+      </tr>
+      <tbody>
+        <tr th:each="check : ${attendChecks}">
+          <td th:text="${check.member.number}"></td>
+          <td th:text="${check.member.name}"></td>
+          <td th:text="${check.member.age}"></td>
+          <td id="status" th:text="${check.attendCheck}"></td>
+          <td id="statusList">
+            <select >
+              <option value="">출석</option>
+              <option value="">지각</option>
+              <option value="">결석</option>
+            </select>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+</div>
+<input type="button" class="btn" id="change" onclick="changeStatus();" value="수정">
+<input type="button" class="btn" id="done" onclick="changeDone();" value="완료">
 <script>
   const table = document.querySelector('.members');
   table.addEventListener('DomSubtreeModified',check());
@@ -74,6 +110,38 @@ tr.style.backgroundColor='#b8e994';
     }
   }
 }
+
+function changeStatus() {
+  var status = document.querySelectorAll('#status');
+  var statusList = document.querySelectorAll('#statusList');
+  var changeBtn = document.querySelector('#change')
+  var doneBtn = document.querySelector('#done')
+  changeBtn.style.display='none';
+  doneBtn.style.display='block';
+  
+  for(i=0;i<status.length;i++)
+  {
+  status[i].style.display='none';
+  statusList[i].style.display='block';
+  }
+  }
+  
+  function changeDone() {
+    var status = document.querySelectorAll('#status');
+    var statusList = document.querySelectorAll('#statusList');
+    var changeBtn = document.querySelector('#change')
+    var doneBtn = document.querySelector('#done')
+    changeBtn.style.display='block';
+    doneBtn.style.display='none';
+    
+    for(i=0;i<status.length;i++)
+    {
+    status[i].style.display='block';
+    statusList[i].style.display='none';
+    }
+}
+
+
 </script>
 </body>
 </html>
