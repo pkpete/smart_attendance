@@ -117,7 +117,7 @@ public class MemberController {
         Account account = accountService.CurrentAccount();
         Course course = courseService.findCourse(courseId);
         addMemberDto.setCourse(course);
-        memberValidator.validate(addMemberDto, bindingResult);
+        memberValidator.updateValidate(addMemberDto, bindingResult, memberId);
         if (bindingResult.hasErrors()){
             model.addAttribute("addMemberDto", new AddMemberDto());
             model.addAttribute("courseId", courseId);

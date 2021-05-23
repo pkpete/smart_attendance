@@ -56,7 +56,6 @@ public class MemberService {
     @Transactional
     public Long updateMember(AddMemberDto addMemberDto, Course course, Long memberId){
         Member member = Member.createMember(addMemberDto, course);
-        member.setId(memberId);
         memberRepository.deleteById(memberId);
         memberRepository.save(member);
         return member.getId();

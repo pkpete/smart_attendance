@@ -44,7 +44,7 @@
       
       
       <tr th:each="member : ${members}">
-        <td th:text="${member.number}"></td>
+        <td th:name="number" th:text="${member.number}"></td>
         <td th:text="${member.name}"></td>
         <td th:text="${member.age}"></td>
         <td th:with="mId=${member.id}">

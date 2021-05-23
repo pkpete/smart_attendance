@@ -28,4 +28,14 @@ public class MemberValidator implements Validator {
         }
     }
 
+    public void updateValidate(Object obj, Errors errors, Long memberId) {
+        AddMemberDto addMemberDto = (AddMemberDto) obj;
+        if(memberRepository.findById(memberId).get().getNumber().equals(addMemberDto.getNumber())){
+            return;
+        }
+        if(memberRepository.findByNumberAndCourse(addMemberDto.getNumber(), addMemberDto.toEntity().getCourse()) != null){
+            errors.rejectValue("number", "key");
+        }
+    }
+
 }
