@@ -46,16 +46,20 @@ public class MemberController {
     public String addMemberForm(@PathVariable("cId") Long courseId, Model model){
         model.addAttribute("addMemberDto", new AddMemberDto());
         model.addAttribute("courseId", courseId);
+        model.addAttribute("result", null);
         return "popup";
     }
 
     @PostMapping("/user/course/{cId}/members/add")
-    public String addMember(@PathVariable("cId") Long courseId, @RequestParam("memberPic") MultipartFile file, @Valid AddMemberDto addMemberDto, BindingResult bindingResult){
+    public String addMember(@PathVariable("cId") Long courseId, @RequestParam("memberPic") MultipartFile file, @Valid AddMemberDto addMemberDto, BindingResult bindingResult, Model model){
         Account account = accountService.CurrentAccount();
         Course course = courseService.findCourse(courseId);
         addMemberDto.setCourse(course);
         memberValidator.validate(addMemberDto, bindingResult);
         if (bindingResult.hasErrors()){
+            model.addAttribute("addMemberDto", new AddMemberDto());
+            model.addAttribute("courseId", courseId);
+            model.addAttribute("result", bindingResult);
             return "popup";
         }
 
@@ -104,16 +108,21 @@ public class MemberController {
         model.addAttribute("addMemberDto", new AddMemberDto());
         model.addAttribute("courseId", courseId);
         model.addAttribute("memberId", memberId);
+        model.addAttribute("result", null);
         return "updatePopup";
     }
 
     @PostMapping("/user/course/{cId}/member/{mId}/update")
-    public String editMember(@PathVariable("cId") Long courseId, @PathVariable("mId") Long memberId, @Valid AddMemberDto addMemberDto, @RequestParam("memberPic") MultipartFile file, BindingResult bindingResult){
+    public String editMember(@PathVariable("cId") Long courseId, @PathVariable("mId") Long memberId, @Valid AddMemberDto addMemberDto, @RequestParam("memberPic") MultipartFile file, BindingResult bindingResult, Model model){
         Account account = accountService.CurrentAccount();
         Course course = courseService.findCourse(courseId);
         addMemberDto.setCourse(course);
         memberValidator.validate(addMemberDto, bindingResult);
         if (bindingResult.hasErrors()){
+            model.addAttribute("addMemberDto", new AddMemberDto());
+            model.addAttribute("courseId", courseId);
+            model.addAttribute("memberId", memberId);
+            model.addAttribute("result", bindingResult);
             return "popup";
         }
 
@@ -135,10 +144,10 @@ public class MemberController {
 //            addMemberDto.setFilename(addMemberDto.getName());
 //            addMemberDto.setFilepath(filePath);
 //
-//            memberService.updateMember(addMemberDto, course, memberId);
 //        }catch (Exception e){
 //            e.printStackTrace();
 //        }
+        memberService.updateMember(addMemberDto, course, memberId);
         return "redirect:/user/members/close";
     }
 }

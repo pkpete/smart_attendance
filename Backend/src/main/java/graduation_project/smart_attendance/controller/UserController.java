@@ -28,7 +28,7 @@ public class UserController {
     }
 
     @PostMapping("/signup")
-    public String createUser(@Valid AccountDto form, BindingResult result){
+    public String createUser(@Valid AccountDto form, BindingResult result, Model model){
         accountValidator.validate(form, result);
         if(result.hasErrors()){
             return "signup";

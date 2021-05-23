@@ -53,7 +53,7 @@
     <input type="submit" value="수정" style="position: fixed; top:150px;" id="insert">
 
     <!-- 동일한 번호가 존재할 때 에러 -->
-    <div id="modalWrap" th:if="${#fields.hasErrors('number')}" style="display: flex;">
+    <div id="modalWrap" th:if="${result}" style="display: flex;">
         <a href="#" th:href="@{/user/course/{cId}/member/{mId}/update (cId=${courseId}, mId=${memberId})}" id="modalClose" onclick="offclick()">닫기</a>
 
         <div id="errorMes">

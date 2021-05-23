@@ -54,7 +54,7 @@
   </div>
 
   <div id="modalWrap" th:if="${#fields.hasErrors()}" style="display: flex;">
-    <a href="#" id="modalClose" onclick="offclick()">닫기</a>
+    <a href="#" th:href="@{/signup}" id="modalClose" onclick="offclick()">닫기</a>
 
 
     <div id="errorMes">

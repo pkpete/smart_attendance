@@ -55,7 +55,7 @@
     <input type="submit" value="입력" style="position: fixed; top:150px;" id="insert">
 
 <!-- 동일한 번호가 존재할 때 에러 -->
-    <div id="modalWrap" th:if="${#fields.hasErrors('number')}" style="display: flex;">
+    <div id="modalWrap" th:if="${result}" style="display: flex;">
       <a href="#" th:href="@{/user/course/{cid}/members/add (cid=${courseId})}" id="modalClose" onclick="offclick()">닫기</a>
       <div id="errorMes">
         해당 번호가 이미 존재합니다 ❗❗

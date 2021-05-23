@@ -27,10 +27,10 @@ public class Course {
     @JoinColumn(name = "account_id")
     private Account account;
 
-    @OneToMany(mappedBy = "course", cascade = CascadeType.MERGE)
+    @OneToMany(mappedBy = "course", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Member> members = new ArrayList<>();
 
-    @OneToMany(mappedBy = "course", cascade = CascadeType.MERGE)
+    @OneToMany(mappedBy = "course", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<AttendDate> attendDates = new ArrayList<>();
 
     public void setAccount(Account account){
