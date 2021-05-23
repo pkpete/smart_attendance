@@ -1,16 +1,14 @@
 package graduation_project.smart_attendance.domain;
 
 import graduation_project.smart_attendance.dto.AddAttendCheckDto;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 
 @Entity
 @Builder
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class AttendCheck {
@@ -31,11 +29,13 @@ public class AttendCheck {
 
     public void setMember(Member member) {
         this.member = member;
+        System.out.println("member.getAttendChecks() = " + member.getAttendChecks());
         member.getAttendChecks().add(this);
     }
 
     public void setAttendDate(AttendDate attendDate) {
         this.attendDate = attendDate;
+        System.out.println("attendDate.getAttendChecks() = " + attendDate.getAttendChecks());
         attendDate.getAttendChecks().add(this);
     }
 

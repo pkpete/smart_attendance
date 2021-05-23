@@ -23,7 +23,6 @@ public class Member {
     private String number;
     private String name;
     private Long age;
-    private String classname;
 //
 //    private String origFilename;
 //

@@ -48,6 +48,7 @@ public class MemberService {
     @Transactional
     public Long member(AddMemberDto addMemberDto, Course course){
         Member member = Member.createMember(addMemberDto, course);
+        System.out.println("member.getAttendChecks() = " + member.getAttendChecks());
         memberRepository.save(member);
         return member.getId();
     }

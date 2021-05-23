@@ -23,13 +23,11 @@ public class AttendDateService {
     private final AttendDateRepository attendDateRepository;
 
     @Transactional
-    public void saveDate(Long accountId, String courseName){
-        Account account = accountRepository.findById(accountId).get();
-        Course course = courseRepository.findByCourseNameAndAccount(courseName, account);
-        AddAttendDateDto addAttendDateDto = new AddAttendDateDto(LocalDate.now());
-        AttendDate attendDate = AttendDate.createAttendDate(addAttendDateDto, course);
+    public Long saveDate(Course course){
+        AttendDate attendDate = new AttendDate();
+        attendDate.setDate(LocalDate.now());
+        attendDate.setCourse(course);
         attendDateRepository.save(attendDate);
-
-
+        return attendDate.getId();
     }
 }

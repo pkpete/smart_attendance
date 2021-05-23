@@ -9,6 +9,6 @@ public class SwSaveCheckDto {
     private Long profID;
     private String course;
     private String studentID;
-    private LocalDate date;
+    private String date;
     private String time;
 }

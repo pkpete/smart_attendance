@@ -42,6 +42,7 @@ public class CourseController {
 
     @PostMapping("/user/courses")
     public String addCourse(@Valid AddCourseDto addCourseDto, BindingResult bindingResult){
+        System.out.println(addCourseDto.getStartTime());
         Account account = accountService.CurrentAccount();
         addCourseDto.setAccount(account);
         courseValidator.validate(addCourseDto, bindingResult);

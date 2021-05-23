@@ -7,6 +7,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalTime;
+
 @Data
 @Builder
 @NoArgsConstructor
@@ -14,11 +16,15 @@ import lombok.NoArgsConstructor;
 public class AddCourseDto {
 
     private String courseName;
+    private String startTime;
+    private String endTime;
     private Account account;
 
     public Course toEntity(){
         return Course.builder()
                 .courseName(courseName)
+                .startTime(startTime)
+                .endTime(endTime)
                 .account(account)
                 .build();
     }

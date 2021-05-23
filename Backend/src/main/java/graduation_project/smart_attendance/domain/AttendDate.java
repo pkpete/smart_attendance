@@ -1,10 +1,7 @@
 package graduation_project.smart_attendance.domain;
 
 import graduation_project.smart_attendance.dto.AddAttendDateDto;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -13,7 +10,8 @@ import java.util.List;
 
 @Entity
 @Builder
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class AttendDate {
@@ -21,7 +19,7 @@ public class AttendDate {
     @Column(name = "attend_date_id")
     private Long id;
 
-    private LocalDate attendDate;
+    private LocalDate date;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "course_id")

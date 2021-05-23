@@ -65,26 +65,28 @@
           </form>
         </div>
       </div> -->
+  <form id="frm" method="post" th:action="@{/user/courses}" th:object="${addCourseDto}">
       <div class= "modalWrap" id="modalInsert">
         <div id="classInsert">
             <div>
               <label for="className">수업명 : </label>
-            <input name="className" placeholder="수업명을 입력해주세요." style="width: 150px; margin-left:15px;"  required>
+            <input name="className" placeholder="수업명을 입력해주세요." style="width: 150px; margin-left:15px;" th:field="${addCourseDto.courseName}" required>
           </div>
             <div>
             <label for="startTime">시작시간 : </label>
-            <input type="time" id="appt" name="startTime" required >
+            <input type="time" id="appt" name="startTime" th:field="${addCourseDto.startTime}" required >
           </div>
           <div>
             <label for="endTime">종료시간 : </label>
-            <input type="time" id="appt" name="endTime" required >
+            <input type="time" id="appt" name="endTime" th:field="${addCourseDto.endTime}" required >
           </div>
       </div>
       <div id="modalClose"> 
-      <a href="#" onclick="offclick()">입력</a>
-      <a href="#" onclick="offclick()">닫기</a>
+          <a onclick="submitoff()">입력</a>
+          <a onclick="offclick()">닫기</a>
       </div>
     </div>
+  </form>
 
     <!-- --------- 전 버전 ------------- -->
       <!-- <div class= "modalWrap" id="modalConfirm" >
@@ -103,8 +105,8 @@
         <div style="font-size: 1.1em;">삭제하시겠습니까 ?</div>
         <form action="#" >
           <div id="modalClose">
-        <a href="#" onclick="confirmed()">확인</a>
-        <a href="#" onclick="offclick()">취소</a>
+        <a href="#" th:href="@{/user/course/{cId}/delete/reset(cId=${courseId})}" onclick="confirmed()">확인</a>
+        <a href="#" th:href="@{/user/courses}" onclick="offclick()">취소</a>
       </div>
         </form>
       </div>
@@ -171,6 +173,16 @@
           modalConfirm.style.display='none';
           bg.style.display='none';
           }
+
+        function submitoff() {
+            var modalInsert=document.querySelector('#modalInsert');
+            var modalConfirm=document.querySelector('#modalConfirm');
+            var bg=document.querySelector('#bg_black');
+            modalInsert.style.display='none';
+            modalConfirm.style.display='none';
+            bg.style.display='none';
+            document.getElementById('frm').submit();
+        }
     
           function confirmed() {
             var modalConfirm=document.querySelector('#modalConfirm');

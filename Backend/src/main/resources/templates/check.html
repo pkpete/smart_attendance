@@ -31,6 +31,7 @@
   </nav>
 </header>
 
+<form id="frm" method="post" th:object="${attendCheckDto}" th:action="@{/user/course/{cId}/date/{dId}/checks (cId=${courseId}, dId=${dateId})}">
 
 <h3>출석한 학생들</h3>
   <div class="container">
@@ -42,16 +43,16 @@
         <th>출결 현황</th>
       </tr>
       <tbody>
-        <tr th:each="check : ${attendChecks}">
+        <tr th:each="check, stat : *{attendChecks}" th:if="${check.attendCheck.toString()} != '결석'">
           <td th:text="${check.member.number}"></td>
           <td th:text="${check.member.name}"></td>
           <td th:text="${check.member.age}"></td>
           <td id="status" th:text="${check.attendCheck}"></td>
           <td id="statusList">
-            <select >
-              <option value="">출석</option>
-              <option value="">지각</option>
-              <option value="">결석</option>
+            <select th:field="*{attendChecks[__${stat.index}__].attendCheck}" th:value="${check.attendCheck}">
+              <option value="" th:value="${status[0]}">출석</option>
+              <option value="" th:value="${status[1]}">지각</option>
+              <option value="" th:value="${status[2]}">결석</option>
             </select>
           </td>
         </tr>
@@ -69,16 +70,16 @@
         <th>출결 현황</th>
       </tr>
       <tbody>
-        <tr th:each="check : ${attendChecks}">
-          <td th:text="${check.member.number}"></td>
-          <td th:text="${check.member.name}"></td>
-          <td th:text="${check.member.age}"></td>
-          <td id="status" th:text="${check.attendCheck}"></td>
+        <tr th:each="check2, stat : *{attendChecks}" th:if="${check2.attendCheck.toString()} == '결석'">
+          <td th:text="${check2.member.number}"></td>
+          <td th:text="${check2.member.name}"></td>
+          <td th:text="${check2.member.age}"></td>
+          <td id="status" th:text="${check2.attendCheck}"></td>
           <td id="statusList">
-            <select >
-              <option value="">출석</option>
-              <option value="">지각</option>
-              <option value="">결석</option>
+            <select th:field="*{attendChecks[__${stat.index}__].attendCheck}" th:value="${check2.attendCheck}">
+              <option value="" th:value="${status[0]}">출석</option>
+              <option value="" th:value="${status[1]}">지각</option>
+              <option value="" th:value="${status[2]}">결석</option>
             </select>
           </td>
         </tr>
@@ -87,6 +88,7 @@
 </div>
 <input type="button" class="btn" id="change" onclick="changeStatus();" value="수정">
 <input type="button" class="btn" id="done" onclick="changeDone();" value="완료">
+</form>
 <script>
   const table = document.querySelector('.members');
   table.addEventListener('DomSubtreeModified',check());
@@ -139,6 +141,7 @@ function changeStatus() {
     status[i].style.display='block';
     statusList[i].style.display='none';
     }
+    document.getElementById('frm').submit();
 }
 
 

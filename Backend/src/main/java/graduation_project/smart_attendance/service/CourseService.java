@@ -22,6 +22,10 @@ public class CourseService {
         return courseRepository.findById(courseId).get();
     }
 
+    public Course findCourseByName(Account account, String courseName){
+        return courseRepository.findByCourseNameAndAccount(courseName, account);
+    }
+
     public List<Course> findCourses(Account account){
         return courseRepository.findCourses(account.getUsername());
     }

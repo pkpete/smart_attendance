@@ -40,21 +40,10 @@
             <th>수업시간</th>
             <th>수업</th>
         </tr>
-        
-        <tr>
-            <a href="#">
-            <td>2021.05.31</td>
-            <td>09:00 ~ 12:00</td>
-            <td>자료구조</td>
-            </a>
-        </tr>
-        <tr onclick="location.href='#'">
-            <td>2021.05.31</td>
-            <td>09:00 ~ 12:00</td>
-            <td>자료구조</td>
-        </tr>
+
         <tr th:each="date : ${attendDates}" th:onclick="'location.href=\''+ @{/user/course/{cId}/date/{dId}/checks (cId=${courseId}, dId=${date.id})} + '\''">
-            <td th:text="${date.attendDate}"></td>
+            <td th:text="${date.date}"></td>
+            <td th:text="${date.getCourse().getStartTime()} + '-' + ${date.getCourse().getEndTime()}"></td>
             <td th:text="${date.getCourse().getCourseName()}"></td>
         </tr>
     </table>

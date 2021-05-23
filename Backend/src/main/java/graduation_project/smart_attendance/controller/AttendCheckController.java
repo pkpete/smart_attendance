@@ -2,6 +2,7 @@ package graduation_project.smart_attendance.controller;
 
 import graduation_project.smart_attendance.domain.AttendCheck;
 import graduation_project.smart_attendance.domain.AttendStatus;
+import graduation_project.smart_attendance.dto.AttendCheckDto;
 import graduation_project.smart_attendance.repository.AttendCheckRepository;
 import graduation_project.smart_attendance.service.AttendCheckService;
 import lombok.RequiredArgsConstructor;
@@ -24,7 +25,9 @@ public class AttendCheckController {
     @GetMapping("/user/course/{cId}/date/{dId}/checks")
     public String checks(@PathVariable("cId") Long courseId, @PathVariable("dId") Long dateId, Model model){
         List<AttendCheck> attendChecks = attendCheckRepository.findAttendChecksByAttendDate_Id(dateId);
-        model.addAttribute("attendChecks", attendChecks);
+        AttendCheckDto attendCheckDto = new AttendCheckDto();
+        attendCheckDto.setAttendChecks(attendChecks);
+        model.addAttribute("attendCheckDto", attendCheckDto);
         model.addAttribute("courseId", courseId);
         model.addAttribute("dateId", dateId);
         model.addAttribute("status", AttendStatus.values());
@@ -32,8 +35,13 @@ public class AttendCheckController {
     }
 
     @PostMapping("/user/course/{cId}/date/{dId}/checks")
-    public String updateCheck(@PathVariable("cId") Long courseId, @PathVariable("dId") Long dateId, @RequestParam("checkId") Long checkId , @RequestParam("status") AttendStatus attendStatus){
-        attendCheckService.updateCheck(checkId, attendStatus);
+    public String updateCheck(@PathVariable("cId") Long courseId, @PathVariable("dId") Long dateId, AttendCheckDto attendCheckDto){
+        System.out.println(attendCheckDto);
+        List<AttendCheck> attendChecks = attendCheckRepository.findAttendChecksByAttendDate_Id(dateId);
+        for(int i = 0; i < attendChecks.size(); i++){
+            attendChecks.get(i).setAttendCheck(attendCheckDto.getAttendChecks().get(i).getAttendCheck());
+        }
+        attendCheckService.updateChecks(attendChecks);
         return "redirect:/user/course/{cId}/date/{dId}/checks";
     }
 }

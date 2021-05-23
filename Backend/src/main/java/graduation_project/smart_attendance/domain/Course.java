@@ -4,6 +4,7 @@ import graduation_project.smart_attendance.dto.AddCourseDto;
 import lombok.*;
 
 import javax.persistence.*;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,6 +19,9 @@ public class Course {
     @Column(name = "course_id")
     private Long id;
     private String courseName;
+
+    private String startTime;
+    private String endTime;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "account_id")

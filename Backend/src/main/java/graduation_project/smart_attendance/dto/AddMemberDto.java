@@ -16,7 +16,6 @@ public class AddMemberDto {
     private String number;
     private String name;
     private Long age;
-    private String classname;
 
     private String origFilename;
 
@@ -31,7 +30,6 @@ public class AddMemberDto {
                 .number(number)
                 .name(name)
                 .age(age)
-                .classname(classname)
 //                .origFilename(origFilename)
 //                .filename(filename)
 //                .filepath(filepath)
