@@ -2,6 +2,7 @@ package graduation_project.smart_attendance.controller;
 
 import graduation_project.smart_attendance.domain.Account;
 import graduation_project.smart_attendance.domain.Course;
+import graduation_project.smart_attendance.domain.Member;
 import graduation_project.smart_attendance.dto.AddCourseDto;
 import graduation_project.smart_attendance.service.AccountService;
 import graduation_project.smart_attendance.service.CourseService;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import javax.validation.Valid;
+import java.util.Comparator;
 import java.util.List;
 
 @Controller
@@ -59,6 +61,16 @@ public class CourseController {
     public String deleteResponse(@PathVariable("cId") Long courseId, Model model){
         Account account = accountService.CurrentAccount();
         List<Course> courses = courseService.findCourses(account);
+        courses.sort(new Comparator<Course>() {
+            @Override
+            public int compare(Course o1, Course o2) {
+                Long num1 = Long.parseLong(o1.getCourseName());
+                Long num2 = Long.parseLong(o2.getCourseName());
+                if(num1 == num2) return 0;
+                else if(num1 > num2) return 1;
+                else return -1;
+            }
+        });
         model.addAttribute("courses", courses);
         model.addAttribute("addCourseDto", new AddCourseDto());
         model.addAttribute("courseId", courseId);

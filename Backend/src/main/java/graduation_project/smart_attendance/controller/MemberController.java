@@ -21,6 +21,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
 import java.io.File;
+import java.util.Comparator;
 import java.util.List;
 
 @Controller
@@ -36,6 +37,16 @@ public class MemberController {
     @GetMapping("/user/course/{cId}/members")
     public String memberList(@PathVariable("cId") Long courseId, Model model){
         List<Member> members = memberService.findMembers(courseId);
+        members.sort(new Comparator<Member>() {
+            @Override
+            public int compare(Member o1, Member o2) {
+                Long num1 = Long.parseLong(o1.getNumber());
+                Long num2 = Long.parseLong(o2.getNumber());
+                if(num1 == num2) return 0;
+                else if(num1 > num2) return 1;
+                else return -1;
+            }
+        });
         model.addAttribute("members", members);
         model.addAttribute("courseId", courseId);
 
@@ -123,7 +134,7 @@ public class MemberController {
             model.addAttribute("courseId", courseId);
             model.addAttribute("memberId", memberId);
             model.addAttribute("result", bindingResult);
-            return "popup";
+            return "updatepopup";
         }
 
 //        try {
