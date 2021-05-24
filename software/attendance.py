@@ -109,45 +109,16 @@ class Attendance:
             "times new roman", 12, "bold"))
         Right_frame.place(x=600, y=250, width=850, height=580)
 
-        # Search System
-        self.search_by = StringVar()
-        self.search_text = StringVar()
-
-        Search_frame = LabelFrame(Right_frame, bd=2, relief=RIDGE, text="Search System",
-                                  font=("times new roman", 12, "bold"))
-        Search_frame.place(x=0, y=0, width=830, height=70)
-
-        search_label = Label(Search_frame, text="Search By : ",
-                             font=("times new roman", 12, "bold"))
-        search_label.grid(row=0, column=0, padx=10, pady=10, sticky=W)
-
-        search_combo = ttk.Combobox(Search_frame, textvariable=self.search_by, font=("times new roman", 12, "bold"),
-                                    state="readonly", width=10)
-        search_combo["values"] = ("Student_id", "Date")
-        search_combo.set("Select")
-        search_combo.grid(row=0, column=1, padx=2, pady=10, sticky=W)
-
-        search_entry = ttk.Entry(Search_frame, textvariable=self.search_text, width=15,
-                                 font=("times new roman", 13, "bold"))
-        search_entry.grid(row=0, column=2, padx=10, pady=5, sticky=W)
-
-        search_btn = Button(Search_frame, text="Search", font=("times new roman", 12, "bold"), width=13,
-                            command=self.search_data)
-        search_btn.grid(row=0, column=3, padx=4)
-
-        show_all_btn = Button(Search_frame, text="Show All", font=("times new roman", 12, "bold"), width=13,
-                              command=self.fetch_data)
-        show_all_btn.grid(row=0, column=4, padx=4)
 
         # Attendance Frame
         table_frame = Frame(Right_frame, bd=2, relief=RIDGE)
-        table_frame.place(x=0, y=80, width=830, height=470)
+        table_frame.place(x=0, y=0, width=830, height=550)
 
         scroll_x = ttk.Scrollbar(table_frame, orient=HORIZONTAL)
         scroll_y = ttk.Scrollbar(table_frame, orient=VERTICAL)
 
         self.attendance_table = ttk.Treeview(table_frame, column=(
-            "ID", "Name", "Course", "Date", "Time"), xscrollcommand=scroll_x.set,
+            "ID", "Course", "Date", "Time"), xscrollcommand=scroll_x.set,
             yscrollcommand=scroll_y.set)
 
         scroll_x.pack(side=BOTTOM, fill=X)
@@ -156,20 +127,17 @@ class Attendance:
         scroll_y.config(command=self.attendance_table.yview)
 
         self.attendance_table.heading("ID", text="ID")
-        self.attendance_table.heading("Name", text="Name")
         self.attendance_table.heading("Course", text="Course")
         self.attendance_table.heading("Date", text="Date")
         self.attendance_table.heading("Time", text="Time")
         self.attendance_table["show"] = "headings"
 
         self.attendance_table.column("ID", width=100)
-        self.attendance_table.column("Name", width=100)
         self.attendance_table.column("Course", width=100)
         self.attendance_table.column("Date", width=100)
         self.attendance_table.column("Date", width=100)
 
         self.attendance_table.pack(fill=BOTH, expand=1)
-        self.fetch_data()
 
     def train_classifier(self):
         if self.var_course.get() == "Select Course":
@@ -222,46 +190,17 @@ class Attendance:
             cv2.destroyAllWindows()
             messagebox.showinfo("Result", "Training datasets completed!!")
 
-    # def mark_attendance(self, name, kor_name, id, course):
-    #     with open("attendance.csv", "r+", newline="\n") as f:
-    #         myDataList = f.readlines()
-    #         name_list = []
-    #         for line in myDataList:
-    #             entry = line.split(",")
-    #             name_list.append(entry[0])
-    #         if (name not in name_list) and (kor_name not in name_list) and (id not in name_list) and (course not in name_list):
-    #             now = datetime.now()
-    #             string_time = now.strftime('%H:%M:%S')
-    #             string_date = now.strftime('%Y/%m/%d')
-    #             f.writelines(
-    #                 f"\n{id}, {kor_name}, {name}, {course}, {string_date}, {string_time}")
-    #             try:
-    #                 conn = mysql.connector.connect(host="localhost", username="root", password="123456",
-    #                                                database="face_recognizer")
-    #                 my_cursor = conn.cursor()
-    #                 my_cursor.execute("insert into attendance values(%s,%s,%s,%s,%s,%s)", (
-    #                     id,
-    #                     kor_name,
-    #                     name,
-    #                     course,
-    #                     string_date,
-    #                     string_time
-    #                 ))
-    #                 conn.commit()
-    #                 self.fetch_data()
-    #                 conn.close()
-    #             except Exception as es:
-    #                 messagebox.showerror(
-    #                     "Error", f"Due To: {str(es)}", parent=self.root)
-
     def face_recognition(self):
+
+        for item in self.attendance_table.get_children():
+            self.attendance_table.delete(item)
 
         js = {"profID": str(self.id), "course": self.var_attendance_course.get()}
         jsonObject = json.dumps(js)  # JSOn 형태로 바꾸기
         print(jsonObject)
         r = requests.post(url="http://localhost:8080/sw/date", data=jsonObject,
                           headers={'Content-Type': 'application/json'})
-        print(r.text)
+
 
         face_classifier = cv2.CascadeClassifier("Resources/haarcascade_frontalface_default.xml")
         recognizer = cv2.face.LBPHFaceRecognizer_create()
@@ -309,7 +248,8 @@ class Attendance:
                         print(jsonObject)
                         r = requests.post(url="http://localhost:8080/sw/check", data=jsonObject,
                                           headers={'Content-Type': 'application/json'})
-                        print(r.text)
+
+
 
 
                         # True이면 attendance_list에 넣기 / False이면 attendance_list에 저장하지 말기
@@ -318,6 +258,7 @@ class Attendance:
                             attendance_list.append(labels[id])
                             print(labels[id])
                             print(len(attendance_list))
+                            self.attendance_table.insert("", "end", text="", values=(labels[id], self.var_attendance_course.get(), string_date, string_time))
 
                             # messagebox.showinfo("Attendance", labels[id] + " 출석 처리 완료")
 
@@ -334,39 +275,6 @@ class Attendance:
 
         webcam.release()
         cv2.destroyAllWindows()
-
-    def fetch_data(self):
-        pass
-        # conn = mysql.connector.connect(
-        #     host="localhost", username="root", password="123456", database="face_recognizer")
-        # my_cursor = conn.cursor()
-        # # WHERE COURSE = '" + self.var_attendance_course.get() +"'")
-        # my_cursor.execute("SELECT * FROM ATTENDANCE")
-        # data = my_cursor.fetchall()
-        #
-        # if len(data) != 0:
-        #     self.attendance_table.delete(*self.attendance_table.get_children())
-        #     for i in data:
-        #         self.attendance_table.insert("", END, values=i)
-        #     conn.commit()
-        # conn.close()
-
-        # Search Data
-
-    def search_data(self):
-        pass
-        # conn = mysql.connector.connect(
-        #     host="localhost", username="root", password="123456", database="face_recognizer")
-        # my_cursor = conn.cursor()
-        # my_cursor.execute(
-        #     "SELECT * FROM ATTENDANCE WHERE " + str(self.search_by.get()) + " = '" + str(self.search_text.get()) + "'" "AND COURSE = '" + str(self.var_attendance_course.get()) + "'")
-        # data = my_cursor.fetchall()
-        # if len(data) != 0:
-        #     self.attendance_table.delete(*self.attendance_table.get_children())
-        #     for i in data:
-        #         self.attendance_table.insert("", END, values=i)
-        #     conn.commit()
-        # conn.close()
 
     # Function buttons
 

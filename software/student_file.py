@@ -92,23 +92,6 @@ class Student:
         course_combo.set("Select Course")
         course_combo.grid(row=1, column=1, padx=2, pady=10, sticky=W)
 
-        # # Year
-        # year_label = Label(current_course_frame, text="Year", font=("times new roman", 12, "bold"))
-        # year_label.grid(row=1, column=0, padx=10, sticky=W)
-        #
-        # year_combo = ttk.Combobox(current_course_frame, font=("times new roman", 12, "bold"), state="readonly", textvariable=self.var_year)
-        # year_combo["values"] = ("2021", "2020", "2019")
-        # year_combo.set("Select Year")
-        # year_combo.grid(row=1, column=1, padx=2, pady=10, sticky=W)
-        #
-        # # Semester
-        # semester_label = Label(current_course_frame, text="Semester", font=("times new roman", 12, "bold"))
-        # semester_label.grid(row=1, column=2, padx=10, sticky=W)
-        #
-        # semester_combo = ttk.Combobox(current_course_frame, font=("times new roman", 12, "bold"), state="readonly", textvariable=self.var_semester)
-        # semester_combo["values"] = ("1", "2")
-        # semester_combo.set("Select Semester")
-        # semester_combo.grid(row=1, column=3, padx=2, pady=10, sticky=W)
 
         # Class Student information
         class_student_frame = LabelFrame(Left_frame, bd=2, relief=RIDGE, text="Class Student information", font=("times new roman", 12, "bold"))
@@ -213,7 +196,6 @@ class Student:
 
         self.student_table.pack(fill=BOTH, expand=1)
         self.student_table.bind("<ButtonRelease>", self.get_data)
-        self.fetch_data()
 
     # ===============================================================================================================
 
@@ -222,49 +204,6 @@ class Student:
         from main import Face_Recognition_System
         self.app = Face_Recognition_System(self.root, self.id)
 
-    # Function declaration
-    # Add Data to DB
-    # def add_data(self):
-    #     if self.var_course.get() == "Select Course" or self.var_name.get() == "" or self.var_id.get() == "" or self.var_kor_name.get() == "" or self.var_photo_addr.get() == "":
-    #         messagebox.showerror("Error", "All Fields are required", parent=self.root)
-    #     else:
-    #         try:
-    #             conn = mysql.connector.connect(host="localhost", username="root", password="123456", database="face_recognizer")
-    #             my_cursor = conn.cursor()
-    #             my_cursor.execute("insert into student values(%s,%s,%s,%s,%s,%s,%s,%s,%s)",(
-    #                                                                                         self.var_id.get(),
-    #                                                                                         self.var_name.get(),
-    #                                                                                         self.var_kor_name.get(),
-    #                                                                                         self.var_dep.get(),
-    #                                                                                         self.var_course.get(),
-    #                                                                                         self.var_year.get(),
-    #                                                                                         self.var_semester.get(),
-    #                                                                                         self.var_phone.get(),
-    #                                                                                         self.var_photo_addr.get(),
-    #                                                                                         ))
-    #             conn.commit()
-    #             self.fetch_data()
-    #             conn.close()
-    #             messagebox.showinfo("Success", f"{self.var_kor_name.get()} Data Saved Successfully", parent=self.root)
-    #         except Exception as es:
-    #             messagebox.showerror("Error", f"Due To: {str(es)}", parent=self.root)
-
-    # Fetch Data
-    # 데이터 가져오기
-    # 교수 id에 있는 모든 학생 가져오기
-    def fetch_data(self):
-        pass
-        # conn = mysql.connector.connect(host="localhost", username="root", password="123456", database="face_recognizer")
-        # my_cursor = conn.cursor()
-        # my_cursor.execute("select * from student")
-        # data = my_cursor.fetchall()
-        #
-        # if len(data) != 0:
-        #     self.student_table.delete(*self.student_table.get_children())
-        #     for i in data:
-        #         self.student_table.insert("", END, values=i)
-        #     conn.commit()
-        # conn.close()
 
     # Get Data
     # 오른쪽 테이블에서 해당 열을 클릭시 왼쪽 테이블에 정보 입력시키기
