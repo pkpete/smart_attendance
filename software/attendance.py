@@ -287,10 +287,13 @@ class Attendance:
             for (x,y,w,h) in faces:
                 roi_gray = gray_img[y:y+h, x:x+w]
                 id, conf = recognizer.predict(roi_gray)
-                if conf >= 45:
+                print(conf)
+
+
+                if conf <= 70:
                     cv2.rectangle(img, (x - 20, y - 20), (x + w + 20, y + h + 20), (0, 255, 0), 3)
-                    cv2.rectangle(img, (x-20, y-20+h), (x+20+w, y+20+h+50), (0, 255, 0), cv2.FILLED)
-                    cv2.putText(img, f"{labels[id]}", (x, y + h + 30), cv2.FONT_HERSHEY_COMPLEX, 0.8, (255, 255, 255), 1)
+                    cv2.rectangle(img, (x-20, y+h), (x+20+w, y+20+h+50), (0, 255, 0), cv2.FILLED)
+                    cv2.putText(img, f"{labels[id]}", (x, y + h + 30), cv2.FONT_HERSHEY_COMPLEX, 0.8, (255, 255, 255), 3)
                     # 민수한테 출석한 학번 전달
                     # 교수id, 강의명, 학생학번, 날짜, 시간
                     if labels[id] not in attendance_list:
@@ -318,16 +321,14 @@ class Attendance:
 
                             # messagebox.showinfo("Attendance", labels[id] + " 출석 처리 완료")
 
-
-                    #print(id)
-
-                else :
-                    cv2.rectangle(img, (x - 20, y - 20), (x+20 + w, y+20 + h), (0, 0, 255), 3)
-                    cv2.putText(img, "Unknown Face", (x, y - 55), cv2.FONT_HERSHEY_COMPLEX, 0.8, (0, 0, 255), 3)
+                else:
+                    cv2.rectangle(img, (x - 20, y - 20), (x + w + 20, y + h + 20), (0, 0, 255), 3)
+                    cv2.rectangle(img, (x - 20, y - 20 + h), (x + 20 + w, y + 20 + h + 50), (0, 0, 255), cv2.FILLED)
+                    cv2.putText(img, "Unknown Face", (x, y + h + 30), cv2.FONT_HERSHEY_COMPLEX, 0.8, (255, 255, 255), 3)
 
 
             cv2.imshow("Attendance", img)
-            if cv2.waitKey(1) == 13  or cur_min+1 == datetime.now().minute:
+            if cv2.waitKey(1) == 13 :#or cur_min+5 == datetime.now().minute:
                 print(attendance_list)
                 break
 
@@ -353,18 +354,19 @@ class Attendance:
         # Search Data
 
     def search_data(self):
-        conn = mysql.connector.connect(
-            host="localhost", username="root", password="123456", database="face_recognizer")
-        my_cursor = conn.cursor()
-        my_cursor.execute(
-            "SELECT * FROM ATTENDANCE WHERE " + str(self.search_by.get()) + " = '" + str(self.search_text.get()) + "'" "AND COURSE = '" + str(self.var_attendance_course.get()) + "'")
-        data = my_cursor.fetchall()
-        if len(data) != 0:
-            self.attendance_table.delete(*self.attendance_table.get_children())
-            for i in data:
-                self.attendance_table.insert("", END, values=i)
-            conn.commit()
-        conn.close()
+        pass
+        # conn = mysql.connector.connect(
+        #     host="localhost", username="root", password="123456", database="face_recognizer")
+        # my_cursor = conn.cursor()
+        # my_cursor.execute(
+        #     "SELECT * FROM ATTENDANCE WHERE " + str(self.search_by.get()) + " = '" + str(self.search_text.get()) + "'" "AND COURSE = '" + str(self.var_attendance_course.get()) + "'")
+        # data = my_cursor.fetchall()
+        # if len(data) != 0:
+        #     self.attendance_table.delete(*self.attendance_table.get_children())
+        #     for i in data:
+        #         self.attendance_table.insert("", END, values=i)
+        #     conn.commit()
+        # conn.close()
 
     # Function buttons
 
