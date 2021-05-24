@@ -13,7 +13,7 @@ import java.util.List;
 @Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
-public class Member {
+public class Member implements Comparable<Member>{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -46,5 +46,10 @@ public class Member {
         Member member = addMemberDto.toEntity();
         member.setCourse(course);
         return member;
+    }
+
+    @Override
+    public int compareTo(Member o) {
+        return this.number.compareTo(o.number);
     }
 }

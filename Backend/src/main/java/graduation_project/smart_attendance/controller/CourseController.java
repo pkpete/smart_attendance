@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import javax.validation.Valid;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
@@ -34,6 +36,7 @@ public class CourseController {
     public String courseList(Model model){
         Account account = accountService.CurrentAccount();
         List<Course> courses = courseService.findCourses(account);
+        Collections.sort(courses);
         Long courseId = 0L;
         model.addAttribute("courses", courses);
         model.addAttribute("addCourseDto", new AddCourseDto());
@@ -61,16 +64,7 @@ public class CourseController {
     public String deleteResponse(@PathVariable("cId") Long courseId, Model model){
         Account account = accountService.CurrentAccount();
         List<Course> courses = courseService.findCourses(account);
-        courses.sort(new Comparator<Course>() {
-            @Override
-            public int compare(Course o1, Course o2) {
-                Long num1 = Long.parseLong(o1.getCourseName());
-                Long num2 = Long.parseLong(o2.getCourseName());
-                if(num1 == num2) return 0;
-                else if(num1 > num2) return 1;
-                else return -1;
-            }
-        });
+        Collections.sort(courses);
         model.addAttribute("courses", courses);
         model.addAttribute("addCourseDto", new AddCourseDto());
         model.addAttribute("courseId", courseId);

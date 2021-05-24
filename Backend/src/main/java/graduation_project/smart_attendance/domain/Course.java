@@ -14,7 +14,7 @@ import java.util.List;
 @Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
-public class Course {
+public class Course implements Comparable<Course>{
     @Id @GeneratedValue
     @Column(name = "course_id")
     private Long id;
@@ -42,5 +42,10 @@ public class Course {
         Course course = addCourseDto.toEntity();
         course.setAccount(account);
         return course;
+    }
+
+    @Override
+    public int compareTo(Course o) {
+        return this.courseName.compareTo(o.courseName);
     }
 }

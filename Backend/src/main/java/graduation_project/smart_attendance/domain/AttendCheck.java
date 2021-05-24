@@ -11,7 +11,7 @@ import javax.persistence.*;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class AttendCheck {
+public class AttendCheck implements Comparable<AttendCheck>{
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "attend_check_id")
     private Long id;
@@ -45,5 +45,10 @@ public class AttendCheck {
         attendCheck.setMember(member);
         attendCheck.setAttendDate(attendDate);
         return attendCheck;
+    }
+
+    @Override
+    public int compareTo(AttendCheck o) {
+        return this.member.getNumber().compareTo(o.getMember().getNumber());
     }
 }

@@ -14,7 +14,7 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class AttendDate {
+public class AttendDate implements Comparable<AttendDate>{
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "attend_date_id")
     private Long id;
@@ -39,4 +39,8 @@ public class AttendDate {
         return attendDate;
     }
 
+    @Override
+    public int compareTo(AttendDate o) {
+        return this.date.compareTo(o.date);
+    }
 }
