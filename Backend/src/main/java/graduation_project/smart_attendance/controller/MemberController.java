@@ -1,10 +1,8 @@
 package graduation_project.smart_attendance.controller;
 
-import graduation_project.smart_attendance.adapter.UserAccount;
 import graduation_project.smart_attendance.domain.Account;
 import graduation_project.smart_attendance.domain.Course;
 import graduation_project.smart_attendance.domain.Member;
-import graduation_project.smart_attendance.dto.AddCourseDto;
 import graduation_project.smart_attendance.dto.AddMemberDto;
 import graduation_project.smart_attendance.repository.MemberRepository;
 import graduation_project.smart_attendance.service.AccountService;
@@ -12,7 +10,6 @@ import graduation_project.smart_attendance.service.CourseService;
 import graduation_project.smart_attendance.service.MemberService;
 import graduation_project.smart_attendance.service.MemberValidator;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -20,9 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
-import java.io.File;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 @Controller

@@ -9,7 +9,7 @@ spring:
       enabled: true
   jpa:
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: update
     properties:
       hibernate:
   #     show_sql: true
