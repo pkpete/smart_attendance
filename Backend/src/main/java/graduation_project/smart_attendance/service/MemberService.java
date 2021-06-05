@@ -1,10 +1,8 @@
 package graduation_project.smart_attendance.service;
 
-import graduation_project.smart_attendance.domain.Account;
 import graduation_project.smart_attendance.domain.Course;
 import graduation_project.smart_attendance.domain.Member;
 import graduation_project.smart_attendance.dto.AddMemberDto;
-import graduation_project.smart_attendance.dto.FindAccountDto;
 import graduation_project.smart_attendance.dto.SearchMemberDto;
 import graduation_project.smart_attendance.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
@@ -38,8 +36,6 @@ public class MemberService {
 
     public List<SearchMemberDto> findMembersLikeName(Long username, String search){
         List<Member> members = memberRepository.findMembersByCourse_Account_IdAndNumberContaining(username, search);
-        System.out.println("username " + username + "search:" + search);
-        System.out.println("find: " + members);
         List<SearchMemberDto> searchMemberDtos= new ArrayList<>();
         members.forEach(x -> searchMemberDtos.add(new SearchMemberDto(x.getNumber(), x.getName(), x.getCourse().getCourseName())));
         return searchMemberDtos;
@@ -48,7 +44,6 @@ public class MemberService {
     @Transactional
     public Long member(AddMemberDto addMemberDto, Course course){
         Member member = Member.createMember(addMemberDto, course);
-        System.out.println("member.getAttendChecks() = " + member.getAttendChecks());
         memberRepository.save(member);
         return member.getId();
     }
@@ -64,10 +59,5 @@ public class MemberService {
     @Transactional
     public void deleteMember(Long memberId){
         memberRepository.deleteById(memberId);
-    }
-
-    @Transactional
-    public void updateMember(Long memberId){
-
     }
 }

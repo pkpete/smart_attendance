@@ -1,6 +1,5 @@
 package graduation_project.smart_attendance.dto;
 
-import graduation_project.smart_attendance.domain.Account;
 import graduation_project.smart_attendance.domain.Course;
 import graduation_project.smart_attendance.domain.Member;
 import lombok.AllArgsConstructor;
