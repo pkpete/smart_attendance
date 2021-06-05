@@ -269,7 +269,7 @@ class Student:
                         os.mkdir(file)
                     pic_path = file + "/" + str(num_images) + ".jpg"
                     cv2.imwrite(pic_path, imgGray)
-                    print(file)
+                    print(img_id, str(num_images), "이미지 저장!")
 
                 cv2.imshow("Result", img)
                 if cv2.waitKey(1) == 13 or int(num_images) == 100:
@@ -282,15 +282,17 @@ class Student:
     # Search Data
     # 오른쪽 테이블에서 해당 학생의 정보 확인하기
     def search_data(self):
-        print(self.search_by.get(), self.search_text.get())
+        #print(self.search_by.get(), self.search_text.get())
         search_by = ""
         if self.search_by.get() == "Course":
             search_by = "course"
+            print("Course", self.search_text.get(), "듣는 학생 검색하기!")
         elif self.search_by.get() == "Student_id":
             search_by = "id"
+            print("학번", self.search_text.get(), "검색하기!")
         js = {"profID":str(self.id), "search":search_by, "info":self.search_text.get().upper()}
         jsonObject = json.dumps(js)
-        print(jsonObject)
+        #print(jsonObject)
         r = requests.post(url="http://localhost:8080/sw/search-members", data=jsonObject, headers={'Content-Type': 'application/json'})
 
         print(r.json())

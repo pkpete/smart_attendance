@@ -144,6 +144,7 @@ class Attendance:
             messagebox.showerror(
                 "Error", "Please select course", parent=self.root)
         else:
+            print(self.var_course.get(), "Class Training Start")
             face_classifier = cv2.CascadeClassifier("Resources/haarcascade_frontalface_default.xml")
             recognizer = cv2.face.LBPHFaceRecognizer_create()
 
@@ -175,6 +176,7 @@ class Attendance:
                         cv2.imshow("Training", image_array)
                         cv2.waitKey(1) == 13
                         face_location = face_classifier.detectMultiScale(image_array, scaleFactor=1.5, minNeighbors=5)
+                        print(path, "Training")
                         for (x,y,w,h) in face_location:
                             roi = image_array[y:y+h, x:x+w]
                             x_train.append(roi)
@@ -189,6 +191,7 @@ class Attendance:
             recognizer.save(str(self.id) + "_" + self.var_course.get() + "_face-train.yml")
             cv2.destroyAllWindows()
             messagebox.showinfo("Result", "Training datasets completed!!")
+            print("Training datasets completed!!")
 
     def face_recognition(self):
 
@@ -226,13 +229,14 @@ class Attendance:
             for (x,y,w,h) in faces:
                 roi_gray = gray_img[y:y+h, x:x+w]
                 id, conf = recognizer.predict(roi_gray)
-                print(conf)
+                #print(conf)
 
 
-                if conf <= 70:
+                if conf <= 80:
                     cv2.rectangle(img, (x - 20, y - 20), (x + w + 20, y + h + 20), (0, 255, 0), 3)
                     cv2.rectangle(img, (x-20, y+h), (x+20+w, y+20+h+50), (0, 255, 0), cv2.FILLED)
                     cv2.putText(img, f"{labels[id]}", (x, y + h + 30), cv2.FONT_HERSHEY_COMPLEX, 0.8, (255, 255, 255), 3)
+                    #print(f"{labels[id]} 얼굴 인식!")
                     # 민수한테 출석한 학번 전달
                     # 교수id, 강의명, 학생학번, 날짜, 시간
                     if labels[id] not in attendance_list:
@@ -245,19 +249,18 @@ class Attendance:
                         js = {"profID": str(self.id), "course": self.var_attendance_course.get(),
                               "studentID": labels[id], "date":string_date, "time":string_time}
                         jsonObject = json.dumps(js)  # JsOn 형태로 바꾸기
-                        print(jsonObject)
+                        #print(jsonObject)
                         r = requests.post(url="http://localhost:8080/sw/check", data=jsonObject,
                                           headers={'Content-Type': 'application/json'})
-
-
 
 
                         # True이면 attendance_list에 넣기 / False이면 attendance_list에 저장하지 말기
                         if r.text == "True":
                             # 해당 학생 레이블 가져오기
                             attendance_list.append(labels[id])
-                            print(labels[id])
-                            print(len(attendance_list))
+                            print(labels[id], string_date, string_time, "출석 확인!")
+                            #print(labels[id])
+                            #print(len(attendance_list))
                             self.attendance_table.insert("", "end", text="", values=(labels[id], self.var_attendance_course.get(), string_date, string_time))
 
                             # messagebox.showinfo("Attendance", labels[id] + " 출석 처리 완료")
@@ -266,6 +269,7 @@ class Attendance:
                     cv2.rectangle(img, (x - 20, y - 20), (x + w + 20, y + h + 20), (0, 0, 255), 3)
                     cv2.rectangle(img, (x - 20, y - 20 + h), (x + 20 + w, y + 20 + h + 50), (0, 0, 255), cv2.FILLED)
                     cv2.putText(img, "Unknown Face", (x, y + h + 30), cv2.FONT_HERSHEY_COMPLEX, 0.8, (255, 255, 255), 3)
+                    print("Unknown Face")
 
 
             cv2.imshow("Attendance", img)

@@ -87,17 +87,18 @@ class Login_Window:
         if self.txtuser.get() == "" or self.txtpassword.get() == "":
             messagebox.showerror("Error", "All field required")
         else:
-            print(self.txtuser.get(), self.txtpassword.get())
+            #print(self.txtuser.get(), self.txtpassword.get())
             # 여기서 아이디, 비번 보내고 확인 결과값 받아오기
             js= {"username": self.txtuser.get(), "password": self.txtpassword.get()}
             jsonObject = json.dumps(js) # JSOn 형태로 바꾸기
-            print(jsonObject)
+            #print(jsonObject)
             r = requests.post(url="http://localhost:8080/python/login", data=jsonObject, headers={'Content-Type': 'application/json'})
-            print(r.text)
+            #print(r.text)
 
             if r.text == "False":
                 messagebox.showerror("Error", "Wrong ID or Password")
             else:
+                print("로그인 성공 : ID = ", self.txtuser.get())
                 # self.new_window = Toplevel(self.root)
                 self.app = Face_Recognition_System(self.root, int(r.text))
 

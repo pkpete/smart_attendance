@@ -84,37 +84,6 @@ class Face_Recognition_System:
         b1_1 = Button(frame, text="Attendance", cursor="hand2", font=("times new roman", 15, "bold"), bg="darkblue", fg="white", command=self.attendance_details)
         b1_1.place(x=500, y=350, width=200, height=40)
 
-        # # Help button
-        # img6 = Image.open(r"C:\Users\LG\PycharmProjects\SmartAttendance\Images\button.jpg")
-        # img6 = img6.resize((200, 200), Image.ANTIALIAS)
-        # self.photoimg6 = ImageTk.PhotoImage(img6)
-        #
-        # b1 = Button(frame, image=self.photoimg6, cursor="hand2")
-        # b1.place(x=1100, y=50, width=200, height=200)
-        # b1_1 = Button(frame, text="Help", cursor="hand2", font=("times new roman", 15, "bold"), bg="darkblue", fg="white")
-        # b1_1.place(x=1100, y=250, width=200, height=40)
-
-        # # Train button
-        # img7 = Image.open(r"C:\Users\LG\PycharmProjects\SmartAttendance\Images\button.jpg")
-        # img7 = img7.resize((200, 200), Image.ANTIALIAS)
-        # self.photoimg7 = ImageTk.PhotoImage(img7)
-        #
-        # b1 = Button(frame, image=self.photoimg7, cursor="hand2")
-        # b1.place(x=200, y=350, width=200, height=200)
-        # b1_1 = Button(frame, text="Train Data", cursor="hand2", font=("times new roman", 15, "bold"), bg="darkblue", fg="white")
-        # b1_1.place(x=200, y=550, width=200, height=40)
-
-        # # Photo face button
-        # img8 = Image.open(r"C:\Users\LG\PycharmProjects\SmartAttendance\Images\button.jpg")
-        # img8 = img8.resize((200, 200), Image.ANTIALIAS)
-        # self.photoimg8 = ImageTk.PhotoImage(img8)
-        #
-        # b1 = Button(frame, image=self.photoimg8, cursor="hand2")
-        # b1.place(x=500, y=350, width=200, height=200)
-        # b1_1 = Button(frame, text="Photos", cursor="hand2", font=("times new roman", 15, "bold"), bg="darkblue",
-        #               fg="white")
-        # b1_1.place(x=500, y=550, width=200, height=40)
-
         # Developer button
         img9 = Image.open(r"./Images/button.jpg")
         img9 = img9.resize((200, 200), Image.ANTIALIAS)
